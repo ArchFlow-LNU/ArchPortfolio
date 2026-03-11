@@ -21,15 +21,15 @@ The application is built using React and follows a component-based architecture.
 
 ---
 
-##Technologies Used
+## Technologies Used
 
-###Core technologies:
+### Core technologies:
 React – JavaScript library for building user interfaces
 JavaScript 
 HTML5
 CSS3
 
-###Development Tools:
+### Development Tools:
 Vite – frontend build tool
 Node.js – runtime environment used for package management
 npm – dependency manager
