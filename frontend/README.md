@@ -24,15 +24,15 @@ The application is built using React and follows a component-based architecture.
 ## Technologies Used
 
 ### Core technologies:
-React – JavaScript library for building user interfaces
-JavaScript 
-HTML5
-CSS3
+- React – JavaScript library for building user interfaces
+- JavaScript 
+- HTML5
+- CSS3
 
 ### Development Tools:
-Vite – frontend build tool
-Node.js – runtime environment used for package management
-npm – dependency manager
+- Vite – frontend build tool
+- Node.js – runtime environment used for package management
+- npm – dependency manager
 
 ---
 
@@ -72,14 +72,14 @@ Contains navigation links and contact information.
 
 ---
 
-##Future Improvements
+## Future Improvements
 
-###Planned improvements for the frontend include:
+### Planned improvements for the frontend include:
 
--Add pages and markup
--Integration with the backend API
--Dynamic loading of projects from the database
--Validation for the contact form
--Responsive design improvements
--Image gallery for project pages
--Authentication for admin project management
+- Add pages and markup
+- Integration with the backend API
+- Dynamic loading of projects from the database
+- Validation for the contact form
+- Responsive design improvements
+- Image gallery for project pages
+- Authentication for admin project management
