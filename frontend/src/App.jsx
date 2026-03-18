@@ -1,33 +1,18 @@
-import Navbar from "./components/Navbar"
-import Hero from "./components/Hero"
-import HouseVariants from "./components/HouseVariants"
-import About from "./components/About"
-import Steps from "./components/Steps"
-import Advantages from "./components/Advantages"
-import ContactForm from "./components/ContactForm"
-import FAQ from "./components/FAQ"
-import Footer from "./components/Footer"
-
+import {Route,Routes} from 'react-router-dom'
 import "./App.css"
+import MainPage from "./pages/MainPage.jsx";
+import CatalogPage from "./pages/CatalogPage.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 function App() {
     return (
-        <div className="app">
-            <Navbar />
-            <Hero />
+        <Routes>
+                <Route path="/" element={<MainPage></MainPage>}></Route>
+                <Route path='/catalog' element={<CatalogPage></CatalogPage>}></Route>
+                <Route path='/about' element={<MainPage></MainPage>}></Route>
+                <Route path='/contacts' element={<ContactPage></ContactPage>}></Route>
+        </Routes>
 
-            <div className="container">
-                <HouseVariants />
-                <About />
-                <Steps />
-            </div>
-
-            {/*<BestProjects />*/}
-            <Advantages />
-            <ContactForm />
-            <FAQ />
-            <Footer />
-        </div>
     )
 }
 
