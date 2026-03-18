@@ -1,6 +1,7 @@
 import "../App.css"
-import {useEffect, useState} from "react";
-export default function Navbar() {
+import {useEffect, useState,} from "react";
+import {Link} from "react-router-dom";
+export default function Navbar(props) {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const [scrolled, setScrolled] = useState(false);
@@ -16,22 +17,36 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
     return (
-        <div className="navbar">
-            <div className="logo">ModHouse</div>
 
-            <div className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""}`}>
-                <a>Main</a>
-                <a>Catalog</a>
-                <a>About Us</a>
-                <a>Contacts</a>
+            <div className="navbar">
+                <div className="logo">ModHouse</div>
+
+                <div
+                    className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl==="main" ? "":''} ${props.cl==="catalog" ? "catalog":''}`}>
+                    <Link to={'/'}>
+                        <p>Main</p>
+                    </Link>
+                    <Link to={'/catalog'}>
+                        <p>Catalog</p>
+                    </Link>
+                    <Link to={'/about'}>
+                        <p>About us</p>
+                    </Link>
+                    <Link to={'/contacts'}>
+                        <p>Contacts</p>
+                    </Link>
+
+                </div>
+
+                {/* гамбургер */}
+                <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+                    <img src="../imgs/main-menu.png" width="45px" height="45px"  alt=""/>
+                </div>
+
+                <button className="btn">Order a call</button>
+
             </div>
 
-            {/* гамбургер */}
-            <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                <img src="../imgs/main-menu.png" width="45px" height="45px"  alt=""/>
-            </div>
 
-            <button className="btn">Order a call</button>
-        </div>
     )
 }

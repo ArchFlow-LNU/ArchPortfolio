@@ -70,18 +70,36 @@ body{
     left:0;
 }
 
+.menu a {
+    text-decoration: none; /* прибирає підкреслення */
+}
 
 .menu{
     display:flex;
     font-size: 18px;
     position:absolute;
     left:40%;
-    display:flex;
     padding:15px;
     border-radius: 30px;
     gap:30px;
     top:20px;
 
+}
+.menu.catalog{
+    display:flex;
+    font-size: 18px;
+    position:absolute;
+    left:40%;
+    padding:15px;
+    border-radius: 30px;
+    gap:30px;
+    top:20px;
+    border: black solid 1px;
+    text-decoration: none;
+}
+.menu.catalog p {
+    color: black;
+    text-decoration: none;
 }
 .menu.scrolled {
     font-size: 18px;
