@@ -7,6 +7,7 @@ export default function CatalogPage(){
         <div className="catalog-page">
             <NavBar cl="catalog" />
             <HouseVariants />
+            <BestProjects />
         </div>
     )
 }
