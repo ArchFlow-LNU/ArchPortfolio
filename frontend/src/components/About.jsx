@@ -7,7 +7,10 @@ export default function About() {
                 <h2>About us</h2>
 
                 <p>
-                    We are a team of professionals who are engaged in the design and construction of modular houses.
+                    Ми — архітектурна компанія з понад 10-річним досвідом у
+                    проєктуванні та будівництві сучасних модульних будинків.
+                    Наша історія почалася у Львові, де ми розпочали як невелика
+                    команда архітекторів.
                 </p>
 
                 <button className="btn-dark">learn more  </button>
