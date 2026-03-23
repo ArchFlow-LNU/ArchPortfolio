@@ -1,20 +1,28 @@
 using Microsoft.EntityFrameworkCore;
 using ArchPortfolio.Data;
+var builder = WebApplication.CreateBuilder(args); 
+// DB
+builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-var builder  = WebApplication.CreateBuilder(args);
-
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddControllers();
-    
+// Controllers
+builder.Services.AddControllers(); 
 var app = builder.Build();
 
-app.UseRouting();
-app.UseEndpoints(endpoints =>
+// Swagger
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    endpoints.MapControllers();
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArchPortfolio API V1");
+    c.RoutePrefix = string.Empty; // щоб UI відкривався просто за http://localhost:5000/
 });
+
+// Routing 
+app.UseRouting(); 
+
+// МАПІНГ КОНТРОЛЕРІВ (ГОЛОВНЕ)
+app.MapControllers(); 
 
 app.Run();
