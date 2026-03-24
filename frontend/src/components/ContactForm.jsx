@@ -1,18 +1,40 @@
 export default function ContactForm() {
     return (
         <section className="contact">
+            <div className="container">
 
-            <h2>Not home yet?</h2>
+                <div className="contact-overlay">
 
-            <form className="form">
 
-                <input placeholder="Name"/>
-                <input placeholder="Phone"/>
-                <textarea placeholder="Comment"/>
 
-                <button>Отправить</button>
+                    <h2 className="contact-title">
+                        Плануєте будівництво будинку?
+                    </h2>
 
-            </form>
+                    <p className="contact-subtitle">
+                        Заповніть форму, і наша команда зв’яжеться з вами
+                    </p>
+
+                    <form className="contact-form">
+
+                        <input type="text" placeholder="Ваше ім’я" />
+                        <input type="text" placeholder="Ваш номер телефону" />
+                        <input type="email" placeholder="Ваша електронна пошта" />
+                        <textarea placeholder="Коротко опишіть ваш проект або побажання"></textarea>
+
+                        <button className="btn-dark">
+                            Надіслати заявку
+                        </button>
+
+                        <p className="contact-note">
+                            Ми зв’яжемося з вами найближчим часом для обговорення деталей проекту.
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
 
         </section>
     )

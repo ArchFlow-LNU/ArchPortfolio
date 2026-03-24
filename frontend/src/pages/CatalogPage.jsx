@@ -1,12 +1,13 @@
 import HouseVariants from "../components/HouseVariants.jsx";
+import BestProjects from "../components/BestProjects.jsx";
 import NavBar from "../components/NavBar.jsx";
 
-
-export default function ContactPage(){
+export default function CatalogPage(){
     return (
-        <div>
-            <NavBar cl="catalog"></NavBar>
-            <HouseVariants></HouseVariants>
+        <div className="catalog-page">
+            <NavBar cl="catalog" />
+            <HouseVariants />
+            <BestProjects />
         </div>
     )
 }

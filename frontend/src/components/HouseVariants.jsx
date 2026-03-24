@@ -1,24 +1,43 @@
 export default function HouseVariants() {
 
     const houses = [
-        {title:"House Modern", img:"/imgs/0 22_17_42.png"},
-        {title:"kjfewjf", img:"/imgs/0 22_17_42.png"},
-        {title:"fewwfef", img:"/imgs/0 22_17_42.png"}
+        {
+            title: "Мінімалістичний будинок",
+            img: "/imgs/house1.png",
+            desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
+            style: "Мінімалізм"
+        },
+        {
+            title: "Міська резиденція",
+            img: "/imgs/house2.png",
+            desc: "Сучасний житловий комплекс для комфортного життя в місті.",
+            style: "Сучасний"
+        },
+        {
+            title: "Клубний будинок",
+            img: "/imgs/house3.png",
+            desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
+            style: "Сучасний / Преміум"
+        }
     ]
 
     return (
         <section className="houses">
 
-            <h2>House Variants</h2>
+            <h2>Варіанти будинків</h2>
 
             <div className="house-grid">
 
-                {houses.map((h,i)=>(
+                {houses.map((h, i) => (
                     <div className="house-card" key={i}>
 
-                        <img src={h.img} alt="" />
+                        <img src={h.img} alt={h.title} />
 
-                        <p>{h.title}</p>
+                        <div className="house-info">
+                            <h3>{h.title}</h3>
+                            <p>{h.desc}</p>
+                            <span>Стиль: {h.style}</span>
+                        </div>
 
                     </div>
                 ))}

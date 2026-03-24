@@ -18,6 +18,10 @@ The application is built using React and follows a component-based architecture.
 - Displaying advantages of modular houses
 - FAQ section
 - Contact form for service requests
+- Navigation between pages using React Router
+- Separate pages: Main, About, Catalog, Contact
+- Footer navigation with links
+- Scroll to top on page change
 
 ---
 
@@ -76,10 +80,17 @@ Contains navigation links and contact information.
 
 ### Planned improvements for the frontend include:
 
-- Add pages and markup
+- Improve UI/UX design
 - Integration with the backend API
 - Dynamic loading of projects from the database
 - Validation for the contact form
 - Responsive design improvements
 - Image gallery for project pages
 - Authentication for admin project management
+
+## Recent Updates
+
+- Added routing between pages
+- Implemented Contact page
+- Improved footer navigation
+- Refactored project structure (pages/components separation)
