@@ -1,3 +1,4 @@
+import "../css/ContactForm.css"
 export default function ContactForm() {
     return (
         <section className="contact">

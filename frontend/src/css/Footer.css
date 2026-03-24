@@ -1,0 +1,44 @@
+.footer {
+    background: black;
+    color: white;
+    padding: 60px 20px;
+    text-align: left;
+}
+
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* колонки */
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* заголовки */
+.footer-col h3,
+.footer-col h4 {
+    margin-bottom: 10px;
+}
+
+/* текст */
+.footer-col p {
+    margin: 0;
+    font-size: 14px;
+    color: #ccc;
+}
+.footer a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer a:hover {
+    color: white;
+}

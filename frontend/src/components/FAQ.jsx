@@ -1,3 +1,4 @@
+import "../css/FAQ.css"
 import { useState } from "react";
 
 export default function FAQ() {

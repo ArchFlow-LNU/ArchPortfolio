@@ -1,0 +1,104 @@
+.contact {
+    background: url('../public/imgs/contact-bg.png') center/cover no-repeat;
+    width: 100%;
+}
+
+/* затемнення */
+.contact-overlay {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 60px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* TITLE */
+.contact-title {
+    color: white;
+    font-size: clamp(26px, 5vw, 42px);
+    margin-bottom: 10px;
+    text-align: center;
+    max-width: 600px;
+    line-height: 1.2;
+}
+
+/* SUBTITLE */
+.contact-subtitle {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 30px;
+    text-align: center;
+    max-width: 500px;
+}
+
+/* FORM */
+.contact-form {
+    background: #e5e5e5;
+    padding: 20px;
+    border-radius: 16px;
+
+    width: 100%;
+    max-width: 500px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    overflow: hidden;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: calc(100% - 24px); /* padding 12+12 */
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    font-family: "News Cycle", sans-serif;
+
+    display: block;
+}
+
+/* textarea */
+.contact-form textarea {
+    height: 120px;
+    resize: none;
+}
+
+/* BUTTON */
+.contact-form .btn-dark {
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* NOTE */
+.contact-note {
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+}
+
+/* ===== DESKTOP ===== */
+@media (min-width: 768px) {
+
+    .contact-overlay {
+        align-items: flex-start;
+        padding: 80px 40px;
+    }
+
+    .contact-title {
+        text-align: left;
+        font-size: 37px;
+    }
+
+    .contact-subtitle {
+        text-align: left;
+        margin-bottom: 40px;
+    }
+
+    .contact-form {
+        margin-left: auto;
+        max-width: 420px;
+    }
+}

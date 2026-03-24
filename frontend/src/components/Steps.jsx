@@ -1,3 +1,4 @@
+import "../css/Steps.css"
 export default function Steps() {
     return (
         <section className="steps">

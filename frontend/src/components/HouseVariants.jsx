@@ -1,3 +1,4 @@
+import "../css/HouseVariants.css"
 export default function HouseVariants() {
 
     const houses = [

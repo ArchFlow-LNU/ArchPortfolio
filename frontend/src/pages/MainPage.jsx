@@ -8,6 +8,7 @@ import ContactForm from "../components/ContactForm.jsx";
 import FAQ from "../components/FAQ.jsx";
 import Footer from "../components/Footer.jsx";
 
+
 export default function MainPage() {
     return(
         <div className="app">

@@ -1,3 +1,4 @@
+import "../css/Advantages.css"
 export default function Advantages() {
 
     return (

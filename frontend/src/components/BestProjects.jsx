@@ -1,3 +1,4 @@
+import "../css/BestProjects.css"
 import { useState } from "react";
 export default function BestProjects() {
     const projects = [

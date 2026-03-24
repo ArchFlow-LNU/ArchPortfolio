@@ -1,7 +1,7 @@
 import Navbar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
 import ContactForm from "../components/ContactForm.jsx";
-
+import "../css/ContactPage.css"
 export default function ContactPage() {
     return (
         <div className="contact-page">
