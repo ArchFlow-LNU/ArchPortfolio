@@ -7,7 +7,7 @@ import Advantages from "../components/Advantages.jsx";
 import ContactForm from "../components/ContactForm.jsx";
 import FAQ from "../components/FAQ.jsx";
 import Footer from "../components/Footer.jsx";
-
+import "../App.css"
 
 export default function MainPage() {
     return(
