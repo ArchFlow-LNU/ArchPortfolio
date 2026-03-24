@@ -1,5 +1,15 @@
-
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 .houses {
+
     max-width: 1100px;
     margin: 100px auto;
     padding: 0 20px;
@@ -37,6 +47,7 @@
 }
 
 .house-card {
+    animation: fadeIn 1.2s ease-out forwards;
     border-radius: 15px;
     overflow: hidden;
     background: white;
