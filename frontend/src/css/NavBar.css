@@ -1,116 +1,85 @@
-.navbar{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    /*padding:20px 40px;*/
-    width:100%;
-    color:white;
+.navbar {
     position: fixed;
-    top:0;
-    left:0;
+    top: 20px;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
 }
 
+/* логотип */
 .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+    position: absolute;
+    left: 40px;
+    top: 10px;
+
+    font-size: 20px;
+    color: white;
+
+    transition: 0.3s;
 }
+
 .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
+    opacity: 0.7;
 }
 
+/* ===== МЕНЮ (КАПСУЛА) ===== */
+
+.menu {
+    display: flex;
+    gap: 40px;
+    padding: 15px 40px;
+
+    border-radius: 40px;
+
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* посилання */
 .menu a {
-    text-decoration: none; /* прибирає підкреслення */
-}
-
-.menu{
-    display:flex;
-    font-size: 18px;
-    position:absolute;
-    left:40%;
-    padding:15px;
-    border-radius: 30px;
-    gap:30px;
-    top:20px;
-
-}
-.menu.catalog{
-    display:flex;
-    font-size: 18px;
-    position:absolute;
-    left:40%;
-    padding:15px;
-    border-radius: 30px;
-    gap:30px;
-    top:20px;
-    border: black solid 1px;
     text-decoration: none;
-}
-.menu.catalog p {
-    color: black;
-    text-decoration: none;
-}
-.menu.scrolled {
-    font-size: 18px;
-    position:absolute;
-    left:50%;
-    display:flex;
-    padding:15px;
-    border-radius: 30px;
-    background-color: rgba(200,200,200, 0.5);
-    box-shadow: white 1px 1px 1px 1px;
-    gap:10px;
-    top:20px;
-}
-.menu a{
-
-    color:white;
-    margin:0 15px;
-}
-.menu a:hover{
-    color:gray;
-    margin:0 15px;
+    color: white;
+    font-size: 16px;
 }
 
+.menu p {
+    margin: 0;
+}
 
-/* гамбургер (прихований на десктоп) */
-/* гамбургер */
+.menu a:hover {
+    opacity: 0.7;
+}
+
 .hamburger {
     display: none;
-    flex-direction: column;
-    gap: 5px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
     cursor: pointer;
-    z-index: 200; /* щоб був поверх menu */
-}
-.hamburger p {
-    width: 25px;
-    height: 3px;
-    background: white;
-    border-radius: 2px;
 }
 
-/* media query для мобільних */
 @media (max-width: 768px) {
 
-    .menu.scrolled {
-        display: none;
-    }
     .menu {
         position: absolute;
         top: 70px;
-        left: 0;
-        right: 0;
+        left: 20px;
+        right: 20px;
+
         flex-direction: column;
-        display: none; /* приховане за замовчуванням */
-        gap: 10px;
-        padding: 20px 0;
+        display: none;
+
         background: rgba(0,0,0,0.9);
-        z-index: 100; /* нижче за гамбургер */
+        padding: 20px;
+        border-radius: 20px;
     }
 
     .menu.open {
@@ -118,20 +87,14 @@
     }
 
     .hamburger {
-        padding-right: 20px;
-        display: block; /* показуємо гамбургер */
+        display: block;
     }
 
-    .btn {
-        display: none;
+    .logo {
+        left: 20px;
     }
 }
 
-
-.btn{
-    background:rgba(200,200,200, 0.7);
-    border:none;
-    color:white;
-    padding:10px 18px;
-    border-radius:20px;
+.btn {
+    display: none; /* щоб не ламала дизайн */
 }
