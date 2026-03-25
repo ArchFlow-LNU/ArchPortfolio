@@ -36,11 +36,28 @@
 
     border-radius: 40px;
 
-    background: rgba(255,255,255,0.15);
+    /*background: rgba(255,255,255,0.15);*/
     backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(255,255,255,0.3);
+    /*border: 1px solid rgba(255,255,255,0.3);*/
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.menu-main {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+}
+
+.menu-default {
+    background: rgba(159, 161, 164, 0.7);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: black;
+}
+
+.menu.scrolled {
+    background: rgba(159, 161, 164, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 /* посилання */

@@ -7,10 +7,11 @@ export default function About() {
                 <div className="about-grid">
 
                     {/* заголовок */}
-                    <h1 className="about-title">Про нас</h1>
+                    {/*<h1 className="about-title">Про нас</h1>*/}
 
                     {/* текст */}
                     <div className="about-text">
+                        <h1 className="about-title">Про нас</h1>
 
                         <p>
                             Ми — архітектурна компанія з понад 10-річним досвідом у

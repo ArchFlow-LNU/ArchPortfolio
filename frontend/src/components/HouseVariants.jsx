@@ -1,5 +1,6 @@
 import "../css/HouseVariants.css";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 export default function HouseVariants() {
 
@@ -31,19 +32,51 @@ export default function HouseVariants() {
 
     return (
         <section className="houses">
-
             <h2>Варіанти будинків</h2>
 
-            <div className="house-grid">
-
+            <motion.div
+                className="house-grid"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: {},
+                    visible: {
+                        transition: {
+                            staggerChildren: 0.2
+                        }
+                    }
+                }}
+            >
                 {houses.map((h) => (
-                    <div 
-                        className="house-card" 
+                    <motion.div
+                        className="house-card"
                         key={h.id}
                         onClick={() => navigate(`/house/${h.id}`)}
                         style={{ cursor: "pointer" }}
-                    >
 
+                        variants={{
+                            hidden: {
+                                opacity: 0,
+                                y: 40,
+                                scale: 0.95
+                            },
+                            visible: {
+                                opacity: 1,
+                                y: 0,
+                                scale: 1
+                            }
+                        }}
+
+                        transition={{
+                            duration: 0.2,
+                            ease: "easeOut"
+                        }}
+
+                        whileHover={{
+                            y: -8,
+                            scale: 1.03
+                        }}
+                    >
                         <img src={h.img} alt={h.title} />
 
                         <div className="house-info">
@@ -51,12 +84,13 @@ export default function HouseVariants() {
                             <p>{h.desc}</p>
                             <span>Стиль: {h.style}</span>
                         </div>
-
-                    </div>
+                    </motion.div>
                 ))}
-
-            </div>
-
+            </motion.div>
         </section>
     );
+
+
+
+
 }
