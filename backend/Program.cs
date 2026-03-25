@@ -7,9 +7,33 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:5174")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 // Controllers
-builder.Services.AddControllers(); 
+//haendle circular references in JSON
+//(наприклад, коли проект має категорію, а категорія має список проектів)
+//without this, we might get "A possible object cycle was detected" error when serializing to JSON or CORS issues in frontend
+//THATS WHY WE USE ReferenceHandler.IgnoreCycles - it tells the serializer to ignore circular references and not throw an error(29-33 STRING)
+//LATER WE CAN IMPLEMENT SPECIAL MODELS TO AVOID THIS PROBLEM IN A BETTER WAY, BUT FOR NOW THIS IS A QUICK FIX!!!!!!!!
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler =
+            System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 var app = builder.Build();
+
+app.UseCors("AllowFrontend");
 
 // Swagger
 app.UseSwagger();
