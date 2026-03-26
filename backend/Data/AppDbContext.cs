@@ -13,5 +13,6 @@ namespace ArchPortfolio.Data
         public DbSet<Review> Reviews { get; set; } = null!;
         public DbSet<ContactRequest> ContactRequests { get; set; } = null!;
         public DbSet<Admin> Admins { get; set; } = null!;
+        public DbSet<ProjectImage> ProjectImages { get; set; }
     }
 }

@@ -11,5 +11,7 @@ namespace ArchPortfolio.Models
 
         public int CategoryId { get; set; }
         public ProjectCategory? Category { get; set; }
+
+        public List<ProjectImage> Images { get; set; } = new();
     }
 }

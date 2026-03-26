@@ -14,15 +14,26 @@ namespace ArchPortfolio.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Project>>> GetAll()
-            => await _context.Projects.Include(p => p.Category).ToListAsync();
+        {
+            var projects = await _context.Projects
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .ToListAsync();
+
+            return Ok(projects);
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> Get(int id)
         {
-            var project = await _context.Projects.Include(p => p.Category)
-                                                 .FirstOrDefaultAsync(p => p.Id == id);
+            var project = await _context.Projects
+                .Include(p => p.Category)
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
             if (project == null) return NotFound();
-            return project;
+
+            return Ok(project);
         }
 
         [HttpPost]
@@ -30,6 +41,7 @@ namespace ArchPortfolio.Controllers
         {
             _context.Projects.Add(project);
             await _context.SaveChangesAsync();
+
             return CreatedAtAction(nameof(Get), new { id = project.Id }, project);
         }
 
@@ -51,5 +63,42 @@ namespace ArchPortfolio.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        //==================IMAGES============================
+
+        [HttpPost("{id}/images")]
+        public async Task<IActionResult> AddImage(int id, [FromBody] AddImageDto dto)
+        {
+            var project = await _context.Projects.FindAsync(id);
+            if (project == null) return NotFound();
+
+            var image = new ProjectImage
+            {
+                ProjectId = id,
+                ImageUrl = dto.ImageUrl,
+                IsMain = dto.IsMain
+            };
+
+            _context.ProjectImages.Add(image);
+            await _context.SaveChangesAsync();
+
+            return Ok(image);
+        }
+
+        public class AddImageDto
+        {
+            public string ImageUrl { get; set; } = null!;
+            public bool IsMain { get; set; } = false;
+        }
+
+        //[HttpGet("{id}")]
+        //public async Task<IActionResult> GetProject(int id)
+        //{
+        //    var project = await _context.Projects
+        //        .Include(p => p.Images)
+        //        .FirstOrDefaultAsync(p => p.Id == id);
+
+        //    return Ok(project);
+        //}
     }
 }

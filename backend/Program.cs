@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using ArchPortfolio.Data;
 var builder = WebApplication.CreateBuilder(args); 
 // DB
@@ -34,6 +35,12 @@ builder.Services.AddControllers()
 var app = builder.Build();
 
 app.UseCors("AllowFrontend");
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+    RequestPath = ""
+});
 
 // Swagger
 app.UseSwagger();
