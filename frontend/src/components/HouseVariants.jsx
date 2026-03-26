@@ -38,19 +38,30 @@ export default function HouseVariants() {
 
             <div className="house-grid">
 
-                {projects.map((h, i) => (
-                    <div className="house-card" key={i}>
+                {projects.map((h) => {
+                    const mainImage = h.images?.find(img => img.isMain);
 
-                        <img src="/imgs/house1.png" alt={h.title} />
+                    return (
+                        <div className="house-card" key={h.id}>
 
-                        <div className="house-info">
-                            <h3>{h.title}</h3>
-                            <p>{h.description}</p>
-                            <span>Стиль: dkdkd</span>
+                            <img
+                                src={
+                                    h.images?.length
+                                        ? `http://localhost:5000/uploads/${h.images.find(img => img.isMain)?.imageUrl || h.images[0].imageUrl}`
+                                        : "/imgs/house1.png"
+                                }
+                                alt={h.title}
+                            />
+
+                            <div className="house-info">
+                                <h3>{h.title}</h3>
+                                <p>{h.description}</p>
+                                <span>Стиль: dkdkd</span>
+                            </div>
+
                         </div>
-
-                    </div>
-                ))}
+                    );
+                })}
 
             </div>
 
