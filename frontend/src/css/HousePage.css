@@ -1,0 +1,78 @@
+.house-page {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: auto;
+    font-family: "News Cycle", sans-serif;
+}
+
+/* кнопка назад */
+.back-btn {
+    margin-bottom: 40px;
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    color: #666;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    color: black;
+    transform: translateX(-3px);
+}
+
+/* контейнер */
+.house-container {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* картинка */
+.house-container img {
+    width: 520px;
+    border-radius: 16px;
+    object-fit: cover;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    transition: 0.3s;
+}
+
+.house-container img:hover {
+    transform: scale(1.02);
+}
+
+/* текст */
+.house-text {
+    max-width: 520px;
+}
+
+/* заголовок */
+.house-text h1 {
+    font-size: 34px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+/* опис */
+.house-text p {
+    white-space: pre-line;
+    line-height: 1.8;
+    color: #555;
+    font-size: 16px;
+}
+
+/* адаптив */
+@media (max-width: 768px) {
+    .house-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .house-container img {
+        width: 100%;
+    }
+
+    .house-text h1 {
+        font-size: 26px;
+    }
+}

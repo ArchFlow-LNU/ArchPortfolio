@@ -42,3 +42,18 @@
 .footer a:hover {
     color: white;
 }
+
+.clickable {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.clickable:hover {
+    color: #555;
+}
+
+.copied {
+    display: block;
+    font-size: 12px;
+    color: green;
+}

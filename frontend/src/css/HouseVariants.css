@@ -10,7 +10,7 @@
 }
 .houses {
 
-    max-width: 1100px;
+    max-width: 1300px;
     margin: 100px auto;
     padding: 0 20px;
 }
@@ -20,34 +20,92 @@
     margin-bottom: 30px;
 }
 
-.house-grid {
-    display: grid;
-    grid-template-columns: 1fr; /* мобілка */
+/*.house-grid {*/
+/*    display: grid;*/
+/*    grid-template-columns: 1fr; !* мобілка *!*/
+/*    gap: 20px;*/
+/*}*/
+
+.slider {
+    overflow: hidden;
+    padding: 20px 20px;
+}
+
+.slider-track {
+    display: flex;
     gap: 20px;
+    overflow: visible;
 }
 
-@media (min-width: 768px) {
-    .house-grid {
-        grid-template-columns: repeat(3, 1fr); /* десктоп */
+/*.house-card {*/
+/*    !*flex: 0 0 calc((100% - 40px) / 3);*!*/
+/*    flex: 0 0 85%;*/
+/*    border-radius: 15px;*/
+/*    overflow: hidden;*/
+/*    background: white;*/
+
+/*    box-shadow: 0 5px 20px rgba(0,0,0,0.08);*/
+
+/*    transition: transform 0.35s ease, box-shadow 0.35s ease;*/
+/*    will-change: transform;*/
+/*}*/
+
+/*@media (min-width: 768px) {*/
+/*    .house-grid {*/
+/*        grid-template-columns: repeat(3, 1fr); !* десктоп *!*/
+/*    }*/
+/*    .house-card {*/
+/*        flex: 0 0 calc((100% - 20px) / 2); !* 2 карточки *!*/
+/*    }*/
+
+/*}*/
+
+/*@media (max-width: 768px) {*/
+/*    .houses {*/
+/*        max-width: 700px;*/
+/*        margin: 0;*/
+/*        padding: 0 20px;*/
+/*        justify-content: center;*/
+/*        align-items: center;*/
+/*    }*/
+/*    .house-grid {*/
+/*        grid-template-columns: 1fr;*/
+
+/*    }*/
+/*    .house-card {*/
+/*        flex: 0 0 calc((100% - 20px) / 2); !* 2 карточки *!*/
+/*    }*/
+/*}*/
+
+/* база (телефон) */
+.house-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    border-radius: 15px;
+    overflow: hidden;
+    background: white;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    will-change: transform;
+}
+
+@media (max-width: 1024px) {
+    .house-card {
+        flex: 0 0 calc((100% - 20px) / 2);
     }
 }
 
-@media (max-width: 768px) {
-    .houses {
-        max-width: 700px;
-        margin: 0;
-        padding: 0 20px;
-        justify-content: center;
-        align-items: center;
+@media (max-width: 600px) {
+    .slider-track {
+        gap: 10px;
     }
-    .house-grid {
-        grid-template-columns: 1fr;
-
+    .house-card {
+        flex: 0 0 calc(100% - 10px);
     }
 }
 
 .house-card {
-    animation: fadeIn 1.2s ease-out forwards;
     border-radius: 15px;
     overflow: hidden;
     background: white;
@@ -56,7 +114,7 @@
 }
 
 .house-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-8px) scale(1.05);
 }
 
 .house-card img {
@@ -88,3 +146,53 @@
     border-radius: 10px;
 }
 
+/* контейнер кнопок */
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    margin-top: 30px;
+}
+
+/* сама кнопка */
+.slider-controls button {
+    width: 38px;
+    height: 28px;
+
+    border-radius: 20%;
+    border: none;
+
+    background: white;
+    color: #333;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+
+    transition: all 0.3s ease;
+}
+
+/* hover */
+.slider-controls button:hover {
+    background: #111;
+    color: white;
+
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* active (натиснута) */
+.slider-controls button:active {
+    transform: scale(0.95);
+}
+
+/* 🔥 коли неактивна */
+.slider-controls button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}

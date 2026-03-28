@@ -1,31 +1,29 @@
+
 import "../css/Hero.css"
 export default function Hero() {
     return (
         <section className="hero">
             <div className="hero-overlay">
-                <h1>
-                    Architecture Firm in Ukraine
-                </h1>
-
+                <h1>Architecture Firm in Ukraine</h1>
                 <p>
-                    Design, manufacture, and installation
+                    Проєктування, будівництво та реалізація
                 </p>
 
                 <div className="hero-stats">
 
                     <div className="stat">
                         <h2>250+</h2>
-                        <p>houses built</p>
+                        <p>збудованих будинків</p>
                     </div>
 
                     <div className="stat">
                         <h2>25</h2>
-                        <p>projects</p>
+                        <p>проєктів</p>
                     </div>
 
                     <div className="stat">
                         <h2>100%</h2>
-                        <p>satisfied customers</p>
+                        <p>задоволених клієнтів</p>
                     </div>
 
                 </div>

@@ -1,3 +1,56 @@
+// import "../App.css"
+// import "../css/NavBar.css"
+// import {useEffect, useState,} from "react";
+// import {Link} from "react-router-dom";
+// export default function Navbar(props) {
+//     const [menuOpen, setMenuOpen] = useState(false);
+//
+//     const [scrolled, setScrolled] = useState(false);
+//
+//     useEffect(() => {
+//         const handleScroll = () => {
+//             // Якщо скрол більше 50px, ставимо true
+//             setScrolled(window.scrollY > 50);
+//         };
+//
+//         window.addEventListener("scroll", handleScroll);
+//
+//         return () => window.removeEventListener("scroll", handleScroll);
+//     }, []);
+//     return (
+//
+//             <div className="navbar">
+//                 <div className="logo">ModHouse</div>
+//
+//                 <div
+//                     className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl==="main" ? "":''} ${props.cl==="catalog" ? "catalog":''}`}>
+//                     <Link to={'/'}>
+//                         <p>Main</p>
+//                     </Link>
+//                     <Link to={'/catalog'}>
+//                         <p>Catalog</p>
+//                     </Link>
+//                     <Link to={'/about'}>
+//                         <p>About us</p>
+//                     </Link>
+//                     <Link to={'/contacts'}>
+//                         <p>Contacts</p>
+//                     </Link>
+//
+//                 </div>
+//
+//                 {/* гамбургер */}
+//                 <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+//                     <img src="../imgs/main-menu.png" width="45px" height="45px"  alt=""/>
+//                 </div>
+//
+//                 <button className="btn">Order a call</button>
+//
+//             </div>
+//
+//
+//     )
+// }
 import "../App.css"
 import "../css/NavBar.css"
 import {useEffect, useState,} from "react";
@@ -10,7 +63,13 @@ export default function Navbar(props) {
     useEffect(() => {
         const handleScroll = () => {
             // Якщо скрол більше 50px, ставимо true
-            setScrolled(window.scrollY > 50);
+            //setScrolled(window.scrollY > 50);
+            if (props.cl === "main") {
+                setScrolled(window.scrollY > 600);
+            } else {
+                //setScrolled(false);
+                setScrolled(window.scrollY > 50);
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -19,35 +78,39 @@ export default function Navbar(props) {
     }, []);
     return (
 
-            <div className="navbar">
-                <div className="logo">ModHouse</div>
+        <div className="navbar">
+            <div className="logo">ModHouse</div>
 
-                <div
-                    className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl==="main" ? "":''} ${props.cl==="catalog" ? "catalog":''}`}>
-                    <Link to={'/'}>
-                        <p>Main</p>
-                    </Link>
-                    <Link to={'/catalog'}>
-                        <p>Catalog</p>
-                    </Link>
-                    <Link to={'/about'}>
-                        <p>About us</p>
-                    </Link>
-                    <Link to={'/contacts'}>
-                        <p>Contacts</p>
-                    </Link>
+            {/* className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl==="main" ? "":''} ${props.cl==="catalog" ? "catalog":''}`}*/}
+            <div
+                className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl === "main" ? "menu-main" : "menu-default"}`}
+            >
+                <Link to={'/'}>
+                    <p>Main</p>
+                </Link>
+                <Link to={'/catalog'}>
+                    <p>Catalog</p>
+                </Link>
+                <Link to={'/about'}>
+                    <p>About us</p>
+                </Link>
+                <Link to={'/contacts'}>
+                    <p>Contacts</p>
+                </Link>
 
-                </div>
+            </div>
 
-                {/* гамбургер */}
-                <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                    <img src="../imgs/main-menu.png" width="45px" height="45px"  alt=""/>
-                </div>
+            {/* гамбургер */}
+            <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+                <img src="../imgs/main-menu.png" width="45px" height="45px" alt=""/>
+            </div>
 
+            <div className="btn-container">
                 <button className="btn">Order a call</button>
+            </div>
 
             </div>
 
 
-    )
-}
+            )
+            }
