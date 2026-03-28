@@ -36,6 +36,17 @@ namespace ArchPortfolio.Controllers
             return Ok(project);
         }
 
+        [HttpGet("best")]
+        public async Task<IActionResult> GetBestProjects()
+        {
+            var projects = await _context.Projects
+                .Where(p => p.IsBest)
+                .Include(p => p.Images)
+                .ToListAsync();
+
+            return Ok(projects);
+        }
+
         [HttpPost]
         public async Task<ActionResult<Project>> Create(Project project)
         {

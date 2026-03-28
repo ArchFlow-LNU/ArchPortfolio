@@ -6,6 +6,7 @@ namespace ArchPortfolio.Models
         public int Id { get; set; }
         public string Title { get; set; } = null!;
         public string Description { get; set; } = null!;
+        public string? FullDescription { get; set; }
         public int Area { get; set; }
         public int Year { get; set; }
 
@@ -13,5 +14,7 @@ namespace ArchPortfolio.Models
         public ProjectCategory? Category { get; set; }
 
         public List<ProjectImage> Images { get; set; } = new();
+
+        public bool IsBest { get; set; }
     }
 }
