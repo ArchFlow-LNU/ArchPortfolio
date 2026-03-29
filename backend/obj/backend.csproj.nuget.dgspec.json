@@ -1,36 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\shchy\\OneDrive - lnu.edu.ua\\3 курс\\ArchProjVS\\backend\\backend.csproj": {}
+    "/Users/anastasia/ArchPortfolio/backend/backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\shchy\\OneDrive - lnu.edu.ua\\3 курс\\ArchProjVS\\backend\\backend.csproj": {
+    "/Users/anastasia/ArchPortfolio/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\shchy\\OneDrive - lnu.edu.ua\\3 курс\\ArchProjVS\\backend\\backend.csproj",
+        "projectUniqueName": "/Users/anastasia/ArchPortfolio/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\shchy\\OneDrive - lnu.edu.ua\\3 курс\\ArchProjVS\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\shchy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\shchy\\OneDrive - lnu.edu.ua\\3 курс\\ArchProjVS\\backend\\obj\\",
+        "projectPath": "/Users/anastasia/ArchPortfolio/backend/backend.csproj",
+        "packagesPath": "/Users/anastasia/.nuget/packages/",
+        "outputPath": "/Users/anastasia/ArchPortfolio/backend/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\shchy\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/anastasia/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net9.0"
+          "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "/usr/local/share/dotnet/library-packs": {},
+          "/usr/local/share/dotnet/sdk/7.0.313/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net9.0": {
-            "targetAlias": "net9.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -38,17 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.300"
+        }
       },
       "frameworks": {
-        "net9.0": {
-          "targetAlias": "net9.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -67,6 +57,10 @@
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.6.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.17.0, )"
             }
           },
           "imports": [
@@ -88,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.305/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.313/RuntimeIdentifierGraph.json"
         }
       }
     }
