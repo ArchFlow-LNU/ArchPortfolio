@@ -1,18 +1,25 @@
-import "../adminCss/RegisterPage.css"
+import "../adminCss/RegisterPage.css";
+
 export default function RegisterPage() {
     return (
         <div className="register-page">
-            <div className="wrapper2">
-                <h1 className="h1">Register</h1>
+            <div className="register-wrapper">
 
-                <form action="" className="register-form">
-                    <input type="text" placeholder="enter your name"/>
-                    <input type="email" placeholder="input your emain"/>
-                    <input type="password" placeholder="input your password"/>
+                <h1 className="register-title">Реєстрація</h1>
+
+                <form className="register-form">
+
+                    <input type="text" placeholder="Введіть ваше ім’я" />
+                    <input type="email" placeholder="Введіть електронну пошту" />
+                    <input type="password" placeholder="Введіть пароль" />
+
+                    <button className="register-btn">
+                        Зареєструватися
+                    </button>
+
                 </form>
-                <button className="register-btn">Register</button>
 
             </div>
         </div>
-    )
+    );
 }

@@ -44,25 +44,25 @@ export default function HousePage() {
 
     return (
         <div className="house-page">
-
+    
             <button 
                 className="back-btn"
                 onClick={() => navigate("/catalog")}
             >
                 ← Назад
             </button>
-
-            <div className="house-container">
-
+    
+            <div className="house-hero">
                 <img src={house.img} alt={house.title} />
-
-                <div className="house-text">
+                <div className="overlay">
                     <h1>{house.title}</h1>
-                    <p>{house.text}</p>
                 </div>
-
             </div>
-
+    
+            <div className="house-content">
+                <p>{house.text}</p>
+            </div>
+    
         </div>
     );
 }

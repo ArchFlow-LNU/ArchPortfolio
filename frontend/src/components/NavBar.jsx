@@ -23,7 +23,7 @@ export default function Navbar(props) {
                 <div className="logo">ModHouse</div>
 
                 <div
-                    className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl==="main" ? "":''} ${props.cl==="catalog" ? "catalog":''}`}>
+                className={`menu centered ${menuOpen ? "open" : ""}`}>
                     <Link to={'/'}>
                         <p>Main</p>
                     </Link>
@@ -43,9 +43,7 @@ export default function Navbar(props) {
                 <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
                     <img src="../imgs/main-menu.png" width="45px" height="45px"  alt=""/>
                 </div>
-
-                <button className="btn">Order a call</button>
-
+                
             </div>
 
 
