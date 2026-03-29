@@ -1,6 +1,12 @@
 .profile-page {
     display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+}
+
+.profile-content {
+    display: flex;
+}
+
+.profile-content > div {
+    flex: 1;
 }
