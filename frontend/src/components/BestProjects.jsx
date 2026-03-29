@@ -1,5 +1,7 @@
 import "../css/BestProjects.css"
 import { useState } from "react";
+import { motion } from "framer-motion";
+
 export default function BestProjects() {
     const projects = [
         {
@@ -35,14 +37,20 @@ export default function BestProjects() {
                 </div>
             </div>
 
-            <div className="best-card">
+            <motion.div className="best-card"
+                        key={current} // КЛЮЧ = тригер анімації
+
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+            >
                 <img src={projects[current].img} alt="" />
 
                 <div className="best-info">
                     <h3>{projects[current].title}</h3>
                     <p>{projects[current].desc}</p>
                 </div>
-            </div>
+            </motion.div>
 
         </section>
     );

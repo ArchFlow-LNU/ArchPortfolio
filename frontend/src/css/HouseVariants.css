@@ -47,7 +47,7 @@
 }
 
 .house-card {
-    animation: fadeIn 1.2s ease-out forwards;
+    /*animation: fadeIn 1.2s ease-out forwards;*/
     border-radius: 15px;
     overflow: hidden;
     background: white;

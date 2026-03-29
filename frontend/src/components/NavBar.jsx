@@ -10,7 +10,13 @@ export default function Navbar(props) {
     useEffect(() => {
         const handleScroll = () => {
             // Якщо скрол більше 50px, ставимо true
-            setScrolled(window.scrollY > 50);
+            //setScrolled(window.scrollY > 50);
+            if (props.cl === "main") {
+                setScrolled(window.scrollY > 600);
+            } else {
+                //setScrolled(false);
+                setScrolled(window.scrollY > 50);
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -22,8 +28,14 @@ export default function Navbar(props) {
             <div className="navbar">
                 <div className="logo">ModHouse</div>
 
+                {/* className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl==="main" ? "":''} ${props.cl==="catalog" ? "catalog":''}`}*/}
                 <div
+<<<<<<< HEAD
                 className={`menu centered ${menuOpen ? "open" : ""}`}>
+=======
+                    className={`menu ${menuOpen ? "open" : ""} ${scrolled ? "scrolled" : ""} ${props.cl === "main" ? "menu-main" : "menu-default"}`}
+                >
+>>>>>>> 28b4399b3b0e8720de10416e4743103a3b009ada
                     <Link to={'/'}>
                         <p>Main</p>
                     </Link>
