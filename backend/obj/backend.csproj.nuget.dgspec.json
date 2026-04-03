@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/anastasia/ArchPortfolio/backend/backend.csproj": {}
+    "/Users/anastasia/Documents/ArchPortfolio/backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/anastasia/ArchPortfolio/backend/backend.csproj": {
+    "/Users/anastasia/Documents/ArchPortfolio/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/anastasia/ArchPortfolio/backend/backend.csproj",
+        "projectUniqueName": "/Users/anastasia/Documents/ArchPortfolio/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/anastasia/ArchPortfolio/backend/backend.csproj",
+        "projectPath": "/Users/anastasia/Documents/ArchPortfolio/backend/backend.csproj",
         "packagesPath": "/Users/anastasia/.nuget/packages/",
-        "outputPath": "/Users/anastasia/ArchPortfolio/backend/obj/",
+        "outputPath": "/Users/anastasia/Documents/ArchPortfolio/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/anastasia/.nuget/NuGet/NuGet.Config"
