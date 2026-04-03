@@ -66,7 +66,13 @@ export default function About() {
                         <h1 className="about-title">{about.title}</h1>
                         <p>{about.text1}</p>
                         <p>{about.text2}</p>
-                        <button className="btn-dark">
+                        <button className="btn-dark"
+                                onClick={() => {
+                                    document.getElementById("contact")?.scrollIntoView({
+                                        behavior: "smooth"
+                                    });
+                                }}
+                        >
                             Замовити проект →
                         </button>
                     </div>

@@ -99,7 +99,7 @@ export default function ContactForm() {
     };
 
     return (
-        <section className="contact">
+        <section className="contact" id="contact">
             <div className="container">
 
                 <div className="contact-overlay">
