@@ -2,6 +2,7 @@ import "../adminCss/ProjectFormPage.css"
 import {Navigate} from "react-router-dom";
 import { useState} from "react";
 import Menu from "../adminComponents/Menu.jsx";
+import Header from "../adminComponents/Header.jsx";
 
 
 export default function ProjectFormPage (){
@@ -29,6 +30,7 @@ export default function ProjectFormPage (){
 
     return(
         <div className="project-form">
+            <Header title="Projects" />
             <Menu></Menu>
 
                 <form className="form" onSubmit={savePlace}>

@@ -1,45 +1,245 @@
+/*.register-page {*/
+/*    background-image: linear-gradient(to bottom, rgba(194, 179, 173), rgba(123, 137, 164));*/
+/*    margin: 0;*/
+/*    min-height: 100vh;*/
+/*}*/
+
+/*.wrapper2 {*/
+/*    display: grid;*/
+/*    position: absolute;*/
+/*    !*border: 1px black solid;*!*/
+/*    border-radius: 30px;*/
+/*    padding: 60px;*/
+/*    top:25%;*/
+/*    left:25%;*/
+/*    width:44%;*/
+/*    height:40%;*/
+/*    background-color:white;*/
+
+/*}*/
+/*.h1{*/
+/*    background-color: white;*/
+/*    font-weight: bold;*/
+/*    font-size: 40px;*/
+/*    !*border:1px black solid;*!*/
+/*    margin-top: 0;*/
+/*}*/
+/*.register-form{*/
+/*    display: grid;*/
+/*    row-gap: 20px;*/
+/*    background-color: white;*/
+/*}*/
+/*.register-form input {*/
+/*    border-radius: 18px;*/
+/*    height: 40px;*/
+/*    padding-left: 30px;*/
+/*    background-color: white;*/
+/*}*/
+/*.register-btn {*/
+/*    margin-top: 20px;*/
+/*    border-radius: 30px;*/
+/*    background-color: rgb(37, 52, 83);*/
+/*    padding: 10px 100px;*/
+/*    color: white;*/
+/*    font-size: 15px;*/
+/*}*/
+
+
+
+/* ===== СТОРІНКА ===== */
 .register-page {
-    background-image: linear-gradient(to bottom, rgba(194, 179, 173), rgba(123, 137, 164));
-    margin: 0;
     min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    background: url("/imgs/contact-bg.png") center/cover no-repeat;
+    position: relative;
 }
 
-.wrapper2 {
-    display: grid;
+/* затемнення */
+.register-page::before {
+    content: "";
     position: absolute;
-    /*border: 1px black solid;*/
-    border-radius: 30px;
-    padding: 60px;
-    top:25%;
-    left:25%;
-    width:44%;
-    height:40%;
-    background-color:white;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
 
+/* ===== КАРТКА ===== */
+.wrapper2 {
+    position: relative;
+    z-index: 2;
+
+    width: 650px;
+    max-width: 100%;
+
+    padding: 50px 60px;
+
+    border-radius: 25px;
+    background: #e5e5e5;
+
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
 }
-.h1{
-    background-color: white;
-    font-weight: bold;
-    font-size: 40px;
-    /*border:1px black solid;*/
-    margin-top: 0;
+
+/* ===== TITLE ===== */
+.h1 {
+    margin: 0;
+
+    font-size: 34px;
+    font-weight: 600;
+
+    text-align: center;
+
+    background: #f3f3f3;
+    padding: 15px;
+    border-radius: 10px;
+
+    color: #333;
 }
-.register-form{
-    display: grid;
-    row-gap: 20px;
-    background-color: white;
+
+/* ===== FORM ===== */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
 }
+
+/* ===== INPUT ===== */
 .register-form input {
-    border-radius: 18px;
-    height: 40px;
-    padding-left: 30px;
-    background-color: white;
+    height: 50px;
+    border-radius: 12px;
+    border: none;
+
+    padding: 0 20px;
+
+    background: #f3f3f3;
+    color: #333;
+
+    outline: none;
+    font-size: 14px;
 }
+
+.register-form input::placeholder {
+    color: #888;
+}
+
+/* ===== BUTTON ===== */
 .register-btn {
-    margin-top: 20px;
-    border-radius: 30px;
-    background-color: rgb(37, 52, 83);
-    padding: 10px 100px;
+    margin-top: 10px;
+
+    height: 50px;
+    width: 100%;
+
+    border-radius: 12px;
+    border: none;
+
+    background: black;
     color: white;
+
     font-size: 15px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: 0.2s;
 }
+
+.register-btn:hover {
+    background: #222;
+    transform: scale(1.02);
+}
+
+/* ===== LOGIN LINK ===== */
+.register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+
+    font-size: 14px;
+    color: #333;
+
+    text-align: center;
+}
+
+.register-link {
+    color: black;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.register-link:hover {
+    opacity: 0.7;
+}
+
+---
+
+/* ========================= */
+/* 📱 МОБІЛКА */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .wrapper2 {
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 20px;
+    }
+
+    .h1 {
+        font-size: 24px;
+        padding: 10px;
+    }
+
+    .register-form input {
+        height: 45px;
+        font-size: 13px;
+    }
+
+    .register-btn {
+        height: 45px;
+        font-size: 14px;
+    }
+
+    .register {
+        flex-direction: column;
+        gap: 4px;
+        font-size: 13px;
+    }
+}
+
+---
+
+/* ========================= */
+/* 💻 ВЕЛИКІ ЕКРАНИ */
+/* ========================= */
+
+@media (min-width: 1200px) {
+
+    .wrapper2 {
+        width: 700px;
+        padding: 60px 80px;
+    }
+
+    .h1 {
+        font-size: 36px;
+    }
+
+    .register-form input {
+        font-size: 15px;
+    }
+
+    .register-btn {
+        font-size: 16px;
+    }
+}
+

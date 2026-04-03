@@ -10,19 +10,52 @@ export default function RegisterPage() {
 
     const navigate = useNavigate();
 
+    // const handleRegister = async (e) => {
+    //     e.preventDefault();
+    //
+    //     try {
+    //         await api.post("/api/auth/register", {
+    //             email,
+    //             password
+    //         });
+    //
+    //         navigate("/admin/login");
+    //
+    //     } catch {
+    //         alert("Користувач вже існує");
+    //     }
+    // };
     const handleRegister = async (e) => {
         e.preventDefault();
 
         try {
-            await api.post("/api/auth/register", {
+            const res = await api.post("/api/auth/register", {
                 email,
                 password
             });
 
-            navigate("/admin/login");
+            // ЗБЕРІГАЄМО ТОКЕН
+            localStorage.setItem("token", res.data.token);
 
-        } catch {
-            alert("Користувач вже існує");
+            // ОДРАЗУ В ПРОФІЛЬ
+            navigate("/admin/profile");
+
+        } catch (err) {
+            console.log("ERROR FULL:", err);
+            console.log("RESPONSE:", err.response);
+            console.log("DATA:", err.response?.data);
+
+            if (err.response) {
+                if (err.response.status === 400) {
+                    alert(err.response.data || "Користувач вже існує");
+                } else if (err.response.status === 500) {
+                    alert("Помилка сервера");
+                } else {
+                    alert("Щось пішло не так");
+                }
+            } else {
+                alert("Немає зʼєднання з сервером");
+            }
         }
     };
 
