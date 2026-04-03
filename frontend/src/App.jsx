@@ -14,6 +14,7 @@ import ProfilePage from "./admin/adminPages/ProfilePage.jsx";
 import ProjectFormPage from "./admin/adminPages/ProjectFormPage.jsx";
 
 import ProtectedRoute from "./admin/adminComponents/ProtectedRoute.jsx";
+import AdminReviewsPage from "./admin/adminPages/AdminReviewsPage";
 
 function App() {
     return (
@@ -49,7 +50,14 @@ function App() {
                     </ProtectedRoute>
                 }
             />
-
+            <Route 
+                path="/admin/reviews" 
+                element={
+                    <ProtectedRoute>
+                        <AdminReviewsPage />
+                    </ProtectedRoute>
+                } 
+            />
         </Routes>
     );
 }
