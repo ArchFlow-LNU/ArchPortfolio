@@ -10,6 +10,7 @@ import ProfilePage from "./admin/adminPages/ProfilePage.jsx";
 import ProjectFormPage from "./admin/adminPages/ProjectFormPage.jsx";
 import HousePage from "./pages/HousePage.jsx";
 import ReviewsPage from "./pages/ReviewsPage.jsx";
+import AdminReviewsPage from "./admin/adminPages/AdminReviewsPage.jsx";
 
 function App() {
     return (
@@ -24,6 +25,7 @@ function App() {
                 <Route path="/admin/profile/new" element={<ProjectFormPage></ProjectFormPage>}></Route>
                 <Route path="/house/:id" element={<HousePage />} />
                 <Route path="/reviews" element={<ReviewsPage />} />
+                <Route path="/admin/reviews" element={<AdminReviewsPage />} />
         </Routes>
 
     )

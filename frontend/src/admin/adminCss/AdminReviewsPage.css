@@ -1,0 +1,72 @@
+.admin-container {
+    padding: 40px;
+    background: #f4f6f8;
+    min-height: 100vh;
+}
+
+.admin-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+.admin-list {
+    display: grid;
+    gap: 20px;
+}
+
+.admin-card {
+    padding: 20px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.admin-card.pending {
+    border-left: 5px solid orange;
+}
+
+.admin-card.approved {
+    border-left: 5px solid green;
+}
+
+.message {
+    margin: 10px 0;
+}
+
+.rating {
+    font-weight: bold;
+}
+
+.status {
+    margin-bottom: 10px;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-approve {
+    background: green;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.admin-denied {
+    text-align: center;
+    margin-top: 100px;
+    color: red;
+}
