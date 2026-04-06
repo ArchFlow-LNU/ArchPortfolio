@@ -35,17 +35,27 @@ export default function ReviewsPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(`${API}/api/reviews`, form)
+        axios.post(`${API}/api/reviews`, {
+            ...form,
+            rating: Number(form.rating) // ФІКС
+        })
             .then(() => {
                 alert("Відгук відправлено");
-                setForm({
-                    authorName: "",
-                    authorEmail: "",
-                    rating: "",
-                    message: ""
-                });
+
+                // оновлюємо список після додавання
+                return axios.get(`${API}/api/reviews`);
             })
-            .catch(err => console.log(err));
+            .then(res => setReviews(res.data))
+            .catch(err => {
+                console.log("ERROR:", err.response?.data || err.message);
+            });
+
+        setForm({
+            authorName: "",
+            authorEmail: "",
+            rating: "",
+            message: ""
+        });
     };
 
     return (
@@ -55,15 +65,12 @@ export default function ReviewsPage() {
 
             <div className="page-content">
 
-            {/* HEADER */}
             <section className="reviews-header">
                 <h1>Відгуки клієнтів</h1>
                 <p>Дізнайтесь, що говорять про нас</p>
             </section>
 
-            {/* СКРОЛ ВІДГУКІВ */}
             <section className="reviews-slider">
-
                 <div className="reviews-track">
                     {reviews.map(r => (
                         <div key={r.id} className="review-card">
@@ -75,16 +82,16 @@ export default function ReviewsPage() {
                             <p>{r.message}</p>
 
                             <span>
-                                {new Date(r.createdAt).toLocaleDateString()}
+                                {r.createdAt 
+                                    ? new Date(r.createdAt).toLocaleDateString() 
+                                    : ""}
                             </span>
 
                         </div>
                     ))}
                 </div>
-
             </section>
 
-            {/* ФОРМА */}
             <section className="review-form-section">
 
                 <h2>Залишити відгук</h2>
@@ -134,7 +141,6 @@ export default function ReviewsPage() {
 
             </section>
             </div>
-
             <Footer />
 
         </div>
