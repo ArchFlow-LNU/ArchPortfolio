@@ -10,22 +10,30 @@ namespace ArchPortfolio.Controllers
     public class ReviewsController : ControllerBase
     {
         private readonly AppDbContext _context;
-        public ReviewsController(AppDbContext context) => _context = context;
 
-        // ✔️ ПУБЛІЧНІ (тільки approved)
+        public ReviewsController(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        // ПУБЛІЧНІ (без фільтра)
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Review>>> GetAll()
-            => await _context.Reviews
-                .Where(r => r.Approved)
+        {
+            return await _context.Reviews
                 .Include(r => r.Project)
+                .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
+        }
 
-        // ✔️ АДМІН (всі)
+        // АДМІН (можеш залишити)
         [HttpGet("admin")]
         public async Task<ActionResult<IEnumerable<Review>>> GetAllAdmin()
-            => await _context.Reviews
+        {
+            return await _context.Reviews
                 .Include(r => r.Project)
                 .ToListAsync();
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> Get(int id)
@@ -35,20 +43,21 @@ namespace ArchPortfolio.Controllers
                 .FirstOrDefaultAsync(r => r.Id == id);
 
             if (review == null) return NotFound();
+
             return review;
         }
 
-        // ✔️ CREATE (pending)
+        // CREATE (тепер одразу видно)
         [HttpPost]
-        public async Task<ActionResult<Review>> Create(Review review)
+        public async Task<ActionResult<Review>> Create([FromBody] Review review)
         {
-            review.Approved = false;
+            review.Approved = true; // 🔥 ключова зміна
             review.CreatedAt = DateTime.UtcNow;
 
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(Get), new { id = review.Id }, review);
+            return Ok(review);
         }
 
         [HttpPut("{id}")]
@@ -62,14 +71,13 @@ namespace ArchPortfolio.Controllers
             return NoContent();
         }
 
-        // ✔️ APPROVE (ГОЛОВНЕ)
+        // approve залишаємо
         [HttpPut("{id}/approve")]
         public async Task<IActionResult> Approve(int id)
         {
             var review = await _context.Reviews.FindAsync(id);
 
-            if (review == null)
-                return NotFound();
+            if (review == null) return NotFound();
 
             review.Approved = true;
 
@@ -83,8 +91,7 @@ namespace ArchPortfolio.Controllers
         {
             var review = await _context.Reviews.FindAsync(id);
 
-            if (review == null)
-                return NotFound();
+            if (review == null) return NotFound();
 
             _context.Reviews.Remove(review);
             await _context.SaveChangesAsync();
