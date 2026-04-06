@@ -37,25 +37,24 @@ export default function ReviewsPage() {
 
         axios.post(`${API}/api/reviews`, {
             ...form,
-            rating: Number(form.rating) // ФІКС
+            rating: Number(form.rating)
         })
-            .then(() => {
-                alert("Відгук відправлено");
+            .then(() => axios.get(`${API}/api/reviews`))
+            .then(res => {
+                setReviews(res.data);
 
-                // оновлюємо список після додавання
-                return axios.get(`${API}/api/reviews`);
+                setForm({
+                    authorName: "",
+                    authorEmail: "",
+                    rating: "",
+                    message: ""
+                });
+
+                alert("Відгук відправлено");
             })
-            .then(res => setReviews(res.data))
             .catch(err => {
                 console.log("ERROR:", err.response?.data || err.message);
             });
-
-        setForm({
-            authorName: "",
-            authorEmail: "",
-            rating: "",
-            message: ""
-        });
     };
 
     return (
@@ -65,82 +64,85 @@ export default function ReviewsPage() {
 
             <div className="page-content">
 
-            <section className="reviews-header">
-                <h1>Відгуки клієнтів</h1>
-                <p>Дізнайтесь, що говорять про нас</p>
-            </section>
+                <section className="reviews-header">
+                    <h1>Відгуки клієнтів</h1>
+                    <p>Дізнайтесь, що говорять про нас</p>
+                </section>
 
-            <section className="reviews-slider">
-                <div className="reviews-track">
-                    {reviews.map(r => (
-                        <div key={r.id} className="review-card">
+                <section className="reviews-slider">
+                    <div className="reviews-track">
+                        {reviews.map(r => (
+                            <div key={r.id} className="review-card">
 
-                            <h3>{r.authorName}</h3>
+                                <h3>{r.authorName}</h3>
 
-                            <p>Оцінка: {r.rating}</p>
+                                <p>Оцінка: {r.rating}</p>
 
-                            <p>{r.message}</p>
+                                <p>{r.message}</p>
 
-                            <span>
-                                {r.createdAt 
-                                    ? new Date(r.createdAt).toLocaleDateString() 
-                                    : ""}
-                            </span>
+                                <span>
+                                    {r.createdAt
+                                        ? new Date(r.createdAt).toLocaleDateString()
+                                        : ""}
+                                </span>
 
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                <section className="review-form-section">
+
+                    <h2>Залишити відгук</h2>
+
+                    <form onSubmit={handleSubmit} className="review-form">
+
+                        <div className="review-row">
+                            <input
+                                name="authorName"
+                                placeholder="Ім'я"
+                                value={form.authorName}
+                                onChange={handleChange}
+                                required
+                            />
+
+                            <input
+                                name="rating"
+                                type="number"
+                                placeholder="Оцінка(1-10)"
+                                min="1"
+                                max="10"
+                                value={form.rating}
+                                onChange={handleChange}
+                                required
+                            />
                         </div>
-                    ))}
-                </div>
-            </section>
 
-            <section className="review-form-section">
-
-                <h2>Залишити відгук</h2>
-
-                <form onSubmit={handleSubmit} className="review-form">
-
-                    <div className="review-row">
                         <input
-                            name="authorName"
-                            placeholder="Ім'я"
-                            value={form.authorName}
+                            name="authorEmail"
+                            placeholder="Email"
+                            value={form.authorEmail}
+                            onChange={handleChange}
+                        />
+
+                        <textarea
+                            name="message"
+                            placeholder="Ваш відгук..."
+                            value={form.message}
                             onChange={handleChange}
                             required
-                        />
+                            />
 
-                        <input
-                            name="rating"
-                            type="number"
-                            placeholder="Оцінка(1-10)"
-                            min="1"
-                            max="10"
-                            value={form.rating}
-                            onChange={handleChange}
-                        />
-                    </div>
+                        <button type="submit" className="btn-dark">
+                            Надіслати
+                        </button>
 
-                    <input
-                        name="authorEmail"
-                        placeholder="Email"
-                        value={form.authorEmail}
-                        onChange={handleChange}
-                    />
+                    </form>
 
-                    <textarea
-                        name="message"
-                        placeholder="Ваш відгук..."
-                        value={form.message}
-                        onChange={handleChange}
-                        required
-                    />
+                </section>
 
-                    <button type="submit" className="btn-dark">
-                        Надіслати
-                    </button>
-
-                </form>
-
-            </section>
             </div>
+
             <Footer />
 
         </div>
