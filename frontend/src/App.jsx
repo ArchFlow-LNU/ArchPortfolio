@@ -9,7 +9,7 @@ import RegisterPage from "./admin/adminPages/RegisterPage.jsx";
 import ProfilePage from "./admin/adminPages/ProfilePage.jsx";
 import ProjectFormPage from "./admin/adminPages/ProjectFormPage.jsx";
 import HousePage from "./pages/HousePage.jsx";
-import ReviewsPage from "./pages/ReviewPage.jsx";
+import ReviewsPage from "./pages/ReviewsPage.jsx";
 
 function App() {
     return (
