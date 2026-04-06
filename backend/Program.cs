@@ -1,37 +1,12 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.FileProviders;
-using ArchPortfolio.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.FileProviders;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args); 
-// DB
-builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))); 
-// Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+var builder = WebApplication.CreateBuilder(args);
 
-//CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend",
-        policy =>
-        {
-            policy.WithOrigins("http://localhost:5173")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-});
-var app = builder.Build();
-app.UseCors("AllowFrontend");
 
-// Controllers
-//haendle circular references in JSON
-//(���������, ���� ������ �� ��������, � �������� �� ������ �������)
-//without this, we might get "A possible object cycle was detected" error when serializing to JSON or CORS issues in frontend
-//THATS WHY WE USE ReferenceHandler.IgnoreCycles - it tells the serializer to ignore circular references and not throw an error(29-33 STRING)
-//LATER WE CAN IMPLEMENT SPECIAL MODELS TO AVOID THIS PROBLEM IN A BETTER WAY, BUT FOR NOW THIS IS A QUICK FIX!!!!!!!!
+// Controllers + IgnoreCycles
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
@@ -39,6 +14,22 @@ builder.Services.AddControllers()
             System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
     });
 
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy =>
+        {
+            policy
+                .WithOrigins("http://localhost:5173")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
+
+// JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -58,9 +49,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
+
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+
 var app = builder.Build();
 
 
+// Static files
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
@@ -68,21 +66,26 @@ app.UseStaticFiles(new StaticFileOptions
     RequestPath = ""
 });
 
-// Swagger
+
+// Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "ArchPortfolio API V1");
-    c.RoutePrefix = string.Empty; // ��� UI ���������� ������ �� http://localhost:5000/
+    c.RoutePrefix = string.Empty;
 });
 
-// Routing 
+
+// Middleware порядок ВАЖЛИВИЙ
 app.UseRouting();
-app.UseCors("AllowFrontend");
+
+app.UseCors("AllowFrontend"); // тепер працює
+
 app.UseAuthentication();
 app.UseAuthorization();
 
-// ��ϲ�� ��������в� (�������)
-app.MapControllers(); 
+
+// Endpoints
+app.MapControllers();
 
 app.Run();
