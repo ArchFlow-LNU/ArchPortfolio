@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import api from "../api/axios";
+=======
+import api from "../api/axios"; // ЗАМІСТЬ axios
+>>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
 
 import Navbar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
@@ -27,7 +31,13 @@ export default function ReviewsPage() {
     };
 
     useEffect(() => {
+<<<<<<< HEAD
         loadReviews();
+=======
+        api.get("/api/reviews")
+            .then(res => setReviews(res.data))
+            .catch(err => console.log(err));
+>>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
     }, []);
 
     const handleChange = (e) => {
@@ -40,11 +50,11 @@ export default function ReviewsPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        axios.post(`${API}/api/reviews`, {
+        api.post("/api/reviews", {
             ...form,
             rating: Number(form.rating)
         })
-            .then(() => axios.get(`${API}/api/reviews`))
+            .then(() => api.get("/api/reviews"))
             .then(res => {
                 setReviews(res.data);
 
@@ -136,8 +146,7 @@ export default function ReviewsPage() {
                             value={form.message}
                             onChange={handleChange}
                             required
-                            />
-
+                        />
                         <button type="submit" className="btn-dark">
                             Надіслати
                         </button>

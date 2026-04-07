@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import api from "../../api/axios"; // 🔥 краще назвати api, не axios
 =======
 import axios from "../../api/axios";
 >>>>>>> dafe44f (update admin reviews page)
+=======
+import api from "../../api/axios"; // 🔥 краще назвати api, не axios
+>>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
 import "../../css/AdminReviews.css";
 
 export default function AdminReviewsPage() {
 
     const [reviews, setReviews] = useState([]);
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
     useEffect(() => {
@@ -33,6 +38,8 @@ export default function AdminReviewsPage() {
     };
 
 >>>>>>> dafe44f (update admin reviews page)
+=======
+>>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -46,6 +53,9 @@ export default function AdminReviewsPage() {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
     useEffect(() => {
         loadReviews();
     }, []);
@@ -66,8 +76,11 @@ export default function AdminReviewsPage() {
             .then(() => loadReviews());
     };
 
+<<<<<<< HEAD
 =======
 >>>>>>> dafe44f (update admin reviews page)
+=======
+>>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
     return (
         <div className="admin-container">
 
