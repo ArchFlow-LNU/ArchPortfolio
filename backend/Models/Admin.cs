@@ -10,6 +10,7 @@ namespace ArchPortfolio.Models
         public string Email { get; set; } = null!;
         public string PasswordHash { get; set; } = null!;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string Role { get; set; } = "Admin";
     }
 
 }
