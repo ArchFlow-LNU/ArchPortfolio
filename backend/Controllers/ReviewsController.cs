@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using ArchPortfolio.Data;
 using ArchPortfolio.Models;
 
@@ -72,6 +73,7 @@ namespace ArchPortfolio.Controllers
         }
 
         // approve залишаємо
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}/approve")]
         public async Task<IActionResult> Approve(int id)
         {
@@ -86,6 +88,7 @@ namespace ArchPortfolio.Controllers
             return Ok();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
