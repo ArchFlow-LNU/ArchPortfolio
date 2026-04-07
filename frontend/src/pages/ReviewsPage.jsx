@@ -40,24 +40,26 @@ export default function ReviewsPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            await api.post("/api/reviews", {
-                ...form,
-                rating: Number(form.rating)
+        axios.post(`${API}/api/reviews`, {
+            ...form,
+            rating: Number(form.rating)
+        })
+            .then(() => axios.get(`${API}/api/reviews`))
+            .then(res => {
+                setReviews(res.data);
+
+                setForm({
+                    authorName: "",
+                    authorEmail: "",
+                    rating: "",
+                    message: ""
+                });
+
+                alert("Відгук відправлено");
+            })
+            .catch(err => {
+                console.log("ERROR:", err.response?.data || err.message);
             });
-
-            alert("Відгук відправлено (після модерації з’явиться)");
-
-            setForm({
-                authorName: "",
-                authorEmail: "",
-                rating: "",
-                message: ""
-            });
-
-        } catch (err) {
-            console.log(err);
-        }
     };
 
     return (
@@ -67,15 +69,12 @@ export default function ReviewsPage() {
 
             <div className="page-content">
 
-                {/* HEADER */}
                 <section className="reviews-header">
                     <h1>Відгуки клієнтів</h1>
                     <p>Дізнайтесь, що говорять про нас</p>
                 </section>
 
-                {/* ВІДГУКИ */}
                 <section className="reviews-slider">
-
                     <div className="reviews-track">
                         {reviews.map(r => (
                             <div key={r.id} className="review-card">
@@ -95,10 +94,8 @@ export default function ReviewsPage() {
                             </div>
                         ))}
                     </div>
-
                 </section>
 
-                {/* ФОРМА */}
                 <section className="review-form-section">
 
                     <h2>Залишити відгук</h2>
@@ -117,7 +114,7 @@ export default function ReviewsPage() {
                             <input
                                 name="rating"
                                 type="number"
-                                placeholder="Оцінка (1-10)"
+                                placeholder="Оцінка(1-10)"
                                 min="1"
                                 max="10"
                                 value={form.rating}
@@ -141,18 +138,18 @@ export default function ReviewsPage() {
                             required
                             />
 
-                            <button type="submit" className="btn-dark">
-                                Надіслати
-                            </button>
-    
-                        </form>
-    
-                    </section>
-    
-                </div>
-    
-                <Footer />
-    
+                        <button type="submit" className="btn-dark">
+                            Надіслати
+                        </button>
+
+                    </form>
+
+                </section>
+
             </div>
-        );
-    }
+
+            <Footer />
+
+        </div>
+    );
+}
