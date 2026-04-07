@@ -1,11 +1,38 @@
 import { useEffect, useState } from "react";
+<<<<<<< HEAD
 import api from "../../api/axios"; // 🔥 краще назвати api, не axios
+=======
+import axios from "../../api/axios";
+>>>>>>> dafe44f (update admin reviews page)
 import "../../css/AdminReviews.css";
 
 export default function AdminReviewsPage() {
 
     const [reviews, setReviews] = useState([]);
 
+<<<<<<< HEAD
+=======
+    useEffect(() => {
+        loadReviews();
+    }, []);
+
+    const loadReviews = () => {
+        axios.get("/api/reviews/admin")
+            .then(res => setReviews(res.data))
+            .catch(err => console.log(err));
+    };
+
+    const approveReview = (id) => {
+        axios.put(`/api/reviews/${id}/approve`)
+            .then(() => loadReviews());
+    };
+
+    const deleteReview = (id) => {
+        axios.delete(`/api/reviews/${id}`)
+            .then(() => loadReviews());
+    };
+
+>>>>>>> dafe44f (update admin reviews page)
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -18,6 +45,7 @@ export default function AdminReviewsPage() {
         return <h2 className="admin-denied">Access denied</h2>;
     }
 
+<<<<<<< HEAD
     useEffect(() => {
         loadReviews();
     }, []);
@@ -38,6 +66,8 @@ export default function AdminReviewsPage() {
             .then(() => loadReviews());
     };
 
+=======
+>>>>>>> dafe44f (update admin reviews page)
     return (
         <div className="admin-container">
 
