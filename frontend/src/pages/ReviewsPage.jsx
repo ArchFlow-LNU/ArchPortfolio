@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "../api/axios"; // ЗАМІСТЬ axios
+import api from "../api/axios";
 
 import Navbar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
@@ -17,10 +17,17 @@ export default function ReviewsPage() {
         message: ""
     });
 
+    const loadReviews = async () => {
+        try {
+            const res = await api.get("/api/reviews");
+            setReviews(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
-        api.get("/api/reviews")
-            .then(res => setReviews(res.data))
-            .catch(err => console.log(err));
+        loadReviews();
     }, []);
 
     const handleChange = (e) => {
@@ -30,29 +37,27 @@ export default function ReviewsPage() {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        api.post("/api/reviews", {
-            ...form,
-            rating: Number(form.rating)
-        })
-            .then(() => api.get("/api/reviews"))
-            .then(res => {
-                setReviews(res.data);
-
-                setForm({
-                    authorName: "",
-                    authorEmail: "",
-                    rating: "",
-                    message: ""
-                });
-
-                alert("Відгук відправлено");
-            })
-            .catch(err => {
-                console.log("ERROR:", err.response?.data || err.message);
+        try {
+            await api.post("/api/reviews", {
+                ...form,
+                rating: Number(form.rating)
             });
+
+            alert("Відгук відправлено (після модерації з’явиться)");
+
+            setForm({
+                authorName: "",
+                authorEmail: "",
+                rating: "",
+                message: ""
+            });
+
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -62,12 +67,15 @@ export default function ReviewsPage() {
 
             <div className="page-content">
 
+                {/* HEADER */}
                 <section className="reviews-header">
                     <h1>Відгуки клієнтів</h1>
                     <p>Дізнайтесь, що говорять про нас</p>
                 </section>
 
+                {/* ВІДГУКИ */}
                 <section className="reviews-slider">
+
                     <div className="reviews-track">
                         {reviews.map(r => (
                             <div key={r.id} className="review-card">
@@ -87,8 +95,10 @@ export default function ReviewsPage() {
                             </div>
                         ))}
                     </div>
+
                 </section>
 
+                {/* ФОРМА */}
                 <section className="review-form-section">
 
                     <h2>Залишити відгук</h2>
@@ -107,7 +117,7 @@ export default function ReviewsPage() {
                             <input
                                 name="rating"
                                 type="number"
-                                placeholder="Оцінка(1-10)"
+                                placeholder="Оцінка (1-10)"
                                 min="1"
                                 max="10"
                                 value={form.rating}
@@ -129,19 +139,20 @@ export default function ReviewsPage() {
                             value={form.message}
                             onChange={handleChange}
                             required
-                        />
-                        <button type="submit" className="btn-dark">
-                            Надіслати
-                        </button>
+                            />
 
-                    </form>
-
-                </section>
-
+                            <button type="submit" className="btn-dark">
+                                Надіслати
+                            </button>
+    
+                        </form>
+    
+                    </section>
+    
+                </div>
+    
+                <Footer />
+    
             </div>
-
-            <Footer />
-
-        </div>
-    );
-}
+        );
+    }
