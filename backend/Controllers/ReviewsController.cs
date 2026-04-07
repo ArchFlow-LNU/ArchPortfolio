@@ -17,22 +17,24 @@ namespace ArchPortfolio.Controllers
             _context = context;
         }
 
-        // ПУБЛІЧНІ (без фільтра)
+        // PUBLIC — тільки approved
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Review>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Review>>> GetApproved()
         {
             return await _context.Reviews
+                .Where(r => r.Approved) // ГОЛОВНЕ
                 .Include(r => r.Project)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
         }
 
-        // АДМІН (можеш залишити)
+        // ADMIN — всі
         [HttpGet("admin")]
         public async Task<ActionResult<IEnumerable<Review>>> GetAllAdmin()
         {
             return await _context.Reviews
                 .Include(r => r.Project)
+                .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
         }
 
@@ -48,11 +50,11 @@ namespace ArchPortfolio.Controllers
             return review;
         }
 
-        // CREATE (тепер одразу видно)
+        // CREATE — тепер pending
         [HttpPost]
         public async Task<ActionResult<Review>> Create([FromBody] Review review)
         {
-            review.Approved = true; // 🔥 ключова зміна
+            review.Approved = false; // КЛЮЧ
             review.CreatedAt = DateTime.UtcNow;
 
             _context.Reviews.Add(review);
@@ -72,7 +74,7 @@ namespace ArchPortfolio.Controllers
             return NoContent();
         }
 
-        // approve залишаємо
+        // APPROVE
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/approve")]
         public async Task<IActionResult> Approve(int id)
@@ -88,6 +90,7 @@ namespace ArchPortfolio.Controllers
             return Ok();
         }
 
+        // DELETE
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
