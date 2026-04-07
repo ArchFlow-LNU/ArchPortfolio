@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../api/axios"; // ЗАМІСТЬ axios
 
 import Navbar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
@@ -7,8 +7,6 @@ import Footer from "../components/Footer.jsx";
 import "../css/ReviewPage.css";
 
 export default function ReviewsPage() {
-
-    const API = "http://localhost:5000";
 
     const [reviews, setReviews] = useState([]);
 
@@ -20,7 +18,7 @@ export default function ReviewsPage() {
     });
 
     useEffect(() => {
-        axios.get(`${API}/api/reviews`)
+        api.get("/api/reviews")
             .then(res => setReviews(res.data))
             .catch(err => console.log(err));
     }, []);
@@ -35,11 +33,11 @@ export default function ReviewsPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(`${API}/api/reviews`, {
+        api.post("/api/reviews", {
             ...form,
             rating: Number(form.rating)
         })
-            .then(() => axios.get(`${API}/api/reviews`))
+            .then(() => api.get("/api/reviews"))
             .then(res => {
                 setReviews(res.data);
 
@@ -131,8 +129,7 @@ export default function ReviewsPage() {
                             value={form.message}
                             onChange={handleChange}
                             required
-                            />
-
+                        />
                         <button type="submit" className="btn-dark">
                             Надіслати
                         </button>

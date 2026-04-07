@@ -1,30 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "../../api/axios";
+import api from "../../api/axios"; // 🔥 краще назвати api, не axios
 import "../../css/AdminReviews.css";
 
 export default function AdminReviewsPage() {
 
     const [reviews, setReviews] = useState([]);
-
-    useEffect(() => {
-        loadReviews();
-    }, []);
-
-    const loadReviews = () => {
-        axios.get("/api/reviews/admin")
-            .then(res => setReviews(res.data))
-            .catch(err => console.log(err));
-    };
-
-    const approveReview = (id) => {
-        axios.put(`/api/reviews/${id}/approve`)
-            .then(() => loadReviews());
-    };
-
-    const deleteReview = (id) => {
-        axios.delete(`/api/reviews/${id}`)
-            .then(() => loadReviews());
-    };
 
     const token = localStorage.getItem("token");
 
@@ -37,6 +17,26 @@ export default function AdminReviewsPage() {
     if (payload["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"] !== "Admin") {
         return <h2 className="admin-denied">Access denied</h2>;
     }
+
+    useEffect(() => {
+        loadReviews();
+    }, []);
+
+    const loadReviews = () => {
+        api.get("/api/reviews/admin")
+            .then(res => setReviews(res.data))
+            .catch(err => console.log(err));
+    };
+
+    const approveReview = (id) => {
+        api.put(`/api/reviews/${id}/approve`)
+            .then(() => loadReviews());
+    };
+
+    const deleteReview = (id) => {
+        api.delete(`/api/reviews/${id}`)
+            .then(() => loadReviews());
+    };
 
     return (
         <div className="admin-container">
