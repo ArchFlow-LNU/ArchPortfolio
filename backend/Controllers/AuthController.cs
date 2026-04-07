@@ -27,34 +27,35 @@ namespace ArchPortfolio.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] LoginDto dto)
         {
-            // перевірка
-            if (string.IsNullOrEmpty(dto.Email) || string.IsNullOrEmpty(dto.Password))
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
                 return BadRequest("Invalid data");
 
-            // перевірка чи існує
             var existing = _context.Admins.FirstOrDefault(a => a.Email == dto.Email);
 
             if (existing != null)
                 return BadRequest("User already exists");
 
-            // bcrypt
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
-            // створення
             var admin = new Admin
             {
                 Email = dto.Email,
                 PasswordHash = hashedPassword,
-                Name = "Admin"
+                Name = "Admin",
+                Role = "Admin" // ОБОВʼЯЗКОВО
             };
 
             _context.Admins.Add(admin);
             _context.SaveChanges();
 
-            //JWT
             var token = GenerateJwt(admin);
 
-            return Ok(new { token });
+            return Ok(new
+            {
+                token,
+                email = admin.Email,
+                role = admin.Role
+            });
         }
 
         // LOGIN
@@ -100,16 +101,19 @@ namespace ArchPortfolio.Controllers
         private string GenerateJwt(Admin user)
         {
             var key = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_config["Jwt:Key"])
+                Encoding.UTF8.GetBytes(_config["Jwt:Key"]!)
             );
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
+        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.Email, user.Email),
+
+        //  ОЦЕ ТЕ, ЧОГО НЕ ВИСТАЧАЛО
+        new Claim(ClaimTypes.Role, user.Role)
+    };
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
@@ -121,16 +125,13 @@ namespace ArchPortfolio.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
-
-
-        
     }
 
     public class LoginDto
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
+        {
+            public string Email { get; set; }
+            public string Password { get; set; }
+        }
 
     
 }

@@ -19,6 +19,7 @@ namespace ArchPortfolio.Data
         public DbSet<Advantage> Advantages { get; set; }
         public DbSet<FAQ> FAQs { get; set; }
         public DbSet<ContactInfo> ContactInfos { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
