@@ -1,10 +1,11 @@
 .admin-container {
     padding: 40px;
-    background: #f4f6f8;
+    background: rgb(242, 241, 230);
     min-height: 100vh;
 }
 
 .admin-title {
+    margin-top: 5%;
     text-align: center;
     margin-bottom: 30px;
     font-size: 32px;

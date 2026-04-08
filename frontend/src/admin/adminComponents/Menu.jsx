@@ -1,12 +1,22 @@
 import "../adminCss/Menu.css"
+import {Link, useNavigate} from "react-router-dom";
 export default function Menu(){
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/admin/login");
+    };
+
     return (
         <div className="admin-menu">
-           <div>ArchFlow</div>
-            <div>This is a panel for admin with DB access and operations </div>
+            <Link to={"/admin/profile/new"}>New Project Add</Link>
+            <Link to={"/admin/reviews"}>Reviews</Link>
+            <Link to={"/admin/profile"}>Projects</Link>
             <div className="account">
-                <p>Logged in as ... </p>
-                <button className="logout">Logout</button>
+                <button onClick={handleLogout}>
+                    Logout
+                </button>
             </div>
         </div>
     )

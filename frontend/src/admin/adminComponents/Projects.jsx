@@ -1,101 +1,47 @@
-import "../adminCss/Projects.css"
-export default function Projects() {
+import "../adminCss/Projects.css";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-    const houses = [
-        {
-            title: "Мінімалістичний будинок",
-            img: "/imgs/house1.png",
-            desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-            style: "Мінімалізм"
-        },
-        {
-            title: "Міська резиденція",
-            img: "/imgs/house2.png",
-            desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-            style: "Сучасний"
-        },
-        {
-            title: "Клубний будинок",
-            img: "/imgs/house3.png",
-            desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-            style: "Сучасний / Преміум"
-        }, {
-            title: "Мінімалістичний будинок",
-            img: "/imgs/house1.png",
-            desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-            style: "Мінімалізм"
-        },
-        {
-            title: "Міська резиденція",
-            img: "/imgs/house2.png",
-            desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-            style: "Сучасний"
-        },
-        {
-            title: "Клубний будинок",
-            img: "/imgs/house3.png",
-            desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-            style: "Сучасний / Преміум"
-        }, {
-            title: "Мінімалістичний будинок",
-            img: "/imgs/house1.png",
-            desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-            style: "Мінімалізм"
-        },
-        {
-            title: "Міська резиденція",
-            img: "/imgs/house2.png",
-            desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-            style: "Сучасний"
-        },
-        {
-            title: "Клубний будинок",
-            img: "/imgs/house3.png",
-            desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-            style: "Сучасний / Преміум"
-        }, {
-            title: "Мінімалістичний будинок",
-            img: "/imgs/house1.png",
-            desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-            style: "Мінімалізм"
-        },
-        {
-            title: "Міська резиденція",
-            img: "/imgs/house2.png",
-            desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-            style: "Сучасний"
-        },
-        {
-            title: "Клубний будинок",
-            img: "/imgs/house3.png",
-            desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-            style: "Сучасний / Преміум"
-        }
-    ]
+export default function Projects() {
+    const [houses, setHouses] = useState([]);
+    const navigate = useNavigate();
+
+    const API = "http://localhost:5000";
+
+    useEffect(() => {
+        axios.get(`${API}/api/projects`)
+            .then(res => setHouses(res.data))
+            .catch(err => console.log(err));
+    }, []);
 
     return (
         <section className="projects">
-
             <h2>Варіанти будинків</h2>
 
             <div className="projects-list">
+                {houses.map((h) => {
+                    const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
+                    const imageSrc = mainImage ? `${API}/uploads/${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
 
-                {houses.map((h, i) => (
-                    <div className="project-card" key={i}>
 
-                        <img src={h.img} alt={h.title} />
-
-                        <div className="projec-info">
-                            <h3>{h.title}</h3>
-                            <p>{h.desc}</p>
-                            <span>Стиль: {h.style}</span>
+                    return (
+                        <div
+                            className="project-card"
+                            key={h.id}
+                            onClick={() => navigate(`/admin/profile/new`)}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <img src={imageSrc} alt={h.title} />
+                            <div className="projec-info">
+                                <h3>{h.title}</h3>
+                                <p>{h.description}</p>
+                                <span>Стиль: {h.category?.name || "—"}</span>
+                            </div>
                         </div>
-
-                    </div>
-                ))}
-
+                    );
+                })}
             </div>
-
         </section>
-    )
+    );
 }

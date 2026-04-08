@@ -11,6 +11,7 @@ import ProjectFormPage from "./admin/adminPages/ProjectFormPage.jsx";
 import HousePage from "./pages/HousePage.jsx";
 import ReviewsPage from "./pages/ReviewsPage.jsx";
 import AdminReviewsPage from "./admin/adminPages/AdminReviewsPage.jsx";
+import PrivateRoute from "./admin/adminComponents/PrivateRoute.jsx";
 
 function App() {
     return (
@@ -21,11 +22,25 @@ function App() {
                 <Route path='/contacts' element={<ContactPage></ContactPage>}></Route>
                 <Route path="/admin/login" element={<LoginPage></LoginPage>}></Route>
                 <Route path="/admin/register" element={<RegisterPage></RegisterPage>}></Route>
-                <Route path="/admin/profile" element={<ProfilePage></ProfilePage>}></Route>
-                <Route path="/admin/profile/new" element={<ProjectFormPage></ProjectFormPage>}></Route>
+                {/*<Route path="/admin/profile" element={<ProfilePage></ProfilePage>}></Route>*/}
+                {/*<Route path="/admin/profile/new" element={<ProjectFormPage></ProjectFormPage>}></Route>*/}
                 <Route path="/house/:id" element={<HousePage />} />
                 <Route path="/reviews" element={<ReviewsPage />} />
-                <Route path="/admin/reviews" element={<AdminReviewsPage />} />
+                <Route path="/admin/reviews" element={
+                    <PrivateRoute>
+                        <AdminReviewsPage />
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/profile" element={
+                    <PrivateRoute>
+                        <ProfilePage></ProfilePage>
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/profile/new" element={
+                    <PrivateRoute>
+                        <ProjectFormPage></ProjectFormPage>
+                    </PrivateRoute>
+                } />
         </Routes>
 
     )
