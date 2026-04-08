@@ -56,7 +56,7 @@ export default function ContactForm() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
 
-    // 🔹 обробка інпутів
+    // обробка інпутів
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -64,7 +64,7 @@ export default function ContactForm() {
         });
     };
 
-    // 🔹 submit
+    // submit
     const handleSubmit = (e) => {
         e.preventDefault();
 

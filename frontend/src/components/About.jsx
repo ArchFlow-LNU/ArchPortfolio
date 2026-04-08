@@ -1,7 +1,9 @@
 import "../css/About.css"
-
+import { useNavigate } from "react-router-dom";
 
 export default function About() {
+    const navigate = useNavigate();
+
     return (
         <section className="about">
             <div className="container">
@@ -9,10 +11,12 @@ export default function About() {
                 <div className="about-grid">
 
                     {/* заголовок */}
-                    <h1 className="about-title">Про нас</h1>
+
 
                     {/* текст */}
                     <div className="about-text">
+
+                        <h1 className="about-title">Про нас</h1>
 
                         <p>
                             Ми — архітектурна компанія з понад 10-річним досвідом у
@@ -28,7 +32,10 @@ export default function About() {
                             естетику, функціональність і комфорт.
                         </p>
 
-                        <button className="btn-dark">
+                        <button  className="btn-dark"
+                                // onClick={() => { document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
+                                 onClick={() => navigate("/#contact")}
+                        >
                             Замовити проект →
                         </button>
 

@@ -106,8 +106,8 @@ export default function Navbar(props) {
                 <Link to={'/about'}>
                     <p>About us</p>
                 </Link>
-                <Link to={'/contacts'}>
-                    <p>Contacts</p>
+                <Link to={'/reviews'}>
+                    <p>Reviews</p>
                 </Link>
 
             </div>
