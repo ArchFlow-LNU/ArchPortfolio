@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-<<<<<<< HEAD
-import api from "../api/axios";
-=======
+
+
+
 import api from "../api/axios"; // ЗАМІСТЬ axios
->>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
 
 import Navbar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
@@ -31,13 +30,13 @@ export default function ReviewsPage() {
     };
 
     useEffect(() => {
-<<<<<<< HEAD
+
         loadReviews();
-=======
+
         api.get("/api/reviews")
             .then(res => setReviews(res.data))
             .catch(err => console.log(err));
->>>>>>> 308fba4 (frontend: add admin panel, JWT auth, protected routes and axios with token)
+
     }, []);
 
     const handleChange = (e) => {
