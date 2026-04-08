@@ -1,0 +1,68 @@
+.photos-uploader-block {
+    display: flex;
+
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    position: relative;    /* залишаємо в потоці */
+    z-index: auto;         /* ніякого накладання */
+}
+
+.photos-uploader-block .btn.upload-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background-color: rgb(37, 52, 83);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+
+.photos-uploader-block input[type="file"] {
+    display: none; /* приховуємо input, кнопка обробляє подію */
+}
+
+.photo-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    max-width: 100%;   /* обмежуємо ширину */
+}
+
+.photo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.photo-preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+}
+
+.photo-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-photo-link{
+    gap: 10px;
+}
+.add-photo-link button {
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+}
+

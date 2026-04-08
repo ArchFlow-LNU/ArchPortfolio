@@ -1,7 +1,8 @@
 import { useState } from "react";
-import axios from "axios";
+
 import "../adminCss/LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
+import API from "../../api/axios.js";
 
 export default function LoginPage(){
 
@@ -10,62 +11,63 @@ export default function LoginPage(){
         password: ""
     });
 
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const handleChange = (e) => {
-        setForm({
-            ...form,
-            [e.target.type === "email" ? "email" : "password"]: e.target.value
-        });
+        setForm({...form, [e.target.name]: e.target.value});
     };
 
-    const handleLogin = () => {
-        axios.post("http://localhost:5000/api/auth/login", form)
-            .then(res => {
-                localStorage.setItem("token", res.data.token);
-                alert("Login success");
+    const handleLogin =async () => {
+        try{
+            setLoading(true);
+            const res = await API.post("/api/auth/login", form);
+            localStorage.setItem("token", res.data.token);
+            alert("Login success");
+            navigate("/admin/reviews");
+        }catch(err){
 
-                navigate("/admin/reviews"); // перекид на адмінку
-            })
-            .catch(err => {
-                console.log(err);
-                alert("Login failed");
-            });
+            console.error(err);
+            alert(err.response?.data || "Login failed");
+        }
+        finally {
+            setLoading(false);
+        }
+
     };
 
     return (
         <div className="login-page">
             <div className="wrapper">
-
                 <h1 className="h1">Login</h1>
-
                 <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-                    <input 
-                        type="email" 
-                        placeholder="input your email"
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Email"
                         value={form.email}
                         onChange={handleChange}
+                        required
                     />
-
-                    <input 
-                        type="password" 
-                        placeholder="input your password"
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Password"
                         value={form.password}
                         onChange={handleChange}
+                        required
                     />
                 </form>
-
-                <button className="login-btn" onClick={handleLogin}>
-                    Login
+                <button className="login-btn" onClick={handleLogin} disabled={loading}>
+                    {loading ? "Logging in..." : "Login"}
                 </button>
-
                 <div className="register">
                     <p>Don't have an account?</p>
                     <Link to={"/admin/register"} className="register-link">
                         Register
                     </Link>
                 </div>
-
             </div>
         </div>
     );

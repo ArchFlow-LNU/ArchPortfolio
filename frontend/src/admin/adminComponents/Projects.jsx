@@ -1,198 +1,47 @@
-// import "../adminCss/Projects.css"
-// export default function Projects() {
-//
-//     const houses = [
-//         {
-//             title: "Мінімалістичний будинок",
-//             img: "/imgs/house1.png",
-//             desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-//             style: "Мінімалізм"
-//         },
-//         {
-//             title: "Міська резиденція",
-//             img: "/imgs/house2.png",
-//             desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-//             style: "Сучасний"
-//         },
-//         {
-//             title: "Клубний будинок",
-//             img: "/imgs/house3.png",
-//             desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-//             style: "Сучасний / Преміум"
-//         }, {
-//             title: "Мінімалістичний будинок",
-//             img: "/imgs/house1.png",
-//             desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-//             style: "Мінімалізм"
-//         },
-//         {
-//             title: "Міська резиденція",
-//             img: "/imgs/house2.png",
-//             desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-//             style: "Сучасний"
-//         },
-//         {
-//             title: "Клубний будинок",
-//             img: "/imgs/house3.png",
-//             desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-//             style: "Сучасний / Преміум"
-//         }, {
-//             title: "Мінімалістичний будинок",
-//             img: "/imgs/house1.png",
-//             desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-//             style: "Мінімалізм"
-//         },
-//         {
-//             title: "Міська резиденція",
-//             img: "/imgs/house2.png",
-//             desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-//             style: "Сучасний"
-//         },
-//         {
-//             title: "Клубний будинок",
-//             img: "/imgs/house3.png",
-//             desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-//             style: "Сучасний / Преміум"
-//         }, {
-//             title: "Мінімалістичний будинок",
-//             img: "/imgs/house1.png",
-//             desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-//             style: "Мінімалізм"
-//         },
-//         {
-//             title: "Міська резиденція",
-//             img: "/imgs/house2.png",
-//             desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-//             style: "Сучасний"
-//         },
-//         {
-//             title: "Клубний будинок",
-//             img: "/imgs/house3.png",
-//             desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-//             style: "Сучасний / Преміум"
-//         }
-//     ]
-//
-//     return (
-//         <section className="projects">
-//
-//             <h2>Варіанти будинків</h2>
-//
-//             <div className="projects-list">
-//
-//                 {houses.map((h, i) => (
-//                     <div className="project-card" key={i}>
-//
-//                         <img src={h.img} alt={h.title} />
-//
-//                         <div className="projec-info">
-//                             <h3>{h.title}</h3>
-//                             <p>{h.desc}</p>
-//                             <span>Стиль: {h.style}</span>
-//                         </div>
-//
-//                     </div>
-//                 ))}
-//
-//             </div>
-//
-//         </section>
-//     )
-// }
-
-
-// import "../adminCss/Projects.css";
-// import Project from "./Project";
-//
-// export default function Projects() {
-//
-//     const houses = [
-//         {
-//             title: "Мінімалістичний будинок",
-//             img: "/imgs/house1.png",
-//             desc: "Сучасний будинок із простими формами...",
-//             style: "Мінімалізм"
-//         },
-//         {
-//             title: "Міська резиденція",
-//             img: "/imgs/house2.png",
-//             desc: "Сучасний житловий комплекс...",
-//             style: "Сучасний"
-//         },
-//         {
-//             title: "Клубний будинок",
-//             img: "/imgs/house3.png",
-//             desc: "Елегантний будинок...",
-//             style: "Сучасний / Преміум"
-//         }
-//     ];
-//
-//     return (
-//         <section className="projects">
-//
-//             <h2>Варіанти будинків</h2>
-//
-//             <div className="projects-list">
-//                 {houses.map((h, i) => (
-//                     <Project
-//                         key={i}
-//                         title={h.title}
-//                         img={h.img}
-//                         desc={h.desc}
-//                         style={h.style}
-//                     />
-//                 ))}
-//             </div>
-//
-//         </section>
-//     );
-// }
-
-
 import "../adminCss/Projects.css";
-import Project from "./Project";
-import { useEffect, useState } from "react";
-import api from "../../api/axios";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Projects() {
+    const [houses, setHouses] = useState([]);
+    const navigate = useNavigate();
 
-    const [projects, setProjects] = useState([]);
     const API = "http://localhost:5000";
 
     useEffect(() => {
-        async function fetchProjects() {
-            try {
-                const res = await api.get("/api/projects");
-                setProjects(res.data);
-            } catch (err) {
-                console.error(err);
-            }
-        }
-
-        fetchProjects();
+        axios.get(`${API}/api/projects`)
+            .then(res => setHouses(res.data))
+            .catch(err => console.log(err));
     }, []);
 
     return (
         <section className="projects">
-
             <h2>Варіанти будинків</h2>
 
             <div className="projects-list">
-                {projects.map((p) => (
-                    <Project
-                        key={p.id}
-                        title={p.title}
-                        img={
-                            p.images?.[0]?.imageUrl
-                                ? `${API}${p.images[0].imageUrl}`
-                                : "/imgs/placeholder.png"
-                        }
-                        desc={p.description}
-                        style={p.category?.name || "—"}
-                    />
-                ))}
-            </div>
+                {houses.map((h) => {
+                    const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
+                    const imageSrc = mainImage ? `${API}/uploads/${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
 
+
+                    return (
+                        <div
+                            className="project-card"
+                            key={h.id}
+                            onClick={() => navigate(`/admin/profile/new`)}
+                            style={{ cursor: "pointer" }}
+                        >
+                            <img src={imageSrc} alt={h.title} />
+                            <div className="projec-info">
+                                <h3>{h.title}</h3>
+                                <p>{h.description}</p>
+                                <span>Стиль: {h.category?.name || "—"}</span>
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
         </section>
     );
 }
