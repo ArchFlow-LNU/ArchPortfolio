@@ -32,7 +32,7 @@ namespace ArchPortfolio.Controllers
             using var stream = new FileStream(fullPath, FileMode.Create);
             await file.CopyToAsync(stream);
 
-            return Ok(new { url = "/uploads/" + fileName });
+            return Ok(new { url =  fileName });
         }
     }
 }

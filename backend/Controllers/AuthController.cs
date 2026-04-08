@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ArchPortfolio.Data;
 using ArchPortfolio.Models;
-using BCrypt.Net;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -23,7 +22,7 @@ namespace ArchPortfolio.Controllers
             _config = config;
         }
 
-        // REGISTER
+        
         [HttpPost("register")]
         public IActionResult Register([FromBody] LoginDto dto)
         {
@@ -42,7 +41,7 @@ namespace ArchPortfolio.Controllers
                 Email = dto.Email,
                 PasswordHash = hashedPassword,
                 Name = "Admin",
-                Role = "Admin" // ОБОВʼЯЗКОВО
+                Role = "Admin"
             };
 
             _context.Admins.Add(admin);
@@ -58,7 +57,7 @@ namespace ArchPortfolio.Controllers
             });
         }
 
-        // LOGIN
+        
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginDto dto)
         {
@@ -68,19 +67,26 @@ namespace ArchPortfolio.Controllers
             if (user == null)
                 return Unauthorized();
 
-            //правильна перевірка bcrypt
-            var isValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
+            bool isValid;
+
+            try
+            {
+                isValid = BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash);
+            }
+            catch
+            {
+                return Unauthorized();
+            }
 
             if (!isValid)
                 return Unauthorized();
 
-            // нормальний JWT
             var token = GenerateJwt(user);
-            //var token = "test";
 
             return Ok(new { token });
         }
 
+        
         [Authorize]
         [HttpGet("me")]
         public IActionResult GetMe()
@@ -95,7 +101,11 @@ namespace ArchPortfolio.Controllers
             if (user == null)
                 return NotFound();
 
-            return Ok(new { email = user.Email });
+            return Ok(new
+            {
+                email = user.Email,
+                role = user.Role
+            });
         }
 
         private string GenerateJwt(Admin user)
@@ -108,12 +118,10 @@ namespace ArchPortfolio.Controllers
 
             var claims = new[]
             {
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        new Claim(ClaimTypes.Email, user.Email),
-
-        //  ОЦЕ ТЕ, ЧОГО НЕ ВИСТАЧАЛО
-        new Claim(ClaimTypes.Role, user.Role)
-    };
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Role, user.Role)
+            };
 
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
@@ -128,10 +136,8 @@ namespace ArchPortfolio.Controllers
     }
 
     public class LoginDto
-        {
-            public string Email { get; set; }
-            public string Password { get; set; }
-        }
-
-    
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
 }

@@ -17,26 +17,26 @@ namespace ArchPortfolio.Controllers
             _context = context;
         }
 
-        // PUBLIC — тільки approved
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Review>>> GetApproved()
         {
             return await _context.Reviews
-                .Where(r => r.Approved) // ГОЛОВНЕ
+                .Where(r => r.Approved)
                 .Include(r => r.Project)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
         }
 
-        // ADMIN — всі
+        [Authorize(Roles = "Admin")]
         [HttpGet("admin")]
-        public async Task<ActionResult<IEnumerable<Review>>> GetAllAdmin()
-        {
-            return await _context.Reviews
-                .Include(r => r.Project)
-                .OrderByDescending(r => r.CreatedAt)
-                .ToListAsync();
-        }
+public async Task<ActionResult<IEnumerable<Review>>> GetAllAdmin()
+{
+    return await _context.Reviews
+        .Include(r => r.Project)
+        .OrderByDescending(r => r.CreatedAt)
+        .ToListAsync();
+}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Review>> Get(int id)
@@ -50,11 +50,11 @@ namespace ArchPortfolio.Controllers
             return review;
         }
 
-        // CREATE — тепер pending
+        
         [HttpPost]
         public async Task<ActionResult<Review>> Create([FromBody] Review review)
         {
-            review.Approved = false; // КЛЮЧ
+            review.Approved = false; 
             review.CreatedAt = DateTime.UtcNow;
 
             _context.Reviews.Add(review);
@@ -74,7 +74,7 @@ namespace ArchPortfolio.Controllers
             return NoContent();
         }
 
-        // APPROVE
+        
         [Authorize(Roles = "Admin")]
         [HttpPut("{id}/approve")]
         public async Task<IActionResult> Approve(int id)
@@ -90,7 +90,7 @@ namespace ArchPortfolio.Controllers
             return Ok();
         }
 
-        // DELETE
+      
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
