@@ -5,26 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 export default function HouseVariants() {
 
-    // const houses = [
-    //     {
-    //         title: "Мінімалістичний будинок",
-    //         img: "/imgs/house1.png",
-    //         desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-    //         style: "Мінімалізм"  //id3
-    //     },
-    //     {
-    //         title: "Міська резиденція",
-    //         img: "/imgs/house2.png",
-    //         desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-    //         style: "Сучасний"  //ід4
-    //     },
-    //     {
-    //         title: "Клубний будинок",
-    //         img: "/imgs/house3.png",
-    //         desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-    //         style: "Сучасний / Преміум"
-    //     }
-    // ]
+
 
     const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
@@ -181,6 +162,8 @@ export default function HouseVariants() {
 
                     {projects.map((h) => {
                         const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
+                        const imageSrc = mainImage ? `${API}/uploads/${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
+
 
                         return (
                             <motion.div
@@ -212,14 +195,7 @@ export default function HouseVariants() {
                                 }}
                             >
 
-                                <img
-                                    src={
-                                        mainImage
-                                            ? `${API}${mainImage.imageUrl}`
-                                            : "/imgs/house1.png"
-                                    }
-                                    alt={h.title}
-                                />
+                                <img src={imageSrc} alt={h.title} />
 
                                 <div className="house-info">
                                     <h3>{h.title}</h3>

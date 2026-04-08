@@ -1,56 +1,37 @@
-// import "../adminCss/LoginPage.css"
-// import {Link} from "react-router-dom";
-//
-//
-// export default function LoginPage(){
-//     return (
-//         <div className="login-page">
-//         <div className="wrapper">
-//             <h1 className="h1">Login </h1>
-//
-//                 <form action="" className="login-form">
-//                     <input type="email" placeholder="input your emain"/>
-//                     <input type="password" placeholder="input your password"/>
-//                 </form>
-//             <button className="login-btn">Login</button>
-//             <div className="register">
-//                 <p>Don't have an account?</p>
-//                 <Link to={"/admin/register"} className="register-link">Register</Link>
-//             </div>
-//
-//         </div>
-//         </div>
-//     )
-// }
+import { useState } from "react";
+import axios from "axios";
 import "../adminCss/LoginPage.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import api from "../../api/axios";
 
-export default function LoginPage() {
+export default function LoginPage(){
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [form, setForm] = useState({
+        email: "",
+        password: ""
+    });
 
     const navigate = useNavigate();
 
-    async function handleLogin(e) {
-        e.preventDefault();
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.type === "email" ? "email" : "password"]: e.target.value
+        });
+    };
 
-        try {
-            const res = await api.post("/api/auth/login", {
-                email,
-                password
+    const handleLogin = () => {
+        axios.post("http://localhost:5000/api/auth/login", form)
+            .then(res => {
+                localStorage.setItem("token", res.data.token);
+                alert("Login success");
+
+                navigate("/admin/reviews"); // перекид на адмінку
+            })
+            .catch(err => {
+                console.log(err);
+                alert("Login failed");
             });
-
-            localStorage.setItem("token", res.data.token);
-
-            navigate("/admin/profile");
-
-        } catch (err) {
-            alert("Неправильний логін або пароль");
-        }
-    }
+    };
 
     return (
         <div className="login-page">
@@ -58,29 +39,29 @@ export default function LoginPage() {
 
                 <h1 className="h1">Login</h1>
 
-                <form className="login-form" onSubmit={handleLogin}>
-
-                    <input
-                        type="email"
+                <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+                    <input 
+                        type="email" 
                         placeholder="input your email"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
+                        value={form.email}
+                        onChange={handleChange}
                     />
 
-                    <input
-                        type="password"
+                    <input 
+                        type="password" 
                         placeholder="input your password"
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        value={form.password}
+                        onChange={handleChange}
                     />
-
-                    <button className="login-btn">Login</button>
-
                 </form>
+
+                <button className="login-btn" onClick={handleLogin}>
+                    Login
+                </button>
 
                 <div className="register">
                     <p>Don't have an account?</p>
-                    <Link to="/admin/register" className="register-link">
+                    <Link to={"/admin/register"} className="register-link">
                         Register
                     </Link>
                 </div>
