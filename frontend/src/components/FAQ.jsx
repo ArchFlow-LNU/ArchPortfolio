@@ -1,6 +1,6 @@
 import "../css/FAQ.css"
 import { useState, useEffect } from "react";
-
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQ() {
 
@@ -46,11 +46,18 @@ export default function FAQ() {
                             </span>
                         </div>
 
+                        <AnimatePresence>
                         {openIndex === index && (
-                            <div className="faq-answer">
+                            <motion.div className="faq-answer"
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                            >
                                 {item.answer}
-                            </div>
+                            </motion.div>
                         )}
+                        </AnimatePresence>
 
                     </div>
                 ))}

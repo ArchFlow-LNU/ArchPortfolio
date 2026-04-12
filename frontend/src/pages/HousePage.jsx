@@ -8,6 +8,19 @@ export default function HousePage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [house, setHouse] = useState(null);
+    const [imgIndex, setImgIndex] = useState(0);
+
+    const nextImg = () => {
+        if (imgIndex < house.images.length - 1) {
+            setImgIndex(prev => prev + 1);
+        }
+    };
+
+    const prevImg = () => {
+        if (imgIndex > 0) {
+            setImgIndex(prev => prev - 1);
+        }
+    };
 
     const API = "http://localhost:5000";
 
@@ -22,7 +35,7 @@ export default function HousePage() {
         return <p style={{ padding: "40px" }}>Loading...</p>;
     }
 
-    const mainImage = house.images?.find(img => img.isMain);
+    // const mainImage = house.images?.find(img => img.isMain);
 
     return (
         <div className="house-page">
@@ -37,14 +50,26 @@ export default function HousePage() {
 
             <div className="house-container">
 
-                <img
-                    src={
-                        house.images?.length
-                            ? `${API}${mainImage?.imageUrl || house.images[0].imageUrl}`
-                            : "/imgs/house1.png"
-                    }
-                    alt={house.title}
-                />
+                <div className="house-gallery">
+
+                    {house.images && house.images.length > 0 ? (
+                        <>
+                            <img
+                                src={`${API}${house.images[imgIndex].imageUrl}`}
+                                alt={house.title}
+                                className="house-image"
+                            />
+
+                            <div className="gallery-controls">
+                                <button onClick={prevImg}>←</button>
+                                <button onClick={nextImg}>→</button>
+                            </div>
+                        </>
+                    ) : (
+                        <img src="/imgs/house1.png" alt="no image" />
+                    )}
+
+                </div>
 
                 <div className="house-text">
 

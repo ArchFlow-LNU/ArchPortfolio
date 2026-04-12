@@ -9,7 +9,18 @@ import FAQ from "../components/FAQ.jsx";
 import Footer from "../components/Footer.jsx";
 import "../App.css"
 
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 export default function MainPage() {
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.hash === "#contact") {
+            const el = document.getElementById("contact");
+            el?.scrollIntoView();
+        }
+    }, [location]);
     return(
         <div className="app">
             <Navbar cl="main"/>

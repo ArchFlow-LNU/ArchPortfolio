@@ -56,7 +56,7 @@ export default function ContactForm() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
 
-    // 🔹 обробка інпутів
+    // обробка інпутів
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -64,7 +64,7 @@ export default function ContactForm() {
         });
     };
 
-    // 🔹 submit
+    // submit
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -99,7 +99,7 @@ export default function ContactForm() {
     };
 
     return (
-        <section className="contact">
+        <section className="contact" id="contact">
             <div className="container">
 
                 <div className="contact-overlay">

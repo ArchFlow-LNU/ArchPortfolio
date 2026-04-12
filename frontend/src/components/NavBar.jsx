@@ -55,10 +55,15 @@ import "../App.css"
 import "../css/NavBar.css"
 import {useEffect, useState,} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+
 export default function Navbar(props) {
     const [menuOpen, setMenuOpen] = useState(false);
 
     const [scrolled, setScrolled] = useState(false);
+
+    const [contact, setContact] = useState(null);
+    const API = "http://localhost:5000";
 
     useEffect(() => {
         const handleScroll = () => {
@@ -76,6 +81,13 @@ export default function Navbar(props) {
 
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
+
+    useEffect(() => {
+        axios.get(`${API}/api/contactinfo`)
+            .then(res => setContact(res.data))
+            .catch(err => console.log(err));
+    }, []);
+
     return (
 
         <div className="navbar">
@@ -94,8 +106,8 @@ export default function Navbar(props) {
                 <Link to={'/about'}>
                     <p>About us</p>
                 </Link>
-                <Link to={'/contacts'}>
-                    <p>Contacts</p>
+                <Link to={'/reviews'}>
+                    <p>Reviews</p>
                 </Link>
 
             </div>
@@ -106,7 +118,15 @@ export default function Navbar(props) {
             </div>
 
             <div className="btn-container">
-                <button className="btn">Order a call</button>
+                {/*<button className="btn">Order a call</button>*/}
+                {contact && (
+                    <a
+                        href={`tel:${contact.phone.replace(/[^+\d]/g, "")}`}
+                        className="btn"
+                    >
+                        Order a call
+                    </a>
+                )}
             </div>
 
             </div>
