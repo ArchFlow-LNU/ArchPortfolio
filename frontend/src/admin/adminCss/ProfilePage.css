@@ -1,7 +1,15 @@
 .profile-page {
-    display: flex;
+    font-family: Inter, sans-serif;
     position: relative;
     justify-content: center;
     align-items: center;
-    background-color:rgb(242, 241, 230);
+    padding: 40px;
+    background: #eaeaea;
+
+    background-image: url("/imgs/stone2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
 }

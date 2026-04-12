@@ -17,7 +17,7 @@ export default function Projects() {
 
     return (
         <section className="projects">
-            <h2>Варіанти будинків</h2>
+            <h2>All Progects</h2>
 
             <div className="projects-list">
                 {houses.map((h) => {
@@ -35,8 +35,9 @@ export default function Projects() {
                             <img src={imageSrc} alt={h.title} />
                             <div className="projec-info">
                                 <h3>{h.title}</h3>
-                                <p>{h.description}</p>
-                                <span>Стиль: {h.category?.name || "—"}</span>
+                                <p>Year: {h.year} / Area: {h.area}m<sup>2</sup> </p>
+                                <p>Description: {h.description}</p>
+                                <span>Category: {h.category?.name || "—"}</span>
                             </div>
                         </div>
                     );
