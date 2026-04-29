@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ArchPortfolio.Data;
 using ArchPortfolio.Models;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace ArchPortfolio.Controllers
 {
@@ -47,6 +49,7 @@ namespace ArchPortfolio.Controllers
             return Ok(projects);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<ActionResult<Project>> Create(Project project)
         {
@@ -57,6 +60,7 @@ namespace ArchPortfolio.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(int id, Project project)
         {
             if (id != project.Id) return BadRequest();
@@ -66,6 +70,7 @@ namespace ArchPortfolio.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var project = await _context.Projects.FindAsync(id);
@@ -78,6 +83,7 @@ namespace ArchPortfolio.Controllers
         //==================IMAGES============================
 
         [HttpPost("{id}/images")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddImage(int id, [FromBody] AddImageDto dto)
         {
             var project = await _context.Projects.FindAsync(id);
@@ -94,6 +100,19 @@ namespace ArchPortfolio.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(image);
+        }
+
+        [HttpDelete("{id}/images")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteAllImages(int id)
+        {
+            var images = await _context.ProjectImages.Where(img => img.ProjectId == id).ToListAsync();
+            if (images.Any())
+            {
+                _context.ProjectImages.RemoveRange(images);
+                await _context.SaveChangesAsync();
+            }
+            return NoContent();
         }
 
         public class AddImageDto
