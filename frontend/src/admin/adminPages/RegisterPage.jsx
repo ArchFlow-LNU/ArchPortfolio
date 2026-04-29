@@ -2,7 +2,7 @@ import "../adminCss/RegisterPage.css"
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api/axios";
-
+/*THIS PAGE IS NOT INCLUDE TEMP*/
 export default function RegisterPage() {
 
     const [email, setEmail] = useState("");
@@ -10,21 +10,7 @@ export default function RegisterPage() {
 
     const navigate = useNavigate();
 
-    // const handleRegister = async (e) => {
-    //     e.preventDefault();
-    //
-    //     try {
-    //         await api.post("/api/auth/register", {
-    //             email,
-    //             password
-    //         });
-    //
-    //         navigate("/admin/login");
-    //
-    //     } catch {
-    //         alert("Користувач вже існує");
-    //     }
-    // };
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
@@ -34,10 +20,10 @@ export default function RegisterPage() {
                 password
             });
 
-            // ЗБЕРІГАЄМО ТОКЕН
+
             localStorage.setItem("token", res.data.token);
 
-            // ОДРАЗУ В ПРОФІЛЬ
+
             navigate("/admin/profile");
 
         } catch (err) {

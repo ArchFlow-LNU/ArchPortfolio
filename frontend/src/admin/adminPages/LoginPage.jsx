@@ -1,8 +1,7 @@
 import { useState } from "react";
-
 import "../adminCss/LoginPage.css";
 import {  useNavigate } from "react-router-dom";
-import API from "../../api/axios.js";
+import api from "../../api/axios.js";
 
 export default function LoginPage(){
 
@@ -22,12 +21,11 @@ export default function LoginPage(){
     const handleLogin =async () => {
         try{
             setLoading(true);
-            const res = await API.post("/api/auth/login", form);
+            const res = await api.post("/api/auth/login", form);
             localStorage.setItem("token", res.data.token);
-            alert("Login success");
+            // alert("Login success");
             navigate("/admin/reviews");
         }catch(err){
-
             console.error(err);
             alert(err.response?.data || "Login failed");
         }

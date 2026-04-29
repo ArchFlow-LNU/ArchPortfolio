@@ -17,12 +17,14 @@ export default function Menu(){
 
             <nav className='nav-links'>
 
-                <NavLink to="/admin/profile/new">
-                    <img src="/imgs/add.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}}/>
-                    <span>Project</span></NavLink>
+
                 <NavLink to="/admin/reviews">
                     <img src="/imgs/review.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}} />
                     <span>Reviews</span>
+                </NavLink>
+                <NavLink to="/admin/main">
+                    <img src="/imgs/home.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}} />
+                    <span>Main</span>
                 </NavLink>
                 <NavLink to="/admin/profile" end>
                     <img src="/imgs/layers.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}}/>

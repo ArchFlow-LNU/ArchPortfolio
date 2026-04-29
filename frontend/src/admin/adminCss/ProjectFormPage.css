@@ -2,7 +2,7 @@
 .project-form-container {
     display: flex;
     flex-direction: column;
-    padding: 60px 20px;
+    padding: 40px;
     align-items: center;
     background: #eaeaea url("/imgs/stone2.png") no-repeat center center fixed;
     background-size: cover;

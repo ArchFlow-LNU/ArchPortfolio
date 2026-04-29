@@ -1,15 +1,45 @@
 .projects h2 {
-    margin-top: 4%;
-    text-align: center;
-    margin-bottom: 30px;
-    font-size: 52px;
+    margin-top: 2%;
+
+    font-size: clamp(32px, 5vw, 52px);
     color: #361500;
-    font-family: "Rethink Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
 }
 
+.add-btn-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-new-project-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+    height: fit-content;
+}
+
+.add-new-project-btn a{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+    background-color: #F8F1F1;
+    color: #361500;
+    border: #361500 2px dashed;
+    border-radius: 10px;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.add-new-project-btn:hover{
+   opacity: 0.5;
+}
 
 .projects-list {
     display: grid;
@@ -27,6 +57,7 @@
     backdrop-filter: blur(20px);
     border-radius: 10px;
     padding: 20px;
+    padding-bottom: 40px;
     box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     /*border-left: 5px solid #ccc;*/
     transition: transform 0.2s;
@@ -42,10 +73,11 @@
     width: 100%;
     height: 220px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .projec-info {
-    padding: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -60,8 +92,8 @@
 .projec-info p {
     font-size: 0.95rem;
     color: #666;
-    line-height: 1.5;
-    margin-bottom: 20px;
+    line-height: 1.0;
+    margin-bottom: 15px;
     flex-grow: 1;
 
 
@@ -79,4 +111,101 @@
     padding: 5px 12px;
     border-radius: 20px;
     align-self: flex-start;
+}
+
+.remove-project-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    padding: 5px;
+
+    background: white;
+    border: 1px solid #361500;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.remove-project-btn:hover {
+    background: #ffeded;
+}
+
+.edit-project-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 50px;
+    padding: 5px;
+
+    background: white;
+    border: 1px solid #361500;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.edit-project-btn:hover {
+    background: #ffeded;
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal {
+    background: #361500;
+    padding: 24px;
+    color: white;
+    border-radius: 12px;
+    width: 400px;
+    text-align: center;
+}
+.modal h2{
+
+    color: white;
+
+}
+
+.modal input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.modal-actions button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.modal-actions .danger {
+    background: red;
+    color: white;
 }

@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react";
 import "../adminCss/AdminReviewsPage.css";
 import Menu from "../adminComponents/Menu.jsx";
-import axios from "axios";
+import api from "../../api/axios.js";
 import ExpandableMessage from "../adminComponents/ReviewMessage.jsx";
+import { motion } from "framer-motion";
 
 export default function AdminReviewsPage() {
 
     const [reviews, setReviews] = useState([]);
+    const container = {
+        hidden: {},
+        show: {
+            transition: {
+                staggerChildren: 0.12
+            }
+        }
+    };
 
+    const item = {
+        hidden: { opacity: 0, y: 20 },
+        show: { opacity: 1, y: 0 }
+    };
 
-    const token = localStorage.getItem('token');
 
     const loadReviews = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/reviews/admin', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await api.get('/api/reviews/admin');
             setReviews(response.data);
-            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -27,11 +34,7 @@ export default function AdminReviewsPage() {
 
     const approveReview = async (id) => {
         try {
-            await axios.put(`http://localhost:5000/api/reviews/${id}/approve`, null, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await api.put(`/api/reviews/${id}/approve`, null);
             loadReviews();
         } catch (error) {
             console.error(error);
@@ -40,11 +43,7 @@ export default function AdminReviewsPage() {
 
     const deleteReview = async (id) => {
         try {
-            await axios.delete(`http://localhost:5000/api/reviews/${id}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            await api.delete(`/api/reviews/${id}`);
             loadReviews();
         } catch (error) {
             console.error(error);
@@ -55,42 +54,23 @@ export default function AdminReviewsPage() {
         loadReviews();
     }, []);
 
-
-
-    // const approveReview = (id) => {
-    //     const token = localStorage.getItem("token");
-    //
-    //     api.put(`/api/reviews/${id}/approve`, null, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //         .then(() => loadReviews());
-    // };
-    //
-    // const deleteReview = (id) => {
-    //     const token = localStorage.getItem("token");
-    //
-    //     api.delete(`/api/reviews/${id}`, {
-    //         headers: {
-    //             Authorization: `Bearer ${token}`
-    //         }
-    //     })
-    //         .then(() => loadReviews());
-    // };
-
-
-
     return (
         <div className="admin-container">
             <div><Menu></Menu></div>
-
-
             <h1 className="admin-title">AdminReviewsPanel</h1>
 
-            <div className="admin-list">
+            <motion.div
+                className="admin-list"
+                variants={container}
+                initial="hidden"
+                animate="show"
+            >
                 {reviews.map(r => (
-                    <div key={r.id} className={`admin-card ${r.approved ? "approved" : "pending"}`}>
+                    <motion.div
+                        key={r.id}
+                        className={`admin-card ${r.approved ? "approved" : "pending"}`}
+                        variants={item}
+                    >
 
                         <div className="review-auth">
                             <img className='quote' src="/imgs/quote.png" alt="" style={{width:'50px', height:'50px', borderRadius:'50%', backgroundColor:'white',padding:'5px'}} />
@@ -135,9 +115,9 @@ export default function AdminReviewsPage() {
 
                         </div>
 
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
 
         </div>
     );
