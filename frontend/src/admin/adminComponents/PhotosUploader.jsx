@@ -1,9 +1,8 @@
 import '../adminCss/PhotosUploader.css'
-import axios from "axios";
+
+import api from '../../api/axios.js'
 
 export default function PhotosUploader({ addedPhotos, onChange }) {
-
-    const API = "http://localhost:5000";
 
 
     async function uploadPhoto(e) {
@@ -13,7 +12,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
             const formData = new FormData();
             formData.append("file", files[i]);
             try {
-                const res = await axios.post(`${API}/api/upload`, formData, {
+                const res = await api.post(`/api/upload`, formData, {
                     headers: { "Content-Type": "multipart/form-data" }
                 });
                 uploadedUrls.push(res.data.url);
@@ -33,7 +32,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
             <div className="uploaded-photos-grid">
                 {addedPhotos.length > 0 &&  addedPhotos.map((url) => (
                     <div key={url} className="photo-card">
-                        <img src={`${API}/uploads/${url}`} alt="Project" />
+                        <img src={`http://localhost:5000/uploads/${url}`} alt="Project" />
                         <button className="remove-photo-btn" onClick={() => removePhoto(url)} type="button">
                             <img src="/imgs/bin.png" alt="Delete" />
                         </button>

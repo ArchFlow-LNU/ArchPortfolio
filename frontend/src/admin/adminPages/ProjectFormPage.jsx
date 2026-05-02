@@ -1,7 +1,7 @@
 import "../adminCss/ProjectFormPage.css";
 import {Navigate, useParams} from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from '../../api/axios.js'
 import Menu from "../adminComponents/Menu.jsx";
 import PhotosUploader from "../adminComponents/PhotosUploader.jsx";
 
@@ -12,32 +12,63 @@ export default function ProjectFormPage() {
     const [addedPhotos, setAddedPhotos] = useState([]);
     const [area, setArea] = useState("");
     const [year, setYear] = useState("");
-    const [categoryId, setCategoryId] = useState("");
+    const [categoryId, setCategoryId] = useState();
     const [categories, setCategories] = useState([]);
     const [redirect, setRedirect] = useState(false);
 
-    const API = "http://localhost:5000";
 
 
     useEffect(() => {
-        axios.get(`${API}/api/projectcategories`).then(res => {
+
+        api.get(`/api/projectcategories`).then(res => {
             setCategories(res.data);
         }).catch(err => console.error("Error fetching categories", err));
+
+        if(!id){
+            return
+        }
+        api.get(`/api/projects/${id}`).then(res => {
+            const {data}=res
+            setTitle(data.title || '')
+            setDescription(data.description || '');
+            setArea(data.area || '');
+            setYear(data.year || '');
+            setCategoryId(data.categoryId || 0);
+
+            if (data.images) {
+                setAddedPhotos(data.images.map(img => img.imageUrl));
+            }
+        })
     }, []);
 
     async function savePlace(e) {
         e.preventDefault();
-        const projectData = { title, description, area, year, categoryId: parseInt(categoryId) };
+        const projectData = { id: id ? parseInt(id) : 0, title, description, area, year, categoryId: parseInt(categoryId) };
         try {
-            const res = await axios.post(`${API}/api/projects`, projectData);
-            const projectId = res.data.id;
-            for (const url of addedPhotos) {
-                await axios.post(`${API}/api/projects/${projectId}/images`, {
-                    imageUrl: url,
-                    isMain: false,
-                });
+            let projectId=id
+            if(id){
+                await api.put(`/api/projects/${projectId}`, projectData)
+
+                await api.delete(`/api/projects/${projectId}/images`)
+                for (const url of addedPhotos) {
+                    await api.post(`/api/projects/${projectId}/images`, {
+                        imageUrl: url,
+                        isMain: false,
+                    });
+                }
+                setRedirect(true);
+
+            }else{
+                const res = await api.post(`/api/projects`, projectData);
+                const projectId = res.data.id;
+                for (const url of addedPhotos) {
+                    await api.post(`/api/projects/${projectId}/images`, {
+                        imageUrl: url,
+                        isMain: false,
+                    });
+                }
+                setRedirect(true);
             }
-            setRedirect(true);
         } catch (err) {
             console.error(err);
             alert("Failed to save project");
@@ -49,7 +80,7 @@ export default function ProjectFormPage() {
     return (
         <div className="project-form-container">
             <Menu />
-            <h1 className="main-title">New Project</h1>
+            <h2 className="main-title">New Project</h2>
 
             <form className="admin-form" onSubmit={savePlace}>
                 <div className="form-header">

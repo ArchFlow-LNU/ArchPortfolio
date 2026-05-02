@@ -1,0 +1,146 @@
+.admin-page-wrapper{
+    font-family: Inter, sans-serif;
+    padding: 40px;
+    position: relative;
+    background: #eaeaea;
+
+    background-image: url("/imgs/stone2.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    min-height: 100vh;
+}
+
+.admin-title {
+    margin-top: 2%;
+    font-size: clamp(32px, 5vw, 52px);
+    color: #361500;
+    font-weight: 800;
+    text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
+    /*background: radial-gradient(circle, rgba(139, 133, 135), transparent 50%);*/
+}
+
+.why {
+    padding: 80px;
+    background: rgba(250,250,250,0.5);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    font-family: Arial, sans-serif;
+    color: #111;
+}
+
+
+.why-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    gap: 40px;
+}
+
+.why-left h1 {
+    font-size: 64px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.why-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 40px;
+}
+
+.why-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #444;
+}
+
+
+.review {
+    max-width: 280px;
+}
+
+.stars {
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.review p {
+    font-size: 14px;
+    color: #555;
+}
+
+.author {
+    display: block;
+    margin-top: 10px;
+    font-weight: 600;
+}
+
+.author small {
+    font-weight: 400;
+    color: #777;
+}
+
+
+.why-right {
+    max-width: 600px;
+    font-size: 24px;
+    line-height: 1.4;
+}
+
+
+.stats {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    --stats-content: "";
+    flex: 1;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+.card::before {
+    content: var(--stats-content);
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 80px;
+    color: rgba(0, 0, 0, 0.06);
+    pointer-events: none;
+}
+
+.card h2 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #666;
+}
+
+
+@media (max-width: 900px) {
+    .why {
+        padding: 40px 20px;
+    }
+
+    .why-header {
+        flex-direction: column;
+    }
+
+    .why-right {
+        font-size: 20px;
+    }
+
+    .stats {
+        flex-direction: column;
+    }
+}
