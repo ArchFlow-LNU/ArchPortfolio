@@ -1,0 +1,33 @@
+.container {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+
+}
+
+.about-title,
+.advantages-title,
+.steps-title {
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    position: relative;
+}
+
+/* тонка лінія */
+.about-title::after,
+.advantages-title::after,
+.steps-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: black;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.btn-dark:hover {
+    background: #222;
+    transform: translateY(-2px);
+}

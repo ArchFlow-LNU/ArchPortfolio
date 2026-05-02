@@ -18,7 +18,7 @@ export default function Footer() {
                     <NavLink to="/" onClick={() => window.scrollTo(0, 0)}>Головна</NavLink>
                     <NavLink to="/about" onClick={() => window.scrollTo(0, 0)}>Про нас</NavLink>
                     <NavLink to="/catalog" onClick={() => window.scrollTo(0, 0)}>Проекти</NavLink>
-                    <NavLink to="/contacts" onClick={() => window.scrollTo(0, 0)}>Контакти</NavLink>
+                    {/*<NavLink to="/contacts" onClick={() => window.scrollTo(0, 0)}>Контакти</NavLink>*/}
                 </div>
 
                 <div className="footer-col">

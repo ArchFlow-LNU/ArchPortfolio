@@ -1,106 +1,262 @@
+/*.house-page {*/
+/*    padding: 80px 20px;*/
+/*    max-width: 1100px;*/
+/*    margin: auto;*/
+/*    font-family: "News Cycle", sans-serif;*/
+/*}*/
+
+/*!* кнопка назад *!*/
+/*.back-btn {*/
+/*    margin-bottom: 40px;*/
+/*    background: none;*/
+/*    border: none;*/
+/*    font-size: 15px;*/
+/*    cursor: pointer;*/
+/*    color: #666;*/
+/*    transition: 0.3s;*/
+/*}*/
+
+/*.back-btn:hover {*/
+/*    color: black;*/
+/*    transform: translateX(-3px);*/
+/*}*/
+
+/*!* контейнер *!*/
+/*.house-container {*/
+/*    display: flex;*/
+/*    gap: 60px;*/
+/*    align-items: flex-start;*/
+/*}*/
+
+/*!* картинка *!*/
+/*.house-container img {*/
+/*    width: 520px;*/
+/*    border-radius: 16px;*/
+/*    object-fit: cover;*/
+/*    box-shadow: 0 15px 40px rgba(0,0,0,0.12);*/
+/*    transition: 0.3s;*/
+/*}*/
+
+/*.house-container img:hover {*/
+/*    transform: scale(1.02);*/
+/*}*/
+
+/*!* текст *!*/
+/*.house-text {*/
+/*    max-width: 520px;*/
+/*}*/
+
+/*!* заголовок *!*/
+/*.house-text h1 {*/
+/*    font-size: 34px;*/
+/*    margin-bottom: 20px;*/
+/*    line-height: 1.2;*/
+/*}*/
+
+/*!* опис *!*/
+/*.house-text p {*/
+/*    white-space: pre-line;*/
+/*    line-height: 1.8;*/
+/*    color: #555;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*.house-gallery {*/
+/*    position: relative;*/
+/*    max-width: 600px;*/
+/*}*/
+
+/*.house-image {*/
+/*    width: 100%;*/
+/*    height: 350px;*/
+/*    object-fit: cover;*/
+/*    border-radius: 15px;*/
+/*}*/
+
+/*.gallery-controls {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin-top: 10px;*/
+/*    gap: 15px;*/
+/*}*/
+
+/*.gallery-controls button {*/
+/*    padding: 8px 16px;*/
+/*    border: none;*/
+/*    background: black;*/
+/*    color: white;*/
+/*    cursor: pointer;*/
+/*    border-radius: 8px;*/
+/*}*/
+
+/*!* адаптив *!*/
+/*@media (max-width: 768px) {*/
+/*    .house-container {*/
+/*        flex-direction: column;*/
+/*        gap: 30px;*/
+/*    }*/
+
+/*    .house-container img {*/
+/*        width: 100%;*/
+/*    }*/
+
+/*    .house-text h1 {*/
+/*        font-size: 26px;*/
+/*    }*/
+/*}*/
+
+/* ================= BASE ================= */
+
+
 .house-page {
-    padding: 80px 20px;
-    max-width: 1100px;
+    padding: 100px 20px;
+    max-width: 1200px;
     margin: auto;
     font-family: "News Cycle", sans-serif;
+
+
 }
 
-/* кнопка назад */
+/* ================= BACK BUTTON ================= */
+
 .back-btn {
     margin-bottom: 40px;
     background: none;
     border: none;
-    font-size: 15px;
+    font-size: 14px;
     cursor: pointer;
-    color: #666;
+    color: #777;
     transition: 0.3s;
 }
 
 .back-btn:hover {
     color: black;
-    transform: translateX(-3px);
+    transform: translateX(-4px);
 }
 
-/* контейнер */
+/* ================= LAYOUT ================= */
+
 .house-container {
     display: flex;
-    gap: 60px;
-    align-items: flex-start;
+    flex-direction: column; /*головна зміна */
+    gap: 20px;
 }
 
-/* картинка */
-.house-container img {
-    width: 520px;
-    border-radius: 16px;
+/* ================= GALLERY ================= */
+
+.house-gallery {
+    width: 100%;
+}
+
+/* головне фото */
+.house-image {
+    width: 700px;
+    height: 400px;
     object-fit: cover;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    border-radius: 20px;
+
+
+    box-shadow: 0 25px 70px rgba(0,0,0,0.15);
     transition: 0.3s;
+
+
 }
 
-.house-container img:hover {
+.house-image:hover {
     transform: scale(1.02);
 }
 
-/* текст */
-.house-text {
-    max-width: 520px;
-}
-
-/* заголовок */
-.house-text h1 {
-    font-size: 34px;
-    margin-bottom: 20px;
-    line-height: 1.2;
-}
-
-/* опис */
-.house-text p {
-    white-space: pre-line;
-    line-height: 1.8;
-    color: #555;
-    font-size: 16px;
-}
-
-.house-gallery {
-    position: relative;
-    max-width: 600px;
-}
-
-.house-image {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
+/* кнопки галереї */
 .gallery-controls {
     display: flex;
     justify-content: center;
-    margin-top: 10px;
-    gap: 15px;
+    margin-top: 15px;
+    gap: 12px;
 }
 
 .gallery-controls button {
-    padding: 8px 16px;
+    padding: 10px 18px;
     border: none;
     background: black;
     color: white;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 10px;
+
+
+    transition: 0.2s;
+
+
 }
 
-/* адаптив */
-@media (max-width: 768px) {
-    .house-container {
-        flex-direction: column;
-        gap: 30px;
-    }
+.gallery-controls button:hover {
+    background: #222;
+    transform: translateY(-2px);
+}
 
-    .house-container img {
-        width: 100%;
+/* ================= TEXT ================= */
+
+.house-text {
+    max-width: 700px;
+    margin: 20px auto 0; /* було більше — зменшили */
+    text-align: center;
+}
+
+/* заголовок */
+.house-text h1 {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+/* лінія під заголовком */
+.house-text h1::after {
+    content: "";
+    display: block;
+    width: 70px;
+    height: 3px;
+    background: black;
+    margin: 12px auto 0;
+    border-radius: 10px;
+}
+
+/* опис */
+.house-text p {
+    line-height: 1.6;
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 8px;
+    text-align: justify;
+
+}
+
+/* мета інформація */
+.house-text p b {
+    color: black;
+    font-weight: 600;
+}
+
+/* ================= ADAPTIVE ================= */
+
+@media (max-width: 768px) {
+
+
+    .house-page {
+    padding: 60px 15px;
+}
+
+    .house-image {
+        height: 260px;
     }
 
     .house-text h1 {
         font-size: 26px;
     }
+
+    .house-text {
+        text-align: left;
+    }
+
+
 }
+

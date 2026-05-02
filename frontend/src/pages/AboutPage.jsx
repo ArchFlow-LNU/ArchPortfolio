@@ -3,6 +3,7 @@ import Steps from "../components/Steps.jsx";
 import Advantages from "../components/Advantages.jsx";
 import Footer from "../components/Footer.jsx";
 import Navbar from "../components/NavBar.jsx";
+import "../css/AboutPage.css";
 
 export default function AboutPage() {
     return (
@@ -13,9 +14,10 @@ export default function AboutPage() {
             <div className="container">
                 <About />
                 <Steps />
+                <Advantages />
             </div>
 
-            <Advantages />
+            {/*<Advantages />*/}
             <Footer />
 
         </div>

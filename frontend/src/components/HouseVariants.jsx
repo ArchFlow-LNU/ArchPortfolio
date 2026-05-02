@@ -162,7 +162,7 @@ export default function HouseVariants() {
 
                     {projects.map((h) => {
                         const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
-                        const imageSrc = mainImage ? `${API}/uploads/${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
+                        const imageSrc = mainImage ? `${API}${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
 
 
                         return (
