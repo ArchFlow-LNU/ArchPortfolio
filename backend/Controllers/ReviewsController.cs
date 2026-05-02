@@ -23,7 +23,6 @@ namespace ArchPortfolio.Controllers
         {
             return await _context.Reviews
                 .Where(r => r.Approved)
-                .Include(r => r.Project)
                 .OrderByDescending(r => r.CreatedAt)
                 .ToListAsync();
         }
