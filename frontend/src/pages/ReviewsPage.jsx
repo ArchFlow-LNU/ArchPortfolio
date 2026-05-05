@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import '../App.css'
 
 
 import api from "../api/axios"; // ЗАМІСТЬ axios
@@ -20,6 +20,10 @@ export default function ReviewsPage() {
         message: ""
     });
 
+    const renderStars = (rating) => {
+        return "★".repeat(Math.min(rating, 5)) + "☆".repeat(Math.max(0, 5 - rating));
+        // Якщо рейтинг до 10, можна ділити на 2 або залишити цифру поруч
+    };
     const loadReviews = async () => {
         try {
             const res = await api.get("/api/reviews");
@@ -87,19 +91,18 @@ export default function ReviewsPage() {
                     <div className="reviews-track">
                         {reviews.map(r => (
                             <div key={r.id} className="review-card">
-
-                                <h3>{r.authorName}</h3>
-
-                                <p>Оцінка: {r.rating}</p>
-
-                                <p>{r.message}</p>
-
-                                <span>
-                                    {r.createdAt
-                                        ? new Date(r.createdAt).toLocaleDateString()
-                                        : ""}
-                                </span>
-
+                                <div className="review-card-header">
+                                    <div className="author-info">
+                                        <h3>{r.authorName}</h3>
+                                        <span className="review-date">
+                {r.createdAt ? new Date(r.createdAt).toLocaleDateString() : ""}
+            </span>
+                                    </div>
+                                    <div className="review-rating">{renderStars(r.rating)}</div>
+                                </div>
+                                <div className="review-body">
+                                    <p>{r.message}</p>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -110,31 +113,39 @@ export default function ReviewsPage() {
                     <h2>Залишити відгук</h2>
 
                     <form onSubmit={handleSubmit} className="review-form">
-
                         <div className="review-row">
-                            <input
-                                name="authorName"
-                                placeholder="Ім'я"
-                                value={form.authorName}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="input-group">
+                                <input
+                                    name="authorName"
+                                    type="text"
+                                    placeholder="Ім'я"
+                                    className="minimal-input"
+                                    value={form.authorName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                            <input
-                                name="rating"
-                                type="number"
-                                placeholder="Оцінка(1-10)"
-                                min="1"
-                                max="10"
-                                value={form.rating}
-                                onChange={handleChange}
-                                required
-                            />
+                            <div className="input-group rating-input">
+                                <input
+                                    name="rating"
+                                    type="number"
+                                    placeholder="Оцінка (1-10)"
+                                    className="minimal-input"
+                                    min="1"
+                                    max="10"
+                                    value={form.rating}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
                         </div>
 
                         <input
                             name="authorEmail"
+                            type="email"
                             placeholder="Email"
+                            className="minimal-input"
                             value={form.authorEmail}
                             onChange={handleChange}
                         />
@@ -142,14 +153,15 @@ export default function ReviewsPage() {
                         <textarea
                             name="message"
                             placeholder="Ваш відгук..."
+                            className="minimal-textarea"
                             value={form.message}
                             onChange={handleChange}
                             required
                         />
-                        <button type="submit" className="btn-dark">
-                            Надіслати
-                        </button>
 
+                        <button type="submit" className="btn-submit-review">
+                            Надіслати відгук
+                        </button>
                     </form>
 
                 </section>

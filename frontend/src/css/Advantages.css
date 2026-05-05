@@ -1,5 +1,9 @@
 .advantages {
-    padding: 60px 0;
+    max-width: 1300px;
+    width: 95%;
+    margin:-80px auto 80px auto  ;
+    padding: 0px 20px;
+    box-sizing: border-box;
 }
 
 /* TITLE */

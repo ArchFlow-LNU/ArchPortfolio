@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap');#root {
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+
+#root {
     max-width: 100%;
     margin: 0 auto;
     padding: 0;
@@ -34,10 +36,35 @@
     color: #888;
 }
 
-body{
-    margin:0;
-    font-family: "News Cycle", sans-serif;
+body {
+    margin: 0;
+    font-family: "Alice", serif;
+    font-weight: 400;
+    font-style: normal;
+
+    min-height: 100vh;
+    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
+
+    position: relative;
+    background: #eaeaea;
 }
+
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: url("/imgs/stonesUser.png") no-repeat center center;
+    background-size: cover;
+
+    opacity: 0.8;
+    z-index: -1;
+}
+
 
 .container{
     max-width: 1500px;

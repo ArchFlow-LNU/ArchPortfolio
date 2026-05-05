@@ -55,7 +55,7 @@ import "../App.css"
 import "../css/NavBar.css"
 import {useEffect, useState,} from "react";
 import {Link} from "react-router-dom";
-import axios from "axios";
+import api from '../api/axios.js'
 
 export default function Navbar(props) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -63,8 +63,6 @@ export default function Navbar(props) {
     const [scrolled, setScrolled] = useState(false);
 
     const [contact, setContact] = useState(null);
-    const API = "http://localhost:5000";
-
     useEffect(() => {
         const handleScroll = () => {
             // Якщо скрол більше 50px, ставимо true
@@ -83,7 +81,7 @@ export default function Navbar(props) {
     }, []);
 
     useEffect(() => {
-        axios.get(`${API}/api/contactinfo`)
+        api.get(`/api/contactinfo`)
             .then(res => setContact(res.data))
             .catch(err => console.log(err));
     }, []);
@@ -114,7 +112,7 @@ export default function Navbar(props) {
 
             {/* гамбургер */}
             <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-                <img src="../imgs/main-menu.png" width="45px" height="45px" alt=""/>
+                <img src="../imgs/main-menu.png" className='icon' width="45px" height="45px"  alt=""/>
             </div>
 
             <div className="btn-container">

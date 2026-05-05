@@ -49,7 +49,11 @@ export default function HouseVariants() {
 
         <section className="houses">
 
-            <h2>Варіанти будинків</h2>
+            <div className="title">
+                <h2>Варіанти будинків</h2>
+                <p>Кожен проєкт розробляється індивідуально з урахуванням побажань клієнта, особливостей ділянки та сучасних будівельних норм.</p>
+            </div>
+
 
             <div className="slider">
 

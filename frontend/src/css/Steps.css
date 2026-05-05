@@ -1,5 +1,11 @@
 .steps {
-    padding: 60px 0;
+    padding: 20px 0 ;
+    margin: 120px 0 ;
+    background: rgba(234, 234, 234, 0.7);
+    backdrop-filter: blur(7px);
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+
 }
 
 /* TITLE */

@@ -36,7 +36,10 @@ export default function ProjectFormPage() {
             setCategoryId(data.categoryId || 0);
 
             if (data.images) {
-                setAddedPhotos(data.images.map(img => img.imageUrl));
+                setAddedPhotos(data.images.map(img => ({
+                    imageUrl: img.imageUrl,
+                    isMain: img.isMain
+                })));
             }
         })
     }, []);
@@ -52,8 +55,8 @@ export default function ProjectFormPage() {
                 await api.delete(`/api/projects/${projectId}/images`)
                 for (const url of addedPhotos) {
                     await api.post(`/api/projects/${projectId}/images`, {
-                        imageUrl: url,
-                        isMain: false,
+                        imageUrl: url.imageUrl,
+                        isMain: url.isMain,
                     });
                 }
                 setRedirect(true);
@@ -63,8 +66,8 @@ export default function ProjectFormPage() {
                 const projectId = res.data.id;
                 for (const url of addedPhotos) {
                     await api.post(`/api/projects/${projectId}/images`, {
-                        imageUrl: url,
-                        isMain: false,
+                        imageUrl: url.imageUrl,
+                        isMain: url.isMain,
                     });
                 }
                 setRedirect(true);
@@ -102,7 +105,6 @@ export default function ProjectFormPage() {
                         />
                     </div>
 
-                    {/* CATEGORY */}
                     <div className="form-group">
                         <label>Category</label>
                         <small>Select project type</small>
@@ -119,7 +121,6 @@ export default function ProjectFormPage() {
                     </div>
                 </div>
 
-                {/* PHOTOS */}
                 <div className="form-group-full">
                     <label>Photos</label>
                     <small>The more, the better (upload or URL)</small>
@@ -128,7 +129,6 @@ export default function ProjectFormPage() {
                     </div>
                 </div>
 
-                {/* DESCRIPTION */}
                 <div className="form-group-full">
                     <label>Description</label>
                     <small>Write what makes this project special</small>
@@ -141,7 +141,6 @@ export default function ProjectFormPage() {
                 </div>
 
                 <div className="form-grid">
-                    {/* AREA */}
                     <div className="form-group">
                         <label>Area (m²)</label>
                         <input
@@ -153,7 +152,6 @@ export default function ProjectFormPage() {
                         />
                     </div>
 
-                    {/* YEAR */}
                     <div className="form-group">
                         <label>Year</label>
                         <input

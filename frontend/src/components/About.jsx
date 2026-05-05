@@ -10,10 +10,6 @@ export default function About() {
 
                 <div className="about-grid">
 
-                    {/* заголовок */}
-
-
-                    {/* текст */}
                     <div className="about-text">
 
                         <h1 className="about-title">Про нас</h1>
@@ -33,7 +29,6 @@ export default function About() {
                         </p>
 
                         <button  className="btn-dark"
-                                // onClick={() => { document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
                                  onClick={() => navigate("/#contact")}
                         >
                             Замовити проект →
@@ -41,7 +36,6 @@ export default function About() {
 
                     </div>
 
-                    {/* фото */}
                     <div className="about-image">
                         <img src="/imgs/about.png" alt="architecture" />
                     </div>

@@ -1,7 +1,8 @@
 import "../css/HousePage.css";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from '../api/axios.js'
+import Navbar from "../components/NavBar.jsx";
 
 export default function HousePage() {
 
@@ -22,10 +23,9 @@ export default function HousePage() {
         }
     };
 
-    const API = "http://localhost:5000";
 
     useEffect(() => {
-        axios.get(`${API}/api/projects/${id}`)
+        api.get(`/api/projects/${id}`)
             .then(res => setHouse(res.data))
             .catch(err => console.log(err));
     }, [id]);
@@ -35,63 +35,66 @@ export default function HousePage() {
         return <p style={{ padding: "40px" }}>Loading...</p>;
     }
 
-    // const mainImage = house.images?.find(img => img.isMain);
 
     return (
         <div className="house-page">
 
-            {/* НАЗАД НА ГОЛОВНУ */}
-            <button
-                className="back-btn"
-                onClick={() => navigate("/")}
-            >
-                ← На головну
-            </button>
+            <Navbar />
 
-            <div className="house-container">
+            <div className="house-main-section">
 
                 <div className="house-gallery">
 
-                    {house.images && house.images.length > 0 ? (
-                        <>
-                            <img
-                                src={`${API}${house.images[imgIndex].imageUrl}`}
-                                alt={house.title}
-                                className="house-image"
-                            />
+                    <div className="main-img-container">
+                        {house.images && house.images.length > 0 ? (
+                            <>
+                                <img
+                                    src={`${import.meta.env.VITE_API_URL}/uploads/${house.images[imgIndex].imageUrl}`}
+                                    alt={house.title}
+                                    className="house-image"
+                                />
 
-                            <div className="gallery-controls">
-                                <button onClick={prevImg}>←</button>
-                                <button onClick={nextImg}>→</button>
-                            </div>
-                        </>
-                    ) : (
-                        <img src="/imgs/house1.png" alt="no image" />
-                    )}
+                                <div className="gallery-controls">
+                                    <button onClick={prevImg}>←</button>
+                                    <button onClick={nextImg}>→</button>
+                                </div>
+                            </>
+                        ) : (
+                            <img src="/imgs/house1.png" alt="no image" />
+                        )}
+                    </div>
 
                 </div>
 
-                <div className="house-text">
-
+                <div className="house-info">
+                    <span className="category-tag">{house.category?.name || "Приватний будинок"}</span>
                     <h1>{house.title}</h1>
 
-                    {/* переноси рядків */}
-                    <p style={{ whiteSpace: "pre-line" }}>
-                        {house.fullDescription || house.description}
-                    </p>
+                    <div className="specs-grid">
+                        <div className="spec-item">
+                            <span className="label">Площа</span>
+                            <span className="value">{house.area} м²</span>
+                        </div>
+                        <div className="spec-item">
+                            <span className="label">Рік</span>
+                            <span className="value">{house.year}</span>
+                        </div>
+                        <div className="spec-item">
+                            <span className="label">Стиль</span>
+                            <span className="value">{house.category?.name || "Modern"}</span>
+                        </div>
+                    </div>
 
-                    <p>
-                        <b>Стиль:</b> {house.category?.name || "—"}
-                    </p>
+                    <div className="description">
+                        <h3>Про проект</h3>
+                        <p>{house.fullDescription || house.description}</p>
+                    </div>
 
-                    <p>
-                        <b>Рік:</b> {house.year}
-                    </p>
+                    <button className="order-btn"
+                            onClick={() => navigate("/#contact")}
 
-                    <p>
-                        <b>Площа:</b> {house.area} м²
-                    </p>
-
+                    >
+                        Замовити консультацію</button>
                 </div>
 
             </div>

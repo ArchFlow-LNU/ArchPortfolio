@@ -3,10 +3,16 @@
     width: 100%;
     margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .about {
-    padding: 80px 0;
+    margin-top: 130px;
+    padding: 50px 0;
+    background: rgba(234, 234, 234, 0.7);
+    backdrop-filter: blur(7px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    border-radius: 15px;
 
 }
 
@@ -14,8 +20,14 @@
 .about-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 30px;
-    padding: 0 20px;
+    gap: 40px;
+    align-items: center;
+}
+
+/* TEXT BLOCK */
+.about-text {
+    order: 2; /* На мобільних текст під картинкою */
+    text-align: left;
 }
 
 /* TITLE */
