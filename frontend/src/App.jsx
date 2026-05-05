@@ -13,6 +13,7 @@ import ReviewsPage from "./pages/ReviewsPage.jsx";
 import AdminReviewsPage from "./admin/adminPages/AdminReviewsPage.jsx";
 import PrivateRoute from "./admin/adminComponents/PrivateRoute.jsx";
 import AdminMainPage from "./admin/adminPages/AdminMainPage.jsx";
+import ContactsRequestsPage from "./admin/adminPages/AdminContactsPage.jsx";
 
 function App() {
     return (
@@ -30,6 +31,11 @@ function App() {
                 <Route path="/admin/reviews" element={
                     <PrivateRoute>
                         <AdminReviewsPage />
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/contacts" element={
+                    <PrivateRoute>
+                        <ContactsRequestsPage />
                     </PrivateRoute>
                 } />
             <Route path="/admin/profile" element={

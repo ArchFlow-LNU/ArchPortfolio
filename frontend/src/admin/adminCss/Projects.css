@@ -1,10 +1,10 @@
-.projects h2 {
+.projects h1 {
     margin-top: 2%;
-
-    font-size: clamp(32px, 5vw, 52px);
-    color: #361500;
+    font-family: "Rethink Sans", Inter, sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
     font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
+    color: #361500;
+    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
 }
 
 .add-btn-wrapper{
@@ -113,6 +113,36 @@
     align-self: flex-start;
 }
 
+.best-project-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 92px;
+    padding: 5px;
+
+    background: white;
+    border: 1px solid #361500;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+.best-project-btn:hover {
+    opacity: 0.6;
+    transform: scale(1.05);
+}
+
+
+.best-project-btn.active {
+
+    box-shadow: 0 0 1px 5px gold;
+}
+
 .remove-project-btn {
     position: absolute;
     bottom: 8px;
@@ -156,6 +186,7 @@
 .edit-project-btn:hover {
     background: #ffeded;
 }
+
 
 .modal-overlay {
     position: fixed;

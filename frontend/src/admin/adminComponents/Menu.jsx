@@ -22,6 +22,10 @@ export default function Menu(){
                     <img src="/imgs/review.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}} />
                     <span>Reviews</span>
                 </NavLink>
+                <NavLink to="/admin/contacts">
+                    <img src="/imgs/phone-call.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}} />
+                    <span>Contacts</span>
+                </NavLink>
                 <NavLink to="/admin/main">
                     <img src="/imgs/home.png" alt="" style={{width:"25px",  padding:"0px", margin:"0px"}} />
                     <span>Main</span>

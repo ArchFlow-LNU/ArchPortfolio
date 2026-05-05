@@ -57,7 +57,7 @@ export default function AdminReviewsPage() {
     return (
         <div className="admin-container">
             <div><Menu></Menu></div>
-            <h1 className="admin-title">AdminReviewsPanel</h1>
+            <h1 className="admin-title">Admin Reviews Panel</h1>
 
             <motion.div
                 className="admin-list"

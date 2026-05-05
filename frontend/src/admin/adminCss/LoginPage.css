@@ -51,13 +51,12 @@ radial-gradient(circle at 50% 80%, rgba(139, 133, 135), transparent 40%),
     margin:0;
     height: 600px;
     margin-right: 20px;
-    justify-content: flex-start;
-    align-items: flex-start;
+
 
     border-radius: 20px;
     border:none;
 
-    background-image: url("/imgs/stone2.png");
+    background-image: url("/imgs/adminbackgr.png");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -68,9 +67,11 @@ radial-gradient(circle at 50% 80%, rgba(139, 133, 135), transparent 40%),
 }
 
 .instructions h2{
+    margin-top: auto;
     color:#361500;
     padding-top: 50px;
-    margin: 0;
+    margin-bottom: 40px;
+
     font-size: 15px;
     width: 70%;
 

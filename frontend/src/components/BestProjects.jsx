@@ -1,6 +1,6 @@
 import "../css/BestProjects.css"
 import { useState, useEffect } from "react";
-import axios from "axios";
+import api from '../api/axios.js'
 import { motion } from "framer-motion";
 
 export default function BestProjects() {
@@ -9,7 +9,7 @@ export default function BestProjects() {
     const [current, setCurrent] = useState(0);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/Projects/best")
+        api.get("/api/projects/best")
             .then(res => {
                 setProjects(res.data);
             })
@@ -24,7 +24,8 @@ export default function BestProjects() {
     }
 
     // беремо головне фото
-    const mainImage = projects[current].images?.find(i => i.isMain);
+    const mainImage = projects[current].images?.find(i => i.isMain) ||  projects[current]?.images?.[0];
+
 
     return (
         <section className="best-projects">
@@ -52,8 +53,15 @@ export default function BestProjects() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5 }}
             >
-                <img src={`http://localhost:5000${mainImage?.imageUrl}`} />
 
+                <img
+                    src={
+                        mainImage?.imageUrl
+                            ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}`
+                            : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`
+                    }
+
+                />
 
 
                 <div className="best-info">

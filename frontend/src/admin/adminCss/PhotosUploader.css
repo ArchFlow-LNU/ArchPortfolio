@@ -24,6 +24,24 @@
     object-fit: cover;
 }
 
+.photo-main-btn{
+    position: absolute;
+    bottom: 8px;
+    right: 50px;
+    padding: 5px;
+
+    background: white;
+    border: 1px solid #361500;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
 .remove-photo-btn {
     position: absolute;
     bottom: 8px;

@@ -1,10 +1,10 @@
 .admin-page-wrapper{
-    font-family: Inter, sans-serif;
+    font-family: "Rethink Sans", Inter, sans-serif;
     padding: 40px;
     position: relative;
     background: #eaeaea;
 
-    background-image: url("/imgs/stone2.png");
+    background-image: url("/imgs/adminbackgr.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -15,10 +15,10 @@
 
 .admin-title {
     margin-top: 2%;
-    font-size: clamp(32px, 5vw, 52px);
-    color: #361500;
+    font-size: clamp(28px, 4vw, 52px);
     font-weight: 800;
-    text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
+    color: #361500;
+    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
     /*background: radial-gradient(circle, rgba(139, 133, 135), transparent 50%);*/
 }
 

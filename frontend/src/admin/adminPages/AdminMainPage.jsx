@@ -66,7 +66,7 @@ export default function AdminMainPage() {
     return (
         <div className="admin-page-wrapper">
             <Menu></Menu>
-            <h1 className="admin-title">MainAdminPanel</h1>
+            <h1 className="admin-title">Main Admin Panel</h1>
 
             <section className="why">
                 <div className="why-header">

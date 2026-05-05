@@ -16,7 +16,6 @@ export default function Projects() {
 
     const [confirmText, setConfirmText] = useState("");
 
-    const API = "http://localhost:5000";
     const container = {
         hidden: {},
         show: {
@@ -44,6 +43,27 @@ export default function Projects() {
 
     }, []);
 
+
+    async function toggleBest(id) {
+        try {
+            const project = houses.find(h => h.id === id);
+            if (!project) return;
+
+            await api.put(`/api/projects/${id}`, {
+                ...project,
+                isBest: !project.isBest
+            });
+
+            setHouses(prev =>
+                prev.map(h =>
+                    h.id === id ? { ...h, isBest: !h.isBest } : h
+                )
+            );
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     function openDeleteModal(id, title) {
         setDeleteModal({
@@ -82,7 +102,7 @@ export default function Projects() {
         </motion.div>
     ) : (
         <section className="projects">
-            <h2>All Progects</h2>
+            <h1>All Progects</h1>
             <div className="add-btn-wrapper">
                 <div className="add-new-project-btn">
                     <Link to={"/admin/profile/new"}>
@@ -102,7 +122,7 @@ export default function Projects() {
                 >
                 { houses.map((h) => {
                     const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
-                    const imageSrc = mainImage ? `${API}/uploads/${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
+                    const imageSrc = mainImage ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}` : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`;
 
 
 
@@ -122,6 +142,17 @@ export default function Projects() {
                                 <span>Category: {h.category?.name || "—"}</span>
                             </div>
 
+                            <button
+                                className={`best-project-btn ${h.isBest ? "active" : ""}`}
+                                onClick={() => toggleBest(h.id)}
+                                type="button"
+                            >
+                                <img
+                                    src="/imgs/yellowstar.png"
+                                    alt="Best"
+                                    style={{ width: '20px', height: '20px' }}
+                                />
+                            </button>
                             <button className="edit-project-btn" onClick={() => navigate(`/admin/profile/${h.id}`)} type="button">
                                 <img src="/imgs/edit.png" alt="Delete" style={{width:'20px', height:'20px'}} />
                             </button>

@@ -1,6 +1,6 @@
 import "../css/HouseVariants.css"
 import {useState, useEffect} from "react";
-import axios from "axios"
+import api from '../api/axios.js'
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 export default function HouseVariants() {
@@ -9,10 +9,9 @@ export default function HouseVariants() {
 
     const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
-    const API = "http://localhost:5000";
 
     useEffect(() => {
-        axios.get(`${API}/api/projects`)
+        api.get(`/api/projects`)
             .then(res => setProjects(res.data))
             .catch(err => console.log(err));
     }, []);
@@ -46,92 +45,6 @@ export default function HouseVariants() {
     };
 
     return (
-        // <section className="houses">
-        //
-        //     <h2>Варіанти будинків</h2>
-        //
-        //     <motion.div
-        //         className="house-grid"
-        //         initial="hidden"
-        //         animate="visible"
-        //         variants={{
-        //             hidden: {},
-        //             visible: {
-        //                 transition: {
-        //                     staggerChildren: 0.2
-        //                 }
-        //             }
-        //         }}
-        //     >
-        //         {projects.map((h) => {
-        //             //const mainImage = h.images?.find(img => img.isMain);
-        //             const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
-        //
-        //             return (
-        //                 <motion.div
-        //                     className="house-card"
-        //                     key={h.id}
-        //                     onClick={() => navigate(`/house/${h.id}`)}
-        //                     style={{ cursor: "pointer" }}
-        //
-        //                     variants={{
-        //                         hidden: {
-        //                             opacity: 0,
-        //                             y: 40,
-        //                             scale: 0.95
-        //                         },
-        //                         visible: {
-        //                             opacity: 1,
-        //                             y: 0,
-        //                             scale: 1
-        //                         }
-        //                     }}
-        //
-        //                     transition={{
-        //                         duration: 0.2,
-        //                         ease: "easeOut"
-        //                     }}
-        //
-        //                     whileHover={{
-        //                         y: -8,
-        //                         scale: 1.03
-        //                     }}
-        //                 >
-        //
-        //                     {/*<img*/}
-        //                     {/*    src={*/}
-        //                     {/*        h.images?.length*/}
-        //                     {/*            ? `${API}/uploads/${mainImage?.imageUrl || h.images[0].imageUrl}`*/}
-        //                     {/*            : "/imgs/house1.png"*/}
-        //                     {/*    }*/}
-        //                     {/*    alt={h.title}*/}
-        //                     {/*/>*/}
-        //
-        //                     <img
-        //                         src={
-        //                             mainImage
-        //                                 ? `${API}${mainImage.imageUrl}`
-        //                                 : "/imgs/house1.png"
-        //                         }
-        //                         alt={h.title}
-        //                     />
-        //
-        //
-        //
-        //                     <div className="house-info">
-        //                         <h3>{h.title}</h3>
-        //                         <p>{h.description}</p>
-        //                         <span>
-        //                             Стиль: {h.category?.name || "—"}
-        //                         </span>
-        //                     </div>
-        //
-        //                 </motion.div>
-        //             );
-        //         })}
-        //     </motion.div>
-        //
-        // </section>
 
 
         <section className="houses">
@@ -162,7 +75,7 @@ export default function HouseVariants() {
 
                     {projects.map((h) => {
                         const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
-                        const imageSrc = mainImage ? `${API}${mainImage.imageUrl}` : `${API}/uploads/noPhoto.jpg`;
+                        const imageSrc = mainImage ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}` : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`;
 
 
                         return (

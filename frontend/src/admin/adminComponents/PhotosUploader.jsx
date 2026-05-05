@@ -15,7 +15,8 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
                 const res = await api.post(`/api/upload`, formData, {
                     headers: { "Content-Type": "multipart/form-data" }
                 });
-                uploadedUrls.push(res.data.url);
+                const isFirst = addedPhotos.length === 0 && uploadedUrls.length === 0;
+                uploadedUrls.push({ imageUrl: res.data.url, isMain: isFirst  });
             } catch (err) {
                 console.error(err);
             }
@@ -23,17 +24,55 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
         onChange([...addedPhotos, ...uploadedUrls]);
     }
 
+    function selectMain(selectedUrl) {
+        const updatedPhotos = addedPhotos.map(photo => ({
+            ...photo,
+            isMain: photo.imageUrl === selectedUrl
+        }));
+        onChange(updatedPhotos);
+    }
+
     function removePhoto(url) {
-        onChange(addedPhotos.filter(photo => photo !== url));
+        onChange(addedPhotos.filter(photo => photo.imageUrl !== url));
     }
 
     return (
         <div className="photos-uploader">
             <div className="uploaded-photos-grid">
                 {addedPhotos.length > 0 &&  addedPhotos.map((url) => (
-                    <div key={url} className="photo-card">
-                        <img src={`http://localhost:5000/uploads/${url}`} alt="Project" />
-                        <button className="remove-photo-btn" onClick={() => removePhoto(url)} type="button">
+                    <div key={url.imageUrl} className="photo-card">
+                        <img src={`${import.meta.env.VITE_API_URL}/uploads/${url.imageUrl}`} alt="Project" />
+
+                        <button
+                            className={`photo-main-btn ${url.isMain ? "active" : ""}`}
+                            onClick={() => selectMain(url.imageUrl)}
+                            type="button"
+                        >
+
+                            <img
+                                src={url.isMain ? "/imgs/yellowstar.png" : "/imgs/plus.png"}
+                                alt="Main"
+                                style={{ width: '20px', height: '20px', filter: url.isMain ? 'none' : 'grayscale(1)' }}
+                            />
+                        </button>
+
+                        <button
+                            className={`photo-main-btn ${url.isMain ? "active" : ""}`}
+                            onClick={() => selectMain(url.imageUrl)}
+                            type="button"
+                        >
+                            <img
+                                src={url.isMain ? "/imgs/yellowstar.png" : "/imgs/yellowstarempty.png"}
+                                alt="Main"
+                                style={{
+                                    width: '20px',
+                                    height: '20px',
+                                    filter: url.isMain ? 'none' : 'grayscale(1)'
+                                }}
+                            />
+                        </button>
+
+                        <button className="remove-photo-btn" onClick={() => removePhoto(url.imageUrl)} type="button">
                             <img src="/imgs/bin.png" alt="Delete" />
                         </button>
                     </div>
