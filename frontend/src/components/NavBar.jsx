@@ -55,7 +55,6 @@ import "../App.css"
 import "../css/NavBar.css"
 import {useEffect, useState,} from "react";
 import {Link} from "react-router-dom";
-import api from '../api/axios.js'
 
 export default function Navbar(props) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -80,11 +79,11 @@ export default function Navbar(props) {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(() => {
-        api.get(`/api/contactinfo`)
-            .then(res => setContact(res.data))
-            .catch(err => console.log(err));
-    }, []);
+    // useEffect(() => {
+    //     api.get(`/api/contactinfo`)
+    //         .then(res => setContact(res.data))
+    //         .catch(err => console.log(err));
+    // }, []);
 
     return (
 

@@ -25,8 +25,12 @@ export default function HousePage() {
 
 
     useEffect(() => {
+        setHouse(null)
         api.get(`/api/projects/${id}`)
-            .then(res => setHouse(res.data))
+            .then(res => {
+                setHouse(res.data);
+                setImgIndex(0);
+            })
             .catch(err => console.log(err));
     }, [id]);
 
@@ -34,6 +38,7 @@ export default function HousePage() {
     if (!house) {
         return <p style={{ padding: "40px" }}>Loading...</p>;
     }
+    const mainImage = house.images?.[imgIndex];
 
 
     return (
@@ -46,11 +51,14 @@ export default function HousePage() {
                 <div className="house-gallery">
 
                     <div className="main-img-container">
-                        {house.images && house.images.length > 0 ? (
+                        {house.images && house.images.length >= 0 ? (
                             <>
                                 <img
-                                    src={`${import.meta.env.VITE_API_URL}/uploads/${house.images[imgIndex].imageUrl}`}
-                                    alt={house.title}
+                                    src={
+                                        mainImage?.imageUrl
+                                            ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}`
+                                            : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`
+                                    }                                    alt={house.title}
                                     className="house-image"
                                 />
 
