@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5174", "https://archportfolio-hazel.vercel.app")
+            .WithOrigins("http://localhost:5173")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -58,7 +58,7 @@ using (var scope = app.Services.CreateScope())
     {
         var services = scope.ServiceProvider;
         var context = services.GetRequiredService<AppDbContext>();
-        //context.Database.Migrate();
+        context.Database.Migrate();
         Console.WriteLine("Migration successful!");
     }
     catch (Exception ex)
@@ -67,14 +67,8 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.UseStaticFiles();
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
-    RequestPath = "/uploads"
-});
+app.UseStaticFiles();
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
@@ -91,5 +85,3 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.Run();
