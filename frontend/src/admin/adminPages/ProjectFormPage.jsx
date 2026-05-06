@@ -9,6 +9,7 @@ export default function ProjectFormPage() {
     const {id}=useParams()
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [fullDescription, setFullDescription] = useState("");
     const [addedPhotos, setAddedPhotos] = useState([]);
     const [area, setArea] = useState("");
     const [year, setYear] = useState("");
@@ -31,6 +32,7 @@ export default function ProjectFormPage() {
             const {data}=res
             setTitle(data.title || '')
             setDescription(data.description || '');
+            setFullDescription(data.fullDescription || '');
             setArea(data.area || '');
             setYear(data.year || '');
             setCategoryId(data.categoryId || 0);
@@ -46,7 +48,7 @@ export default function ProjectFormPage() {
 
     async function savePlace(e) {
         e.preventDefault();
-        const projectData = { id: id ? parseInt(id) : 0, title, description, area, year, categoryId: parseInt(categoryId) };
+        const projectData = { id: id ? parseInt(id) : 0, title, description,fullDescription, area, year, categoryId: parseInt(categoryId) };
         try {
             let projectId=id
             if(id){
@@ -129,12 +131,25 @@ export default function ProjectFormPage() {
                     </div>
                 </div>
 
+
+
                 <div className="form-group-full">
                     <label>Description</label>
-                    <small>Write what makes this project special</small>
+                    <small>Short description of a project</small>
                     <textarea
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Detailed description..."
+                        required
+                    />
+                </div>
+
+                <div className="form-group-full">
+                    <label>Full description</label>
+                    <small>Write what makes this project special</small>
+                    <textarea
+                        value={fullDescription}
+                        onChange={(e) => setFullDescription(e.target.value)}
                         placeholder="Detailed description..."
                         required
                     />

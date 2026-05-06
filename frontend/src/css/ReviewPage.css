@@ -18,9 +18,8 @@
 }
 
 .reviews-header h1 {
-    font-family: "Alice", serif;
+
     font-size: clamp(36px, 6vw, 64px);
-    font-weight: 400;
     margin-bottom: 10px;
     letter-spacing: -1px;
 }

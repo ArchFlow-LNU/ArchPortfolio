@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 export default function HouseVariants() {
 
-
-
     const [projects, setProjects] = useState([]);
     const navigate = useNavigate();
 
@@ -32,30 +30,16 @@ export default function HouseVariants() {
         return () => window.removeEventListener("resize", handleResize);
     }, []);
 
-    const next = () => {
-        if (index < projects.length - visibleCount) {
-            setIndex(prev => prev + 1);
-        }
-    };
 
-    const prev = () => {
-        if (index > 0) {
-            setIndex(prev => prev - 1);
-        }
-    };
 
     return (
 
 
         <section className="houses">
 
-            <div className="title">
-                <h2>Варіанти будинків</h2>
-                <p>Кожен проєкт розробляється індивідуально з урахуванням побажань клієнта, особливостей ділянки та сучасних будівельних норм.</p>
-            </div>
-
 
             <div className="slider">
+
 
                 <motion.div
                     className="slider-track"
@@ -112,9 +96,10 @@ export default function HouseVariants() {
                                 }}
                             >
 
+                                <h2>Варіант Проекту</h2>
                                 <img src={imageSrc} alt={h.title} />
 
-                                <div className="house-info">
+                                <div className="house-info-var">
                                     <h3>{h.title}</h3>
                                     <p>{h.description}</p>
                                     <span>Стиль: {h.category?.name || "—"}</span>
@@ -123,13 +108,7 @@ export default function HouseVariants() {
                             </motion.div>
                         );
                     })}
-
                 </motion.div>
-
-                <div className="slider-controls">
-                    <button onClick={prev}>←</button>
-                    <button onClick={next}>→</button>
-                </div>
 
             </div>
 

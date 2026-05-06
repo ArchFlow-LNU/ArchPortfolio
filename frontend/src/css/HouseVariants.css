@@ -1,7 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
 
-
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -13,15 +12,15 @@
     }
 }
 .houses {
-    background: rgba(234, 234, 234, 0.6);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    backdrop-filter: blur(7px);
-    border-radius: 15px;
+
     max-width: 1300px;
     width: 95%;
     margin:80px auto  ;
-    padding: 40px 20px;
+    padding: 0px 20px;
     box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .title {
@@ -29,7 +28,7 @@
     font-size: 28px;
     flex-wrap: wrap;
 
-    padding:0 20px;
+    padding: 20px;
     margin-bottom: 30px;
     justify-content: space-between;
     align-items: flex-end;
@@ -53,16 +52,16 @@
     opacity: 0.8;
 }
 
-/*.house-grid {*/
-/*    display: grid;*/
-/*    grid-template-columns: 1fr; !* мобілка *!*/
-/*    gap: 20px;*/
-/*}*/
+
 
 .slider {
-    position: relative;
-    overflow: hidden;
-    padding: 10px 0;
+    padding-bottom: 30px;
+    margin-bottom: 100px !important;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(250,250,250,0.8) transparent;
+
+
 }
 
 .slider-track {
@@ -72,20 +71,21 @@
     will-change: transform;
 }
 
-/* база (телефон) */
+
 .house-card {
     flex: 0 0 calc((100% - 40px) / 3);
     border-radius: 15px;
+    height: 450px;
     overflow: hidden;
-    background: white;
+    background: rgba(250,250,250,0.1);
+    backdrop-filter: blur(10px);
     cursor: pointer;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-
-
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    will-change: transform;
 }
 
 @media (max-width: 1024px) {
@@ -103,11 +103,10 @@
     }
 }
 
-.house-card {
-    border-radius: 15px;
-    overflow: hidden;
-    background: none;
-
+.house-info,
+.house-info h3,
+.house-info p {
+    background: transparent !important;
 }
 
 .house-card:hover {
@@ -115,32 +114,50 @@
 }
 
 .house-card img {
-    width: 100%;
-    height: 250px;
+    width: 140px;
+    height: 140px;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 50%;
+
+    margin: 20px auto 0;
+    display: block;
 }
 
-.house-info {
+.house-card h2 {
+    margin: 0 90px;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    background: #eaeaea;
+
+}
+
+.house-info-var {
     padding: 20px;
     text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
+
 }
 
-.house-info h3 {
+.house-info-var h3 {
     margin: 0;
     font-size: 18px;
 }
 
-.house-info p {
+
+
+.house-info-var p {
     font-size: 14px;
     color: #555;
     margin: 8px 0;
+    max-height: 20px;
+    overflow: hidden;
 }
 
-.house-info span {
+.house-info-var span {
     font-size: 12px;
     background: #f2f2f2;
     padding: 4px 12px;
@@ -149,53 +166,4 @@
     color: #333;
 }
 
-/* контейнер кнопок */
-.slider-controls {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-top: 40px;
-}
 
-/* сама кнопка */
-.slider-controls button {
-    width: 38px;
-    height: 28px;
-
-    border-radius: 50%;
-    border: none;
-
-    background: white;
-    color: #333;
-
-    font-size: 20px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-
-    transition: all 0.3s ease;
-}
-
-/* hover */
-.slider-controls button:hover {
-    background: #111;
-    color: white;
-
-    transform: scale(1.1);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-}
-
-/* active (натиснута) */
-.slider-controls button:active {
-    transform: scale(0.95);
-}
-
-/* 🔥 коли неактивна */
-.slider-controls button:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}

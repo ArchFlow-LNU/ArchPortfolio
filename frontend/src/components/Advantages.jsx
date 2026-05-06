@@ -1,11 +1,17 @@
 import "../css/Advantages.css"
+import { motion } from "framer-motion";
 
 
 export default function Advantages() {
 
     return (
         <section className="advantages">
-            <div className="container">
+            <motion.section
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="container">
 
                 <h2 className="advantages-title">
                     Переваги нашої компанії
@@ -64,7 +70,7 @@ export default function Advantages() {
                     </div>
 
                 </div>
-            </div>
+            </motion.section>
         </section>
     )
 

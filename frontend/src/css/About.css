@@ -9,7 +9,7 @@
 .about {
     margin-top: 130px;
     padding: 50px 0;
-    background: rgba(234, 234, 234, 0.7);
+    background: rgba(234, 234, 234, 0.1);
     backdrop-filter: blur(7px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     border-radius: 15px;

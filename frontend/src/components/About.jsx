@@ -1,12 +1,19 @@
 import "../css/About.css"
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
 
 export default function About() {
     const navigate = useNavigate();
 
     return (
         <section className="about">
-            <div className="container">
+            <motion.section
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="container">
 
                 <div className="about-grid">
 
@@ -41,7 +48,7 @@ export default function About() {
                     </div>
 
                 </div>
-            </div>
+            </motion.section>
 
         </section>
     )
