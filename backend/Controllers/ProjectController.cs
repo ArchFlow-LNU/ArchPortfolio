@@ -25,11 +25,7 @@ namespace ArchPortfolio.Controllers
             return Ok(projects);
         }
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("API works");
-        }
+      
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> Get(int id)
