@@ -52,6 +52,9 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 app.UseDeveloperExceptionPage();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+app.Urls.Add($"http://0.0.0.0:{port}");
+
 using (var scope = app.Services.CreateScope())
 {
     try
