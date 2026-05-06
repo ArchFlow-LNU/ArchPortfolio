@@ -22,7 +22,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy("AllowFrontend", policy =>
     {
         policy
-            .WithOrigins("http://localhost:5173")
+            .WithOrigins("http://localhost:5174", "https://archportfolio-hazel.vercel.app")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -68,6 +68,13 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseStaticFiles();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "uploads")),
+    RequestPath = "/uploads"
+});
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
