@@ -19,8 +19,17 @@ namespace ArchPortfolio.Controllers
         {
             try
             {
+                var conn = _context.Database.GetDbConnection().ConnectionString;
+                var canConnect = await _context.Database.CanConnectAsync();
+
                 var projects = await _context.Projects.ToListAsync();
-                return Ok(projects);
+
+                return Ok(new
+                {
+                    connection = conn,
+                    canConnect,
+                    count = projects.Count
+                });
             }
             catch (Exception ex)
             {
