@@ -17,12 +17,15 @@ namespace ArchPortfolio.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Project>>> GetAll()
         {
-            var projects = await _context.Projects
-                .Include(p => p.Category)
-                .Include(p => p.Images)
-                .ToListAsync();
-
-            return Ok(projects);
+            try
+            {
+                var projects = await _context.Projects.ToListAsync();
+                return Ok(projects);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.ToString());
+            }
         }
 
       
