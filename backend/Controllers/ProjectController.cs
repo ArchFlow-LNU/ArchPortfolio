@@ -20,13 +20,14 @@ namespace ArchPortfolio.Controllers
             try
             {
                 var projects = await _context.Projects
-        .Select(p => new { p.Id, p.Title, p.Description }) 
-        .ToListAsync();
+                    .Select(p => new { p.Id, p.Title, p.Description })
+                    .ToListAsync();
                 return Ok(projects);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, ex.ToString());
+               
+                return StatusCode(500, $"Database Error: {ex.Message}");
             }
         }
 

@@ -50,6 +50,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseDeveloperExceptionPage();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -66,12 +67,7 @@ using (var scope = app.Services.CreateScope())
     }
 }
 
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
-    RequestPath = ""
-});
+app.UseStaticFiles();
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>
