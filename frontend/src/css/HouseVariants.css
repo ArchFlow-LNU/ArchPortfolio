@@ -1,0 +1,169 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.houses {
+
+    max-width: 1300px;
+    width: 95%;
+    margin:80px auto  ;
+    padding: 0px 20px;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.title {
+    display: flex;
+    font-size: 28px;
+    flex-wrap: wrap;
+
+    padding: 20px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap:20px;
+    text-align: left;
+}
+
+.title h2{
+    font-size: clamp(28px, 4vw, 42px);
+    margin: 0;
+    white-space: nowrap;
+    font-weight: 400;
+
+}
+
+.title p{
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+
+
+.slider {
+    padding-bottom: 30px;
+    margin-bottom: 100px !important;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(250,250,250,0.8) transparent;
+
+
+}
+
+.slider-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1); /* Плавний рух */
+    will-change: transform;
+}
+
+
+.house-card {
+    flex: 0 0 calc((100% - 40px) / 3);
+    border-radius: 15px;
+    height: 450px;
+    overflow: hidden;
+    background: rgba(250,250,250,0.1);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 1024px) {
+    .house-card {
+        flex: 0 0 calc((100% - 20px) / 2);
+    }
+}
+
+@media (max-width: 600px) {
+    .slider-track {
+        gap: 10px;
+    }
+    .house-card {
+        flex: 0 0 calc(100% - 10px);
+    }
+}
+
+.house-info,
+.house-info h3,
+.house-info p {
+    background: transparent !important;
+}
+
+.house-card:hover {
+    transform: translateY(-8px) scale(1.05);
+}
+
+.house-card img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+
+    margin: 20px auto 0;
+    display: block;
+}
+
+.house-card h2 {
+    margin: 0 90px;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    background: #eaeaea;
+
+}
+
+.house-info-var {
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.house-info-var h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+
+
+.house-info-var p {
+    font-size: 14px;
+    color: #555;
+    margin: 8px 0;
+    max-height: 20px;
+    overflow: hidden;
+}
+
+.house-info-var span {
+    font-size: 12px;
+    background: #f2f2f2;
+    padding: 4px 12px;
+    align-self: flex-start;
+    border-radius: 20px;
+    color: #333;
+}
+
+

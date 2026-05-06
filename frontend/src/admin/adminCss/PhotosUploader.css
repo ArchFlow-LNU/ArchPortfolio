@@ -1,0 +1,94 @@
+.photos-uploader {
+    width: 100%;
+}
+
+.uploaded-photos-grid {
+    display: flex;
+    flex-wrap: wrap; /*переносити фото на наступний рядок*/
+    gap: 15px;
+    padding: 10px;
+}
+
+.photo-card {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-main-btn{
+    position: absolute;
+    bottom: 8px;
+    right: 50px;
+    padding: 5px;
+
+    background: white;
+    border: 1px solid #361500;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.remove-photo-btn {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    padding: 5px;
+
+    background: white;
+    border: 1px solid #361500;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.remove-photo-btn:hover {
+    background: #ffeded;
+}
+
+
+.upload-button {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed rgba(54, 21, 0, 0.3);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.4);
+    transition: 0.3s;
+}
+
+.upload-button:hover {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: #361500;
+}
+
+.upload-icon {
+    text-align: center;
+    color: #361500;
+}
+
+.upload-icon span {
+    font-size: 30px;
+    font-weight: bold;
+}

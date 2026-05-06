@@ -1,0 +1,188 @@
+import "../adminCss/ProjectFormPage.css";
+import {Navigate, useParams} from "react-router-dom";
+import { useEffect, useState } from "react";
+import api from '../../api/axios.js'
+import Menu from "../adminComponents/Menu.jsx";
+import PhotosUploader from "../adminComponents/PhotosUploader.jsx";
+
+export default function ProjectFormPage() {
+    const {id}=useParams()
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [fullDescription, setFullDescription] = useState("");
+    const [addedPhotos, setAddedPhotos] = useState([]);
+    const [area, setArea] = useState("");
+    const [year, setYear] = useState("");
+    const [categoryId, setCategoryId] = useState();
+    const [categories, setCategories] = useState([]);
+    const [redirect, setRedirect] = useState(false);
+
+
+
+    useEffect(() => {
+
+        api.get(`/api/projectcategories`).then(res => {
+            setCategories(res.data);
+        }).catch(err => console.error("Error fetching categories", err));
+
+        if(!id){
+            return
+        }
+        api.get(`/api/projects/${id}`).then(res => {
+            const {data}=res
+            setTitle(data.title || '')
+            setDescription(data.description || '');
+            setFullDescription(data.fullDescription || '');
+            setArea(data.area || '');
+            setYear(data.year || '');
+            setCategoryId(data.categoryId || 0);
+
+            if (data.images) {
+                setAddedPhotos(data.images.map(img => ({
+                    imageUrl: img.imageUrl,
+                    isMain: img.isMain
+                })));
+            }
+        })
+    }, []);
+
+    async function savePlace(e) {
+        e.preventDefault();
+        const projectData = { id: id ? parseInt(id) : 0, title, description,fullDescription, area, year, categoryId: parseInt(categoryId) };
+        try {
+            let projectId=id
+            if(id){
+                await api.put(`/api/projects/${projectId}`, projectData)
+
+                await api.delete(`/api/projects/${projectId}/images`)
+                for (const url of addedPhotos) {
+                    await api.post(`/api/projects/${projectId}/images`, {
+                        imageUrl: url.imageUrl,
+                        isMain: url.isMain,
+                    });
+                }
+                setRedirect(true);
+
+            }else{
+                const res = await api.post(`/api/projects`, projectData);
+                const projectId = res.data.id;
+                for (const url of addedPhotos) {
+                    await api.post(`/api/projects/${projectId}/images`, {
+                        imageUrl: url.imageUrl,
+                        isMain: url.isMain,
+                    });
+                }
+                setRedirect(true);
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Failed to save project");
+        }
+    }
+
+    if (redirect) return <Navigate to={"/admin/profile"} />;
+
+    return (
+        <div className="project-form-container">
+            <Menu />
+            <h2 className="main-title">New Project</h2>
+
+            <form className="admin-form" onSubmit={savePlace}>
+                <div className="form-header">
+                    <h2>Let's start.</h2>
+                    <p>Tell me about your project:</p>
+                </div>
+
+                <div className="form-grid">
+                    {/* TITLE */}
+                    <div className="form-group">
+                        <label>Title</label>
+                        <small>Short and catchy title</small>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="Ex: Modern Villa"
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Category</label>
+                        <small>Select project type</small>
+                        <select
+                            value={categoryId}
+                            onChange={(e) => setCategoryId(e.target.value)}
+                            required
+                        >
+                            <option value="">Choose...</option>
+                            {categories.map(cat => (
+                                <option key={cat.id} value={cat.id}>{cat.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
+                <div className="form-group-full">
+                    <label>Photos</label>
+                    <small>The more, the better (upload or URL)</small>
+                    <div className="uploader-wrapper">
+                        <PhotosUploader addedPhotos={addedPhotos} onChange={setAddedPhotos} />
+                    </div>
+                </div>
+
+
+
+                <div className="form-group-full">
+                    <label>Description</label>
+                    <small>Short description of a project</small>
+                    <textarea
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        placeholder="Detailed description..."
+                        required
+                    />
+                </div>
+
+                <div className="form-group-full">
+                    <label>Full description</label>
+                    <small>Write what makes this project special</small>
+                    <textarea
+                        value={fullDescription}
+                        onChange={(e) => setFullDescription(e.target.value)}
+                        placeholder="Detailed description..."
+                        required
+                    />
+                </div>
+
+                <div className="form-grid">
+                    <div className="form-group">
+                        <label>Area (m²)</label>
+                        <input
+                            type="text"
+                            value={area}
+                            onChange={(e) => setArea(e.target.value)}
+                            placeholder="Ex: 150"
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Year</label>
+                        <input
+                            type="number"
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
+                            placeholder="2024"
+                            required
+                        />
+                    </div>
+                </div>
+
+                <button type="submit" className="save-btn">
+                    Save Project
+                </button>
+            </form>
+        </div>
+    );
+}

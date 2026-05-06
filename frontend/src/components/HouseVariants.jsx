@@ -1,49 +1,117 @@
+import "../css/HouseVariants.css"
+import {useState, useEffect} from "react";
+import api from '../api/axios.js'
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 export default function HouseVariants() {
 
-    const houses = [
-        {
-            title: "Мінімалістичний будинок",
-            img: "/imgs/house1.png",
-            desc: "Сучасний будинок із простими формами, панорамними вікнами та відкритим простором.",
-            style: "Мінімалізм"
-        },
-        {
-            title: "Міська резиденція",
-            img: "/imgs/house2.png",
-            desc: "Сучасний житловий комплекс для комфортного життя в місті.",
-            style: "Сучасний"
-        },
-        {
-            title: "Клубний будинок",
-            img: "/imgs/house3.png",
-            desc: "Елегантний будинок із класичними елементами та сучасним плануванням.",
-            style: "Сучасний / Преміум"
-        }
-    ]
+    const [projects, setProjects] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        api.get(`/api/projects`)
+            .then(res => setProjects(res.data))
+            .catch(err => console.log(err));
+    }, []);
+
+    const [index, setIndex] = useState(0);
+
+    const getVisibleCount = () => {
+        if (window.innerWidth < 600) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+    };
+
+    const [visibleCount, setVisibleCount] = useState(getVisibleCount());
+
+    useEffect(() => {
+        const handleResize = () => setVisibleCount(getVisibleCount());
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
 
     return (
+
+
         <section className="houses">
 
-            <h2>Варіанти будинків</h2>
 
-            <div className="house-grid">
+            <div className="slider">
 
-                {houses.map((h, i) => (
-                    <div className="house-card" key={i}>
 
-                        <img src={h.img} alt={h.title} />
+                <motion.div
+                    className="slider-track"
 
-                        <div className="house-info">
-                            <h3>{h.title}</h3>
-                            <p>{h.desc}</p>
-                            <span>Стиль: {h.style}</span>
-                        </div>
+                    initial="hidden"
+                    animate="visible"
 
-                    </div>
-                ))}
+                    variants={{
+                        hidden: {},
+                        visible: {
+                            transition: {
+                                staggerChildren: 0.15
+                            }
+                        }
+                    }}
+
+                    style={{
+                        transform: `translateX(-${index * (100 / visibleCount)}%)`
+                    }}
+                >
+
+                    {projects.map((h) => {
+                        const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
+                        const imageSrc = mainImage ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}` : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`;
+
+
+                        return (
+                            <motion.div
+                                className="house-card"
+                                key={h.id}
+                                onClick={() => navigate(`/house/${h.id}`)}
+
+                                variants={{
+                                    hidden: {
+                                        opacity: 0,
+                                        y: 40,
+                                        scale: 0.95
+                                    },
+                                    visible: {
+                                        opacity: 1,
+                                        y: 0,
+                                        scale: 1
+                                    }
+                                }}
+
+                                transition={{
+                                    duration: 0.2,
+                                    ease: "easeOut"
+                                }}
+
+                                whileHover={{
+                                    y: -8,
+                                    scale: 1.03
+                                }}
+                            >
+
+                                <h2>Варіант Проекту</h2>
+                                <img src={imageSrc} alt={h.title} />
+
+                                <div className="house-info-var">
+                                    <h3>{h.title}</h3>
+                                    <p>{h.description}</p>
+                                    <span>Стиль: {h.category?.name || "—"}</span>
+                                </div>
+
+                            </motion.div>
+                        );
+                    })}
+                </motion.div>
 
             </div>
 
         </section>
-    )
+    );
 }

@@ -1,7 +1,16 @@
+import "../css/Steps.css"
+import { motion } from "framer-motion";
+
+
 export default function Steps() {
     return (
         <section className="steps">
-            <div className="container">
+            <motion.section
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="container">
 
                 <h2 className="steps-title">Етапи роботи</h2>
 
@@ -44,8 +53,10 @@ export default function Steps() {
                     </div>
 
                 </div>
-            </div>
+            </motion.section>
 
         </section>
     )
+
+
 }

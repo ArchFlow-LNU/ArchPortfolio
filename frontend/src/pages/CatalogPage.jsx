@@ -4,8 +4,8 @@ import NavBar from "../components/NavBar.jsx";
 
 export default function CatalogPage(){
     return (
-        <div className="catalog-page">
-            <NavBar cl="catalog" />
+        <div >
+            <NavBar  />
             <HouseVariants />
             <BestProjects />
         </div>

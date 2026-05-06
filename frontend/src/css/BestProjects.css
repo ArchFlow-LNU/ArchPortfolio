@@ -1,0 +1,60 @@
+
+.best-projects {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+
+.best-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.best-header h2 {
+    font-size: 36px;
+}
+
+.controls button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    margin-left: 10px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.controls button.active {
+    opacity: 1;
+}
+
+.best-card {
+    position: relative;
+    margin-top: 20px;
+}
+
+.best-card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.best-info {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.7);
+    padding: 15px 20px;
+    border-radius: 20px;
+}
+
+.best-info h3 {
+    margin: 0;
+}
+
+.best-info p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}

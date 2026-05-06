@@ -2,8 +2,17 @@ import {Route,Routes} from 'react-router-dom'
 import "./App.css"
 import MainPage from "./pages/MainPage.jsx";
 import CatalogPage from "./pages/CatalogPage.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
+import LoginPage from "./admin/adminPages/LoginPage.jsx";
+import RegisterPage from "./admin/adminPages/RegisterPage.jsx";
+import ProfilePage from "./admin/adminPages/ProfilePage.jsx";
+import ProjectFormPage from "./admin/adminPages/ProjectFormPage.jsx";
+import HousePage from "./pages/HousePage.jsx";
+import ReviewsPage from "./pages/ReviewsPage.jsx";
+import AdminReviewsPage from "./admin/adminPages/AdminReviewsPage.jsx";
+import PrivateRoute from "./admin/adminComponents/PrivateRoute.jsx";
+import AdminMainPage from "./admin/adminPages/AdminMainPage.jsx";
+import ContactsRequestsPage from "./admin/adminPages/AdminContactsPage.jsx";
 
 function App() {
     return (
@@ -11,7 +20,43 @@ function App() {
                 <Route path="/" element={<MainPage></MainPage>}></Route>
                 <Route path='/catalog' element={<CatalogPage></CatalogPage>}></Route>
                 <Route path='/about' element={<AboutPage></AboutPage>}></Route>
-                <Route path='/contacts' element={<ContactPage></ContactPage>}></Route>
+                {/*<Route path='/contacts' element={<ContactPage></ContactPage>}></Route>*/}
+                <Route path="/admin/login" element={<LoginPage></LoginPage>}></Route>
+                <Route path="/admin/register" element={<RegisterPage></RegisterPage>}></Route>
+                {/*<Route path="/admin/profile" element={<ProfilePage></ProfilePage>}></Route>*/}
+                {/*<Route path="/admin/profile/new" element={<ProjectFormPage></ProjectFormPage>}></Route>*/}
+                <Route path="/house/:id" element={<HousePage />} />
+                <Route path="/reviews" element={<ReviewsPage />} />
+                <Route path="/admin/reviews" element={
+                    <PrivateRoute>
+                        <AdminReviewsPage />
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/contacts" element={
+                    <PrivateRoute>
+                        <ContactsRequestsPage />
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/profile" element={
+                    <PrivateRoute>
+                        <ProfilePage></ProfilePage>
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/main" element={
+                    <PrivateRoute>
+                        <AdminMainPage></AdminMainPage>
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/profile/new" element={
+                    <PrivateRoute>
+                        <ProjectFormPage></ProjectFormPage>
+                    </PrivateRoute>
+                } />
+            <Route path="/admin/profile/:id" element={
+                    <PrivateRoute>
+                        <ProjectFormPage></ProjectFormPage>
+                    </PrivateRoute>
+                } />
         </Routes>
 
     )

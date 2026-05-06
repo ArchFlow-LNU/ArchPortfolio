@@ -1,0 +1,64 @@
+
+.message-container {
+    position: relative;
+    height: 50px;
+    margin-bottom: 15px;
+    width: 100%;
+
+}
+
+.message {
+    font-style: italic;
+    color: #555;
+    line-height: 1.5;
+    height: 50px;
+    transition: all 0.3s ease;
+    margin: 0;
+    background: white;
+    padding: 0 15px;
+    border-radius: 5px;
+}
+
+
+.message-container.expanded .message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: auto;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+
+    background: rgba(234, 234, 234);
+    padding: 15px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 10;
+    border: 1px solid #ddd;
+}
+
+
+.admin-card:hover {
+    z-index: 5;
+}
+.message-container.expanded {
+    z-index: 100;
+}
+
+.btn-toggle {
+    background: none;
+    border: none;
+    color: #253453;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 5px;
+    font-family: inherit;
+    text-decoration: underline;
+}
+
+.btn-toggle:hover {
+    color: #f1c40f;
+}
