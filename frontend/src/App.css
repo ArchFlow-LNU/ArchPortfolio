@@ -50,10 +50,7 @@ body {
     min-height: 100vh;
     text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
 
     position: relative;
     background-color: #eaeaea;
@@ -63,8 +60,7 @@ body {
 body::before {
     content: "";
     position: fixed;
-    width: 1000px;
-    height: 1000px;
+
 
     background-image: url("/imgs/stoneApp2.png");
     background-position: bottom center;
