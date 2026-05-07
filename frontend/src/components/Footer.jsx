@@ -24,7 +24,7 @@ export default function Footer() {
                 <div className="footer-col">
                     <h4>Контакти</h4>
                     <p>Телефон: +380 93 604 57 22</p>
-                    <p>Email: kovalyshynnatalia@gmail.com</p>
+                    <NavLink to='/admin/login'>Email: kovalyshynnatalia@gmail.com</NavLink>
                     <p>Адреса: Львів, вул. Личаківська, 20</p>
                 </div>
 
