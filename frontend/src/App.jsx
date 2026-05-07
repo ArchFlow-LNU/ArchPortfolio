@@ -1,5 +1,5 @@
 import {Route,Routes} from 'react-router-dom'
-import "./App.css"
+
 import MainPage from "./pages/MainPage.jsx";
 import CatalogPage from "./pages/CatalogPage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
@@ -13,6 +13,8 @@ import AdminReviewsPage from "./admin/adminPages/AdminReviewsPage.jsx";
 import PrivateRoute from "./admin/adminComponents/PrivateRoute.jsx";
 import AdminMainPage from "./admin/adminPages/AdminMainPage.jsx";
 import ContactsRequestsPage from "./admin/adminPages/AdminContactsPage.jsx";
+import "./App.css"
+
 
 function App() {
     return (
