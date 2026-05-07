@@ -122,7 +122,7 @@ export default function Projects() {
                 >
                 { houses.map((h) => {
                     const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
-                    const imageSrc = mainImage ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}` : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`;
+                    const imageSrc = mainImage ? `${import.meta.env.VITE_API_URL}${mainImage.imageUrl}` : `${import.meta.env.VITE_API_URL}noPhoto.jpg`;
 
 
 

@@ -10,7 +10,7 @@ export default function HouseVariants() {
 
     useEffect(() => {
         api.get(`/api/projects`)
-            .then(res => setProjects(res.data))
+            .then(res => {setProjects(res.data); })
             .catch(err => console.log(err));
     }, []);
 
@@ -62,10 +62,13 @@ export default function HouseVariants() {
                 >
 
                     {projects.map((h) => {
-                        const mainImage = h.images?.find(img => img.isMain) || h.images?.[0];
-                        const imageSrc = mainImage ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}` : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`;
-
-
+                        const mainImage =  h.images?.find(img => img.isMain) || h.images?.[0];
+                        const imageSrc = mainImage
+                            ? mainImage.imageUrl.startsWith("http")
+                                ? mainImage.imageUrl
+                                : `${import.meta.env.VITE_API_URL}${mainImage.imageUrl}`
+                            : `${import.meta.env.VITE_API_URL}noPhoto.jpg`;
+                        console.log(imageSrc);
                         return (
                             <motion.div
                                 className="house-card"

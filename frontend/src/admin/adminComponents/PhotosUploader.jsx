@@ -41,7 +41,7 @@ export default function PhotosUploader({ addedPhotos, onChange }) {
             <div className="uploaded-photos-grid">
                 {addedPhotos.length > 0 &&  addedPhotos.map((url) => (
                     <div key={url.imageUrl} className="photo-card">
-                        <img src={`${import.meta.env.VITE_API_URL}/uploads/${url.imageUrl}`} alt="Project" />
+                        <img src={`${import.meta.env.VITE_API_URL}${url.imageUrl}`} alt="Project" />
 
                         <button
                             className={`photo-main-btn ${url.isMain ? "active" : ""}`}

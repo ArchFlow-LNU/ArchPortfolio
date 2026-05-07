@@ -56,8 +56,8 @@ export default function HousePage() {
                                 <img
                                     src={
                                         mainImage?.imageUrl
-                                            ? `${import.meta.env.VITE_API_URL}/uploads/${mainImage.imageUrl}`
-                                            : `${import.meta.env.VITE_API_URL}/uploads/noPhoto.jpg`
+                                            ? `${import.meta.env.VITE_API_URL}${mainImage.imageUrl}`
+                                            : `${import.meta.env.VITE_API_URL}noPhoto.jpg`
                                     }                                    alt={house.title}
                                     className="house-image"
                                 />

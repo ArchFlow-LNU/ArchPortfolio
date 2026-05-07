@@ -55,12 +55,14 @@ export default function ProjectFormPage() {
                 await api.put(`/api/projects/${projectId}`, projectData)
 
                 await api.delete(`/api/projects/${projectId}/images`)
-                for (const url of addedPhotos) {
-                    await api.post(`/api/projects/${projectId}/images`, {
-                        imageUrl: url.imageUrl,
-                        isMain: url.isMain,
-                    });
-                }
+                const promises = addedPhotos.map(photo =>
+                    api.post(`/api/projects/${projectId}/images`, {
+                        imageUrl: photo.imageUrl,
+                        isMain: photo.isMain,
+                    })
+                );
+
+                await Promise.all(promises);
                 setRedirect(true);
 
             }else{
