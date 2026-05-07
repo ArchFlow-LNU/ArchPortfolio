@@ -50,6 +50,11 @@ body {
     min-height: 100vh;
     text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     position: relative;
     background-color: #eaeaea;
 }
