@@ -64,7 +64,7 @@ body::before {
     height: 100%;
 
     background: #eaeaea;
-    background-image: url("/imgs/stoneApp2.png") ;
+    background-image: url("/imgs/stoneApp2.png") !important;
     background-position: 50% -1000%;
     background-repeat: no-repeat;
     background-size: 1000px 1000px;
